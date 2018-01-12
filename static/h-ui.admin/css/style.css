@@ -1,0 +1,30 @@
+@charset "utf-8";
+/* 你自己的样式 */
+.btn-group{margin-top:20px;}
+
+.pagination {padding:10px 0; text-align:center;}
+.pagination li{  border:1px solid #dfdfdf;display:inline-block; }
+.pagination li a,.pagination li span{padding:3px 12px;margin:2px 2px;display:inline-block;}
+.pagination .active{ background:#5a98de; color:#FFF; border-color:#09F; margin:0 2px;}
+.pagination li:hover{background:#5a98de; color:#FFF; border-color:#09F; }
+.pagination li a:hover{background:#5a98de; color:#FFF; border-color:#09F; }
+.Hui-article-box div{border-radius: 20px; padding:5px 20px;}
+
+.navbar{border-radius: 20px;margin: 5px;}
+.Hui-article-box{border-radius: 30px;margin:10px 15px 10px 25px;}
+.Hui-aside{border-radius: 30px;margin:10px 5px;}
+.btn{border-radius: 30px;}
+.page li{border-radius: 30px;}
+input{border-radius: 30px;}
+textarea{border-radius: 20px;}
+select{
+	-moz-border-radius:20px;
+}
+.Hui-aside .menu_dropdown dd li{border-radius: 30px;}
+table{
+	border-radius: 30px;
+	overflow: hidden;
+}
+span.select-box{
+	border-radius: 30px;
+}

@@ -1,0 +1,96 @@
+{extend name="base" /}
+
+{block name="main"}
+
+<article class="cl pd-20">
+
+    <form action="" method="post" class="form form-horizontal">
+
+        <div class="row cl">
+            <label class="form-label col-xs-2 col-sm-2"><span class="c-red">*</span>名称</label>
+            <div class="formControls col-xs-10 col-sm-10">
+                <input type="text" class="input-text" value="{$grid.name|default=''}" id="gridname" placeholder="名称"  name="name">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-2 col-sm-2"><span class="c-red"></span>排序</label>
+            <div class="formControls col-xs-10 col-sm-10">
+                <input type="text" class="input-text" value="{$grid.sort|default=''}" id="gridsort" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="排序（数字）"  name="code">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-2 col-sm-2"><span class="c-red"></span>备注</label>
+            <div class="formControls col-xs-10 col-sm-10">
+                <textarea name="value" class="textarea" cols="30" rows="10" id="gridremark" placeholder="备注">{$grid.remark|default=''}</textarea>
+            </div>
+        </div>
+        {if $user.role_id == 7 or $user.role_id == 9 or $user.role_id == 13}
+        <div class="row cl">
+            <label class="form-label col-xs-2 col-sm-2">管理人</label>
+            <div class="formControls col-xs-10 col-sm-10">
+                <select name="xiaoqu_manger" id="manger" >
+                    <option value="0">==请选择==</option>
+                    {foreach name="banks" item="vo" key="key"}
+                        <option disabled="disabled">{$vo.bankname}</option>
+                        {foreach name="vo.manager" item="v" key="k"}
+                            <option value="{$v.id}" {if isset($grid) && $v.id == $grid.xiaoqu_manger} selected="selected"{/if}>&nbsp;&nbsp;|- {$v.real_name}</option>
+                        {/foreach}
+                    {/foreach}
+                </select>
+            </div>
+        </div>
+        {/if}
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+
+                <a href="javascript:" class="btn btn-primary radius"  onclick="gridadd()"> 提交</a>
+                <a href="javascript:" class="btn btn-default radius"  onclick="layer_close()"> 取消</a>
+
+            </div>
+        </div>
+    </form>
+
+
+
+
+	
+</article>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+
+<script type="text/javascript">
+
+
+  function gridadd(){
+	  var gridid = '{$grid.id|default = 0}';
+      var gridname = $("#gridname").val();
+      var gridremark = $("#gridremark").val();
+      var user_id = $("#user_id").val();
+      var manger = $("#manger").val();
+      var gridsort = $("#gridsort").val();
+      $.ajax({
+		  url:'{:url("admin/grid/gridadds")}',
+		  type:'post',
+		  data:{id:gridid,name:gridname,remark:gridremark,user_id:user_id,sort:gridsort,xiaoqu_manger:manger},
+		  success:function (data) {
+			  if(data.code==0){
+				  layer.msg(data.msg);
+                  parent.location.reload();
+                  setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))",2000);
+
+			  }else{
+				  layer.msg(data.msg);
+			  }
+		  }
+	  });
+  }
+
+
+
+
+</script>
+
+{/block}

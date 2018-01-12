@@ -1,0 +1,127 @@
+{extend name="base" /}
+
+{block name="content"}
+
+<div class="Hui-article-box">
+
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> {$title1}<span class="c-gray en">&gt;</span>{$title2}<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:history.go(-1);" title="返回" >返回</a></nav>
+    <div class="panel panel-default" >
+        <div class="panel-header">
+            <span>客户编号&nbsp;[{$client['client_number']}]</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>客户名称&nbsp;[{$client['name']}]</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>所属机构&nbsp;[{$client['bankname']|default='罗庄农村商业银行'}]</span>
+        </div>
+    </div>
+
+    <div class="btn-group" style="text-align: center;">
+        {include file="clientmenu"}
+    </div>
+    <h4 style=" text-align: center;">家庭成员信息详情</h4>
+    <div>
+        <div class="panel panel-default">
+            <div class="panel-header" style="display: flex;justify-content: space-between;"><span>家庭成员信息</span><a href="javascript:;" onclick="submit('添加成员信息','{:url('familymember/add',array('client_id'=>$client['id']))}','','510')" ><i class="Hui-iconfont">&#xe600;</i>添加</a></div>
+            <div class="panel-body">
+
+                <table class="table table-border table-bordered table-hover table-bg table-sort">
+                    <thead >
+                        <tr class="text-c">
+                            <th>成员名称</th>
+                            <th>成员关系</th>
+                            <th>创建人</th>
+                            <th>创建时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    {volist name="info" id="list"}
+                    <tbody>
+                        <tr class="text-c">
+                            <td>{$list.members_name}</td>
+                            <td>{$list.members_relation}</td>
+                            <td>{$list.builder}</td>
+                            <td>{:date('Y-m-d',$list.add_time);}</td>
+                            <td class="td-manage"><a href="javascript:;" onclick="show('查看成员信息','{:url('familymember/member_show',array('member_id'=>$list['id']))}','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe725;</i>查看</a>&nbsp;&nbsp;<a href="javascript:;" onclick="submit('修改成员信息','{:url('familymember/edit',array('member_id'=>$list['id']))}','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i>编辑</a>&nbsp;&nbsp;<a style="text-decoration:none"  href="{:url('familymember/del',array('member_id'=>$list['id']))}" title="删除成员"><i class="Hui-iconfont">&#xe6e2;</i>删除</a> </td>
+                        </tr>
+                    </tbody>
+                    {/volist}
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <!--配偶信息-->
+    <div style="text-align: center;">
+        <div class="panel panel-default">
+            <div class="panel-header" style="display: flex;justify-content: space-between;"><span>配偶信息</span>{if !empty($spouse_info)&&(isset($spouse_info))}  <span><a href="javascript:;" onclick="submit('编辑配偶信息','{:url('familymember/spouseedit',array('client_id'=>$client['id']))}','','510')" ><i class="Hui-iconfont">&#xe6df;</i>编辑</a>&nbsp;&nbsp;<a href="{:url('familymember/spousedel',array('client_id'=>$client['id']))}"  ><i class="Hui-iconfont">&#xe6e2;</i>删除</a></span>{else}<span><a href="javascript:;" onclick="submit('添加配偶信息','{:url('familymember/spouseadd',array('client_id'=>$client['id']))}','','510')" ><i class="Hui-iconfont">&#xe600;</i>添加</a></span>{/if}</div>
+            <div class="panel-body">
+                {volist name="spouse_info" id="spouse"}
+                <table class="table table-border table-bordered table-hover">
+                    <tr>
+                        <td style="width: 55px;">配偶名称</td><td style="width: 200px;">{$spouse.spouse_name|default=''}</td>
+                        <td style="width: 55px;">性别</td><td style="width: 200px;">{if $spouse.spouse_sex==0}女{else}男{/if}</td>
+
+                    </tr>
+                    <tr>
+                        <td>证件类型</td><td>{if $spouse.card_type==0}身份证{else}其他{/if}</td>
+                        <td>证件号码</td><td>{$spouse.card_number|default=''}</td>
+                    </tr>
+                    <tr>
+                        <td>出生日期</td><td>{:date('Y-m-d',$spouse.born_date)}</td>
+                        <td>住址</td><td>{$spouse.address|default=''}</td>
+                    </tr>
+                    <tr>
+                        <td>签发机关</td><td>{$spouse.issue_office|default=''}</td>
+                        <td>有效期限</td><td>{:date('Y-m-d',$spouse.valid_time)}</td>
+                    </tr>
+
+                    <tr>
+                        <td>联系方式（手机）</td><td>{if !empty($spouse.tel_number)}{$spouse.tel_number}{/if}</td>
+                        <td>联系方式（电话）</td><td>{if !empty($spouse.phone_number)} {$spouse.phone_number}{/if}</td>
+                    </tr>
+                    <tr>
+                        <td>工作单位</td><td>{$spouse.work_place|default=''}</td>
+                        <td>从事职业</td><td>{$spouse.professional|default=''}</td>
+                    </tr>
+                    <tr>
+                        <td>健康状况</td><td colspan="3">{if(!empty($spouse.physical_condition))}{:get_name('physical_condition',$spouse.physical_condition)}{/if}</td>
+
+                    </tr>
+                </table>
+                {/volist}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function(){
+        $('.table-sort').dataTable({
+            "aaSorting": [[ 1, "desc" ]],//默认第几个排序
+            "bStateSave": true,//状态保存
+            "aoColumnDefs": [
+                //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+                {"orderable":false,"aTargets":[0,4,6,8]}// 制定列不参与排序
+            ]
+        });
+        $('.table-sort tbody').on( 'click', 'tr', function () {
+            if ( $(this).hasClass('selected') ) {
+                $(this).removeClass('selected');
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });
+    });
+    function submit(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+    function show(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+</script>
+
+
+
+{/block}

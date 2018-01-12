@@ -1,0 +1,67 @@
+{extend name="base" /}
+
+{block name="content"}
+<link href="/static/lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
+<div class="Hui-article-box">
+
+
+    <div class="Hui-article">
+
+
+
+
+        <div style="width: 1000px; margin: 0 auto">
+            <div class="panel panel-default">
+                <div class="panel-header" style="display: flex;justify-content: space-between;"><span>拜访内容</span></div>
+                <div class="panel-body">
+
+                    <table class="table table-border table-bordered table-hover">
+                        <tr class="text-c">
+                            <td style="width: 55px;">客户名称</td><td  colspan="3" style="width: 200px;">{$visit.name}</td>
+                        </tr>
+                        <tr class="text-c">
+                            <td style="width: 55px;">拜访时间</td><td  colspan="3" style="width: 200px;">{:date('Y-m-d',$visit.visit_time)}</td>
+                        </tr>
+                        <tr class="text-c">
+                            <td style="width: 55px;">拜访内容</td><td  colspan="3" style="width: 200px;">{$visit.content}</td>
+                        </tr>
+                    </table>
+
+
+
+                </div>
+            </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-header" style="display: flex;justify-content: space-between;"><span>拜访照片</span></div>
+                <div class="panel-body">
+                    {foreach name="list" item="vo"}
+                    <table class="table table-border table-bordered table-hover">
+                        <tr class="text-c">
+                            <td ><img  style="width: 800px; height: 400px; " src="{$vo}"/></td>
+
+                        </tr>
+
+                    </table>
+                    {/foreach}
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</div>
+
+<script type="text/javascript">
+    function submit(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+</script>
+
+
+
+
+
+{/block}

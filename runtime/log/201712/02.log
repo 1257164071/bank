@@ -1,0 +1,521 @@
+---------------------------------------------------------------
+[ 2017-12-02T08:23:12+08:00 ] 76.36.0.8 76.36.22.29 GET /admin/user/login.html
+[ info ] 76.36.0.8/admin/user/login.html [运行时间：0.045003s][吞吐率：22.22req/s] [内存消耗：1,780.18kb] [文件加载：46]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'user',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept' => 'application/x-ms-application, image/jpeg, application/xaml+xml, image/gif, image/pjpeg, application/x-ms-xbap, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, application/x-shockwave-flash, */*',
+  'accept-language' => 'zh-CN',
+  'user-agent' => 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0)',
+  'accept-encoding' => 'gzip, deflate',
+  'host' => '76.36.0.8',
+  'connection' => 'Keep-Alive',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\admin\controller\User->login[ F:\www\bank.cn\app\admin\controller\User.php ]
+[ info ] [ VIEW ] F:\www\bank.cn/app/admin\view\user\login.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2017-12-02T09:17:16+08:00 ] 76.36.0.8 76.36.0.232 GET /admin/user/login.html
+[ info ] 76.36.0.8/admin/user/login.html [运行时间：0.045002s][吞吐率：22.22req/s] [内存消耗：1,779.63kb] [文件加载：46]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'user',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '76.36.0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; rv:55.0) Gecko/20100101 Firefox/55.0',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept-encoding' => 'gzip, deflate',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\admin\controller\User->login[ F:\www\bank.cn\app\admin\controller\User.php ]
+[ info ] [ VIEW ] F:\www\bank.cn/app/admin\view\user\login.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2017-12-02T09:17:22+08:00 ] 76.36.0.8 76.36.0.232 POST /admin/user/login.html
+[ info ] 76.36.0.8/admin/user/login.html [运行时间：0.091005s][吞吐率：10.99req/s] [内存消耗：2,657.42kb] [文件加载：58]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'user',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '76.36.0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; rv:55.0) Gecko/20100101 Firefox/55.0',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://76.36.0.8/admin/user/login.html',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'content-length' => '31',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+)
+[ info ] [ PARAM ] array (
+  'username' => 'admin',
+  'password' => 'Nsgly17',
+)
+[ info ] [ RUN ] app\admin\controller\User->login[ F:\www\bank.cn\app\admin\controller\User.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:dbname=bank;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_user` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_rbac_user` WHERE  `username` = 'admin' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_action` [ RunTime:0.006000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_action` WHERE  `name` = 'user_login' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `username` FROM `ym_rbac_user` WHERE  `id` = 6 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_action_log` [ RunTime:0.005000s ]
+[ sql ] [ SQL ] INSERT INTO `ym_action_log` (`action_id` , `user_id` , `action_ip` , `model` , `record_id` , `create_time` , `remark`) VALUES (1 , 6 , 1277427944 , 'rbac_user' , 6 , 1512177442 , 'admin在2017-12-02 09:17登录了后台') [ RunTime:0.000000s ]
+[ sql ] [ SQL ] UPDATE `ym_rbac_user`  SET `last_login_time`=1512177442,`last_login_ip`='76.36.0.232',`login_count`=177  WHERE  `id` = 6 [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2017-12-02T09:17:23+08:00 ] 76.36.0.8 76.36.0.232 GET /admin/index/index.html
+[ info ] 76.36.0.8/admin/index/index.html [运行时间：1.505086s][吞吐率：0.66req/s] [内存消耗：2,656.41kb] [文件加载：54]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '76.36.0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; rv:55.0) Gecko/20100101 Firefox/55.0',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://76.36.0.8/admin/user/login.html',
+  'cookie' => 'PHPSESSID=lc937tr5rs9tmahc7epnv7l3l2',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Index->index[ F:\www\bank.cn\app\admin\controller\Index.php ]
+[ info ] [ VIEW ] F:\www\bank.cn/app/admin\view\index\index.html [ array (
+  0 => 'user',
+  1 => 'nodes',
+  2 => 'dep1',
+  3 => 'det1',
+  4 => 'dep2',
+  5 => 'det2',
+  6 => 'dep3',
+  7 => 'det3',
+  8 => 'resloan',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010001s ] mysql:dbname=bank;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_bank` [ RunTime:0.004000s ]
+[ sql ] [ SQL ] SELECT `bankname` FROM `ym_bank` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_role` [ RunTime:0.004000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_rbac_role` WHERE  `id` = 13 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_access` [ RunTime:0.004001s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.* FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) ORDER BY `b`.`sort`  asc [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_dataconfig` [ RunTime:0.006000s ]
+[ sql ] [ SQL ] SELECT `value` FROM `ym_dataconfig` WHERE  `code` = 'select_loantable' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT *  FROM ym_sign_analyse [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT SUM(provide_loan_money) AS sum,belong_organization FROM  ym_loan GROUP BY belong_organization having sum > 1 ORDER BY sum desc [ RunTime:0.572033s ]
+[ sql ] [ SQL ] SELECT SUM(remian_money) AS sum,belong_organization FROM ym_loan GROUP BY belong_organization having sum>10000000 ORDER BY sum desc [ RunTime:0.510029s ]
+[ sql ] [ SQL ] SELECT SUM(provide_loan_money) AS loannum  FROM ym_loan [ RunTime:0.321019s ]
+---------------------------------------------------------------
+[ 2017-12-02T09:49:12+08:00 ] 76.36.0.8 76.36.0.232 GET /admin/index/index.html
+[ info ] 76.36.0.8/admin/index/index.html [运行时间：1.474084s][吞吐率：0.68req/s] [内存消耗：2,656.04kb] [文件加载：54]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '76.36.0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; rv:55.0) Gecko/20100101 Firefox/55.0',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=lc937tr5rs9tmahc7epnv7l3l2',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Index->index[ F:\www\bank.cn\app\admin\controller\Index.php ]
+[ info ] [ VIEW ] F:\www\bank.cn/app/admin\view\index\index.html [ array (
+  0 => 'user',
+  1 => 'nodes',
+  2 => 'dep1',
+  3 => 'det1',
+  4 => 'dep2',
+  5 => 'det2',
+  6 => 'dep3',
+  7 => 'det3',
+  8 => 'resloan',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:dbname=bank;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_bank` [ RunTime:0.005000s ]
+[ sql ] [ SQL ] SELECT `bankname` FROM `ym_bank` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_role` [ RunTime:0.005001s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_rbac_role` WHERE  `id` = 13 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_access` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.* FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) ORDER BY `b`.`sort`  asc [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_dataconfig` [ RunTime:0.004001s ]
+[ sql ] [ SQL ] SELECT `value` FROM `ym_dataconfig` WHERE  `code` = 'select_loantable' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT *  FROM ym_sign_analyse [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT SUM(provide_loan_money) AS sum,belong_organization FROM  ym_loan GROUP BY belong_organization having sum > 1 ORDER BY sum desc [ RunTime:0.555031s ]
+[ sql ] [ SQL ] SELECT SUM(remian_money) AS sum,belong_organization FROM ym_loan GROUP BY belong_organization having sum>10000000 ORDER BY sum desc [ RunTime:0.507029s ]
+[ sql ] [ SQL ] SELECT SUM(provide_loan_money) AS loannum  FROM ym_loan [ RunTime:0.313018s ]
+---------------------------------------------------------------
+[ 2017-12-02T11:17:21+08:00 ] 76.36.0.8 76.36.0.232 GET /robots.txt
+[ info ] 76.36.0.8/robots.txt [运行时间：0.039002s][吞吐率：25.64req/s] [内存消耗：1,457.65kb] [文件加载：39]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'robots.txt',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'en',
+  'user-agent' => 'Scrapy/1.4.0 (+http://scrapy.org)',
+  'accept-encoding' => 'gzip,deflate',
+  'host' => '76.36.0.8',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2017-12-02T11:17:21+08:00 ] 76.36.0.8 76.36.0.232 GET /admin/index/index.html
+[ info ] 76.36.0.8/admin/index/index.html [运行时间：0.045003s][吞吐率：22.22req/s] [内存消耗：1,824.88kb] [文件加载：48]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'en',
+  'user-agent' => 'Scrapy/1.4.0 (+http://scrapy.org)',
+  'accept-encoding' => 'gzip,deflate',
+  'host' => '76.36.0.8',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2017-12-02T11:17:21+08:00 ] 76.36.0.8 76.36.0.232 GET /admin/user/login.html
+[ info ] 76.36.0.8/admin/user/login.html [运行时间：0.041003s][吞吐率：24.39req/s] [内存消耗：1,779.13kb] [文件加载：46]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'user',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'en',
+  'user-agent' => 'Scrapy/1.4.0 (+http://scrapy.org)',
+  'accept-encoding' => 'gzip,deflate',
+  'cookie' => 'PHPSESSID=1ko0bckvfafrd2p3mhvhm2g5i2',
+  'host' => '76.36.0.8',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\admin\controller\User->login[ F:\www\bank.cn\app\admin\controller\User.php ]
+[ info ] [ VIEW ] F:\www\bank.cn/app/admin\view\user\login.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2017-12-02T11:17:32+08:00 ] 76.36.0.8 76.36.0.232 GET /robots.txt
+[ info ] 76.36.0.8/robots.txt [运行时间：0.037002s][吞吐率：27.03req/s] [内存消耗：1,457.65kb] [文件加载：39]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'robots.txt',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'en',
+  'user-agent' => 'Scrapy/1.4.0 (+http://scrapy.org)',
+  'accept-encoding' => 'gzip,deflate',
+  'host' => '76.36.0.8',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2017-12-02T11:17:32+08:00 ] 76.36.0.8 76.36.0.232 GET /admin/index/index.html
+[ info ] 76.36.0.8/admin/index/index.html [运行时间：0.041002s][吞吐率：24.39req/s] [内存消耗：1,824.88kb] [文件加载：48]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'en',
+  'user-agent' => 'Scrapy/1.4.0 (+http://scrapy.org)',
+  'accept-encoding' => 'gzip,deflate',
+  'host' => '76.36.0.8',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2017-12-02T11:17:32+08:00 ] 76.36.0.8 76.36.0.232 GET /admin/user/login.html
+[ info ] 76.36.0.8/admin/user/login.html [运行时间：0.040002s][吞吐率：25.00req/s] [内存消耗：1,779.13kb] [文件加载：46]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'user',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'en',
+  'user-agent' => 'Scrapy/1.4.0 (+http://scrapy.org)',
+  'accept-encoding' => 'gzip,deflate',
+  'cookie' => 'PHPSESSID=80eencrq703loi8r48kt6nt0j5',
+  'host' => '76.36.0.8',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\admin\controller\User->login[ F:\www\bank.cn\app\admin\controller\User.php ]
+[ info ] [ VIEW ] F:\www\bank.cn/app/admin\view\user\login.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2017-12-02T11:19:08+08:00 ] 76.36.0.8 76.36.0.232 GET /robots.txt
+[ info ] 76.36.0.8/robots.txt [运行时间：0.036002s][吞吐率：27.78req/s] [内存消耗：1,457.65kb] [文件加载：39]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'robots.txt',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'en',
+  'user-agent' => 'Scrapy/1.4.0 (+http://scrapy.org)',
+  'accept-encoding' => 'gzip,deflate',
+  'host' => '76.36.0.8',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2017-12-02T11:19:08+08:00 ] 76.36.0.8 76.36.0.232 GET /admin/index/index.html
+[ info ] 76.36.0.8/admin/index/index.html [运行时间：0.041002s][吞吐率：24.39req/s] [内存消耗：1,824.88kb] [文件加载：48]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'en',
+  'user-agent' => 'Scrapy/1.4.0 (+http://scrapy.org)',
+  'accept-encoding' => 'gzip,deflate',
+  'host' => '76.36.0.8',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2017-12-02T11:19:08+08:00 ] 76.36.0.8 76.36.0.232 GET /admin/user/login.html
+[ info ] 76.36.0.8/admin/user/login.html [运行时间：0.040002s][吞吐率：25.00req/s] [内存消耗：1,779.13kb] [文件加载：46]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'user',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'en',
+  'user-agent' => 'Scrapy/1.4.0 (+http://scrapy.org)',
+  'accept-encoding' => 'gzip,deflate',
+  'cookie' => 'PHPSESSID=7dbcmtkt33eouk3662e3nn3635',
+  'host' => '76.36.0.8',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\admin\controller\User->login[ F:\www\bank.cn\app\admin\controller\User.php ]
+[ info ] [ VIEW ] F:\www\bank.cn/app/admin\view\user\login.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2017-12-02T14:26:49+08:00 ] 76.36.0.8 76.36.22.29 GET /admin/user/login.html
+[ info ] 76.36.0.8/admin/user/login.html [运行时间：0.045003s][吞吐率：22.22req/s] [内存消耗：1,780.19kb] [文件加载：46]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'user',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept' => 'application/x-ms-application, image/jpeg, application/xaml+xml, image/gif, image/pjpeg, application/x-ms-xbap, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, application/x-shockwave-flash, */*',
+  'accept-language' => 'zh-CN',
+  'user-agent' => 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0)',
+  'accept-encoding' => 'gzip, deflate',
+  'host' => '76.36.0.8',
+  'connection' => 'Keep-Alive',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\admin\controller\User->login[ F:\www\bank.cn\app\admin\controller\User.php ]
+[ info ] [ VIEW ] F:\www\bank.cn/app/admin\view\user\login.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2017-12-02T14:26:52+08:00 ] 76.36.0.8 76.36.22.29 GET /admin/user/login.html
+[ info ] 76.36.0.8/admin/user/login.html [运行时间：0.045003s][吞吐率：22.22req/s] [内存消耗：1,779.33kb] [文件加载：46]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'user',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'accept-language' => 'zh-CN',
+  'user-agent' => 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0)',
+  'accept-encoding' => 'gzip, deflate',
+  'host' => '76.36.0.8',
+  'connection' => 'Keep-Alive',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\admin\controller\User->login[ F:\www\bank.cn\app\admin\controller\User.php ]
+[ info ] [ VIEW ] F:\www\bank.cn/app/admin\view\user\login.html [ array (
+) ]
+[ info ] [ LOG ] INIT File

@@ -1,0 +1,137 @@
+{extend name="base" /}
+
+{block name="main"}
+
+<article class="cl pd-20">
+	<form action="" method="post" class="form form-horizontal" id="form-admin-add">
+		{if !empty($loan_ss_info)}
+			<input type="hidden" name="id" value="{$loan_ss_info.id}">
+		{else}
+			<input type="hidden" name="loan_id" value="{:input('loan_id')}">
+		{/if}
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">诉前审查：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" onfocus="WdatePicker()" value="<?php echo (isset($loan_ss_info['sqshencha']) && ($loan_ss_info['sqshencha'] !== '')?date('Y-m-d',$loan_ss_info['sqshencha']):''); ?>"  name="sqshencha" class="input-text Wdate" >
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">一审：</label>
+			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+				<div class="radio-box">
+					<input name="yishen" type="radio"  value="1" id="yishen_1" checked>
+					<label for="yishen_1">再审</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="yishen_2" value="2" name="yishen" <?php echo (isset($loan_ss_info['yishen']) && ($loan_ss_info['yishen'] == '2')?'checked':''); ?>>
+					<label for="yishen_2">重审</label>
+				</div>
+
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">上诉：</label>
+			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+				<div class="radio-box">
+					<input name="shangsu" type="radio"  value="1" id="shangsu_1" checked>
+					<label for="shangsu_1">再审</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="shangsu_2" value="2" name="shangsu"<?php echo (isset($loan_ss_info['shangsu']) && ($loan_ss_info['shangsu'] == '2')?'checked':''); ?>  >
+					<label for="shangsu_2">重审</label>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">申请执行：</label>
+			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+				<div class="radio-box">
+					<input name="sqzhixing" type="radio"  value="1" id="sqzhixing_1" checked>
+					<label for="sqzhixing_1">是</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="sqzhixing_2" value="0" name="sqzhixing"<?php echo (isset($loan_ss_info['sqzhixing']) && ($loan_ss_info['sqzhixing'] == '0')?'checked':''); ?> >
+					<label for="sqzhixing_2">否</label>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">执行异议：</label>
+			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+				<div class="radio-box">
+					<input name="zxyiyi" type="radio"  value="1" id="zxyiyi_1" checked>
+					<label for="zxyiyi_1">是</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="zxyiyi_2" value="0" name="zxyiyi" <?php echo (isset($loan_ss_info['zxyiyi']) && ($loan_ss_info['zxyiyi'] == '0')?'checked':''); ?> >
+					<label for="zxyiyi_2">否</label>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">检察院检察：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$loan_ss_info.jcyjiancha|default=''}" placeholder="检察院检察"  name="jcyjiancha">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">其他：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$loan_ss_info.ss_other|default=''}" placeholder="其他"  name="ss_other">
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-6 col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+
+			</div>
+		</div>
+	</form>
+</article>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+	
+	$("#form-admin-add").validate({
+
+		onkeyup:false,
+		focusCleanup:true,
+		success:"valid",
+		submitHandler:function(form){
+			var $form = $(form);
+			$.ajax({
+				url:'{$url}',
+				type:'post',
+				data:$form.serialize(),
+				success:function (data) {
+					if(data.code==0){
+						layer.msg(data.msg);
+						parent.location.reload();
+						setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))",2000);
+					}else{
+						layer.msg(data.msg);
+					}
+				}
+			});
+		}
+	});
+
+})
+
+
+      
+</script>
+
+{/block}

@@ -1,0 +1,1177 @@
+---------------------------------------------------------------
+[ 2017-11-18T08:43:58+08:00 ] 76.36.0.8 76.36.0.232 GET /
+[ info ] 76.36.0.8/ [运行时间：0.044002s][吞吐率：22.73req/s] [内存消耗：1,832.55kb] [文件加载：48]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '76.36.0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; rv:55.0) Gecko/20100101 Firefox/55.0',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept-encoding' => 'gzip, deflate',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2017-11-18T08:43:58+08:00 ] 76.36.0.8 76.36.0.232 GET /admin/user/login.html
+[ info ] 76.36.0.8/admin/user/login.html [运行时间：0.041002s][吞吐率：24.39req/s] [内存消耗：1,779.84kb] [文件加载：46]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'user',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '76.36.0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; rv:55.0) Gecko/20100101 Firefox/55.0',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=i5sqf4dq35cbpf1e7lp5ajjta2',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\admin\controller\User->login[ F:\www\bank.cn\app\admin\controller\User.php ]
+[ info ] [ VIEW ] F:\www\bank.cn/app/admin\view\user\login.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2017-11-18T08:44:06+08:00 ] 76.36.0.8 76.36.0.232 POST /admin/user/login.html
+[ info ] 76.36.0.8/admin/user/login.html [运行时间：0.075004s][吞吐率：13.33req/s] [内存消耗：2,657.48kb] [文件加载：58]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'user',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '76.36.0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; rv:55.0) Gecko/20100101 Firefox/55.0',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://76.36.0.8/admin/user/login.html',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'content-length' => '31',
+  'cookie' => 'PHPSESSID=i5sqf4dq35cbpf1e7lp5ajjta2',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+)
+[ info ] [ PARAM ] array (
+  'username' => 'admin',
+  'password' => 'Nsgly17',
+)
+[ info ] [ RUN ] app\admin\controller\User->login[ F:\www\bank.cn\app\admin\controller\User.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:dbname=bank;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_user` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_rbac_user` WHERE  `username` = 'admin' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_action` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_action` WHERE  `name` = 'user_login' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `username` FROM `ym_rbac_user` WHERE  `id` = 6 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_action_log` [ RunTime:0.002001s ]
+[ sql ] [ SQL ] INSERT INTO `ym_action_log` (`action_id` , `user_id` , `action_ip` , `model` , `record_id` , `create_time` , `remark`) VALUES (1 , 6 , 1277427944 , 'rbac_user' , 6 , 1510965846 , 'admin在2017-11-18 08:44登录了后台') [ RunTime:0.000000s ]
+[ sql ] [ SQL ] UPDATE `ym_rbac_user`  SET `last_login_time`=1510965846,`last_login_ip`='76.36.0.232',`login_count`=128  WHERE  `id` = 6 [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2017-11-18T08:44:11+08:00 ] 76.36.0.8 76.36.0.232 GET /admin/index/index.html
+[ info ] 76.36.0.8/admin/index/index.html [运行时间：5.756330s][吞吐率：0.17req/s] [内存消耗：2,817.25kb] [文件加载：54]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '76.36.0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; rv:55.0) Gecko/20100101 Firefox/55.0',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://76.36.0.8/admin/user/login.html',
+  'cookie' => 'PHPSESSID=i5sqf4dq35cbpf1e7lp5ajjta2',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Index->index[ F:\www\bank.cn\app\admin\controller\Index.php ]
+[ info ] [ VIEW ] F:\www\bank.cn/app/admin\view\index\index.html [ array (
+  0 => 'user',
+  1 => 'nodes',
+  2 => 'dep1',
+  3 => 'det1',
+  4 => 'dep2',
+  5 => 'det2',
+  6 => 'dep3',
+  7 => 'det3',
+  8 => 'resloan',
+  9 => 'banklist',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010001s ] mysql:dbname=bank;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_bank` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT `bankname` FROM `ym_bank` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_role` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_rbac_role` WHERE  `id` = 13 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_access` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.* FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) ORDER BY `b`.`id`  asc [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_dataconfig` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT `value` FROM `ym_dataconfig` WHERE  `code` = 'select_loantable' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT *  FROM ym_sign_analyse [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT SUM(provide_loan_money) AS sum,belong_organization FROM  ym_loan GROUP BY belong_organization having sum > 1 ORDER BY sum desc [ RunTime:0.562032s ]
+[ sql ] [ SQL ] SELECT SUM(remian_money) AS sum,belong_organization FROM ym_loan GROUP BY belong_organization having sum>10000000 ORDER BY sum desc [ RunTime:0.515030s ]
+[ sql ] [ SQL ] SELECT SUM(provide_loan_money) AS loannum  FROM ym_loan [ RunTime:0.333019s ]
+[ sql ] [ SQL ] select belong_organization,count(belong_organization) as count from ym_client GROUP BY belong_organization having count > 1 ORDER BY belong_organization asc [ RunTime:4.213241s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_user` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 1 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 24 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 24 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 26 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 26 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 27 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 27 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 28 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 28 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 29 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 29 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 30 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 30 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 31 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 31 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 32 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 32 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 33 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 33 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 35 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 35 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 36 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 36 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 37 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 37 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 38 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 38 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 39 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 39 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 40 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 40 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 41 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 41 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 42 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 42 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 43 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 43 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 44 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 44 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 45 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 45 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 46 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 46 LIMIT 1 [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2017-11-18T08:48:15+08:00 ] 76.36.0.8 76.36.0.232 GET /admin/grid/allbank.html
+[ info ] 76.36.0.8/admin/grid/allbank.html [运行时间：0.130007s][吞吐率：7.69req/s] [内存消耗：2,786.29kb] [文件加载：54]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'grid',
+    2 => 'allbank',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '76.36.0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; rv:55.0) Gecko/20100101 Firefox/55.0',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://76.36.0.8/admin/index/index.html',
+  'cookie' => 'PHPSESSID=i5sqf4dq35cbpf1e7lp5ajjta2',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Grid->allbank[ F:\www\bank.cn\app\admin\controller\Grid.php ]
+[ info ] [ VIEW ] F:\www\bank.cn/app/admin\view\grid\allbank.html [ array (
+  0 => 'user',
+  1 => 'nodes',
+  2 => 'count',
+  3 => 'bank',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010000s ] mysql:dbname=bank;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_bank` [ RunTime:0.002001s ]
+[ sql ] [ SQL ] SELECT `bankname` FROM `ym_bank` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_role` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_rbac_role` WHERE  `id` = 13 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_access` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.* FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) ORDER BY `b`.`id`  asc [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_bank` WHERE  `is_del` = 0 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `is_del` = 0 [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_user` [ RunTime:0.004000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `role_id` = 10  AND `bank_id` = 1 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `role_id` = 10  AND `bank_id` = 2 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `role_id` = 10  AND `bank_id` = 39 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `role_id` = 10  AND `bank_id` = 36 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `role_id` = 10  AND `bank_id` = 35 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `role_id` = 10  AND `bank_id` = 24 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `role_id` = 10  AND `bank_id` = 26 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `role_id` = 10  AND `bank_id` = 38 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `role_id` = 10  AND `bank_id` = 27 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `role_id` = 10  AND `bank_id` = 37 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `role_id` = 10  AND `bank_id` = 28 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `role_id` = 10  AND `bank_id` = 29 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `role_id` = 10  AND `bank_id` = 30 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `role_id` = 10  AND `bank_id` = 31 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `role_id` = 10  AND `bank_id` = 32 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `role_id` = 10  AND `bank_id` = 33 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `role_id` = 10  AND `bank_id` = 40 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `role_id` = 10  AND `bank_id` = 41 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `role_id` = 10  AND `bank_id` = 42 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `role_id` = 10  AND `bank_id` = 43 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `role_id` = 10  AND `bank_id` = 44 LIMIT 1 [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `role_id` = 10  AND `bank_id` = 45 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `role_id` = 10  AND `bank_id` = 46 LIMIT 1 [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2017-11-18T08:48:23+08:00 ] 76.36.0.8 76.36.0.232 GET /admin/index/index.html
+[ info ] 76.36.0.8/admin/index/index.html [运行时间：5.692325s][吞吐率：0.18req/s] [内存消耗：2,817.25kb] [文件加载：54]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '76.36.0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; rv:55.0) Gecko/20100101 Firefox/55.0',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://76.36.0.8/admin/user/login.html',
+  'cookie' => 'PHPSESSID=i5sqf4dq35cbpf1e7lp5ajjta2',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Index->index[ F:\www\bank.cn\app\admin\controller\Index.php ]
+[ info ] [ VIEW ] F:\www\bank.cn/app/admin\view\index\index.html [ array (
+  0 => 'user',
+  1 => 'nodes',
+  2 => 'dep1',
+  3 => 'det1',
+  4 => 'dep2',
+  5 => 'det2',
+  6 => 'dep3',
+  7 => 'det3',
+  8 => 'resloan',
+  9 => 'banklist',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010001s ] mysql:dbname=bank;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_bank` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT `bankname` FROM `ym_bank` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_role` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_rbac_role` WHERE  `id` = 13 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_access` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.* FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) ORDER BY `b`.`id`  asc [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_dataconfig` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT `value` FROM `ym_dataconfig` WHERE  `code` = 'select_loantable' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT *  FROM ym_sign_analyse [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT SUM(provide_loan_money) AS sum,belong_organization FROM  ym_loan GROUP BY belong_organization having sum > 1 ORDER BY sum desc [ RunTime:0.558032s ]
+[ sql ] [ SQL ] SELECT SUM(remian_money) AS sum,belong_organization FROM ym_loan GROUP BY belong_organization having sum>10000000 ORDER BY sum desc [ RunTime:0.512029s ]
+[ sql ] [ SQL ] SELECT SUM(provide_loan_money) AS loannum  FROM ym_loan [ RunTime:0.312018s ]
+[ sql ] [ SQL ] select belong_organization,count(belong_organization) as count from ym_client GROUP BY belong_organization having count > 1 ORDER BY belong_organization asc [ RunTime:4.173239s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_user` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 1 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 24 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 24 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 26 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 26 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 27 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 27 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 28 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 28 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 29 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 29 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 30 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 30 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 31 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 31 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 32 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 32 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 33 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 33 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 35 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 35 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 36 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 36 LIMIT 1 [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 37 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 37 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 38 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 38 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 39 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 39 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 40 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 40 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 41 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 41 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 42 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 42 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 43 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 43 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 44 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 44 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 45 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 45 LIMIT 1 [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 46 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 46 LIMIT 1 [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2017-11-18T08:48:28+08:00 ] 76.36.0.8 76.36.0.232 GET /admin/index/index.html
+[ info ] 76.36.0.8/admin/index/index.html [运行时间：9.223528s][吞吐率：0.11req/s] [内存消耗：2,817.25kb] [文件加载：54]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '76.36.0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; rv:55.0) Gecko/20100101 Firefox/55.0',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://76.36.0.8/admin/user/login.html',
+  'cookie' => 'PHPSESSID=i5sqf4dq35cbpf1e7lp5ajjta2',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Index->index[ F:\www\bank.cn\app\admin\controller\Index.php ]
+[ info ] [ VIEW ] F:\www\bank.cn/app/admin\view\index\index.html [ array (
+  0 => 'user',
+  1 => 'nodes',
+  2 => 'dep1',
+  3 => 'det1',
+  4 => 'dep2',
+  5 => 'det2',
+  6 => 'dep3',
+  7 => 'det3',
+  8 => 'resloan',
+  9 => 'banklist',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010001s ] mysql:dbname=bank;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_bank` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT `bankname` FROM `ym_bank` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_role` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_rbac_role` WHERE  `id` = 13 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_access` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.* FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) ORDER BY `b`.`id`  asc [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_dataconfig` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT `value` FROM `ym_dataconfig` WHERE  `code` = 'select_loantable' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT *  FROM ym_sign_analyse [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT SUM(provide_loan_money) AS sum,belong_organization FROM  ym_loan GROUP BY belong_organization having sum > 1 ORDER BY sum desc [ RunTime:0.563032s ]
+[ sql ] [ SQL ] SELECT SUM(remian_money) AS sum,belong_organization FROM ym_loan GROUP BY belong_organization having sum>10000000 ORDER BY sum desc [ RunTime:0.511029s ]
+[ sql ] [ SQL ] SELECT SUM(provide_loan_money) AS loannum  FROM ym_loan [ RunTime:0.315018s ]
+[ sql ] [ SQL ] select belong_organization,count(belong_organization) as count from ym_client GROUP BY belong_organization having count > 1 ORDER BY belong_organization asc [ RunTime:4.146238s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_user` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 1 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 24 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 24 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 26 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 26 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 27 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 27 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 28 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 28 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 29 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 29 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 30 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 30 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 31 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 31 LIMIT 1 [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 32 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 32 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 33 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 33 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 35 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 35 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 36 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 36 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 37 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 37 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 38 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 38 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 39 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 39 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 40 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 40 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 41 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 41 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 42 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 42 LIMIT 1 [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 43 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 43 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 44 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 44 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 45 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 45 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 46 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 46 LIMIT 1 [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2017-11-18T08:52:47+08:00 ] 76.36.0.8 76.36.0.232 GET /admin/grid/banktree/bank_id/29.html
+[ info ] 76.36.0.8/admin/grid/banktree/bank_id/29.html [运行时间：0.109006s][吞吐率：9.17req/s] [内存消耗：2,745.98kb] [文件加载：54]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'grid',
+    2 => 'banktree',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '76.36.0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; rv:55.0) Gecko/20100101 Firefox/55.0',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://76.36.0.8/admin/index/index.html',
+  'cookie' => 'PHPSESSID=i5sqf4dq35cbpf1e7lp5ajjta2',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+)
+[ info ] [ PARAM ] array (
+  'bank_id' => '29',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Grid->banktree[ F:\www\bank.cn\app\admin\controller\Grid.php ]
+[ info ] [ VIEW ] F:\www\bank.cn/app/admin\view\grid\banktree.html [ array (
+  0 => 'user',
+  1 => 'nodes',
+  2 => 'bankname',
+  3 => 'client_manger',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010001s ] mysql:dbname=bank;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_bank` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT `bankname` FROM `ym_bank` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_role` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_rbac_role` WHERE  `id` = 13 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_access` [ RunTime:0.002001s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.* FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) ORDER BY `b`.`id`  asc [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `bankname` FROM `ym_bank` WHERE  `is_del` = 0  AND `id` = 29 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_user` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_rbac_user` WHERE  `bank_id` = 29  AND `role_id` = 10 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_grid` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 110 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 111 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 112 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 113 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 114 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 115 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 116 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 198 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 219 LIMIT 1 [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2017-11-18T08:52:55+08:00 ] 76.36.0.8 76.36.0.232 GET /admin/index/index.html
+[ info ] 76.36.0.8/admin/index/index.html [运行时间：5.775330s][吞吐率：0.17req/s] [内存消耗：2,817.25kb] [文件加载：54]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '76.36.0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; rv:55.0) Gecko/20100101 Firefox/55.0',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://76.36.0.8/admin/user/login.html',
+  'cookie' => 'PHPSESSID=i5sqf4dq35cbpf1e7lp5ajjta2',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Index->index[ F:\www\bank.cn\app\admin\controller\Index.php ]
+[ info ] [ VIEW ] F:\www\bank.cn/app/admin\view\index\index.html [ array (
+  0 => 'user',
+  1 => 'nodes',
+  2 => 'dep1',
+  3 => 'det1',
+  4 => 'dep2',
+  5 => 'det2',
+  6 => 'dep3',
+  7 => 'det3',
+  8 => 'resloan',
+  9 => 'banklist',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:dbname=bank;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_bank` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT `bankname` FROM `ym_bank` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_role` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_rbac_role` WHERE  `id` = 13 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_access` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.* FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) ORDER BY `b`.`id`  asc [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_dataconfig` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT `value` FROM `ym_dataconfig` WHERE  `code` = 'select_loantable' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT *  FROM ym_sign_analyse [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT SUM(provide_loan_money) AS sum,belong_organization FROM  ym_loan GROUP BY belong_organization having sum > 1 ORDER BY sum desc [ RunTime:0.613035s ]
+[ sql ] [ SQL ] SELECT SUM(remian_money) AS sum,belong_organization FROM ym_loan GROUP BY belong_organization having sum>10000000 ORDER BY sum desc [ RunTime:0.577033s ]
+[ sql ] [ SQL ] SELECT SUM(provide_loan_money) AS loannum  FROM ym_loan [ RunTime:0.312018s ]
+[ sql ] [ SQL ] select belong_organization,count(belong_organization) as count from ym_client GROUP BY belong_organization having count > 1 ORDER BY belong_organization asc [ RunTime:4.145237s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_user` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 1 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 24 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 24 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 26 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 26 LIMIT 1 [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 27 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 27 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 28 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 28 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 29 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 29 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 30 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 30 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 31 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 31 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 32 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 32 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 33 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 33 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 35 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 35 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 36 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 36 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 37 LIMIT 1 [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 37 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 38 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 38 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 39 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 39 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 40 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 40 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 41 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 41 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 42 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 42 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 43 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 43 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 44 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 44 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 45 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 45 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 46 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 46 LIMIT 1 [ RunTime:0.001001s ]
+---------------------------------------------------------------
+[ 2017-11-18T08:53:01+08:00 ] 76.36.0.8 76.36.0.232 GET /admin/index/index.html
+[ info ] 76.36.0.8/admin/index/index.html [运行时间：6.541374s][吞吐率：0.15req/s] [内存消耗：2,817.25kb] [文件加载：54]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '76.36.0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; rv:55.0) Gecko/20100101 Firefox/55.0',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://76.36.0.8/admin/user/login.html',
+  'cookie' => 'PHPSESSID=i5sqf4dq35cbpf1e7lp5ajjta2',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Index->index[ F:\www\bank.cn\app\admin\controller\Index.php ]
+[ info ] [ VIEW ] F:\www\bank.cn/app/admin\view\index\index.html [ array (
+  0 => 'user',
+  1 => 'nodes',
+  2 => 'dep1',
+  3 => 'det1',
+  4 => 'dep2',
+  5 => 'det2',
+  6 => 'dep3',
+  7 => 'det3',
+  8 => 'resloan',
+  9 => 'banklist',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011001s ] mysql:dbname=bank;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_bank` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT `bankname` FROM `ym_bank` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_role` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_rbac_role` WHERE  `id` = 13 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_access` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.* FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) ORDER BY `b`.`id`  asc [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_dataconfig` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT `value` FROM `ym_dataconfig` WHERE  `code` = 'select_loantable' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT *  FROM ym_sign_analyse [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT SUM(provide_loan_money) AS sum,belong_organization FROM  ym_loan GROUP BY belong_organization having sum > 1 ORDER BY sum desc [ RunTime:0.563032s ]
+[ sql ] [ SQL ] SELECT SUM(remian_money) AS sum,belong_organization FROM ym_loan GROUP BY belong_organization having sum>10000000 ORDER BY sum desc [ RunTime:0.511029s ]
+[ sql ] [ SQL ] SELECT SUM(provide_loan_money) AS loannum  FROM ym_loan [ RunTime:0.314018s ]
+[ sql ] [ SQL ] select belong_organization,count(belong_organization) as count from ym_client GROUP BY belong_organization having count > 1 ORDER BY belong_organization asc [ RunTime:4.167239s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_user` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 24 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 24 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 26 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 26 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 27 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 27 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 28 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 28 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 29 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 29 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 30 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 30 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 31 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 31 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 32 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 32 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 33 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 33 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 35 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 35 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 36 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 36 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 37 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 37 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 38 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 38 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 39 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 39 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 40 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 40 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 41 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 41 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 42 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 42 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 43 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 43 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 44 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 44 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 45 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 45 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 46 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 46 LIMIT 1 [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2017-11-18T08:53:04+08:00 ] 76.36.0.8 76.36.0.232 GET /admin/grid/banktree/bank_id/1.html
+[ info ] 76.36.0.8/admin/grid/banktree/bank_id/1.html [运行时间：0.169010s][吞吐率：5.92req/s] [内存消耗：3,018.34kb] [文件加载：54]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'grid',
+    2 => 'banktree',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '76.36.0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; rv:55.0) Gecko/20100101 Firefox/55.0',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://76.36.0.8/admin/index/index.html',
+  'cookie' => 'PHPSESSID=i5sqf4dq35cbpf1e7lp5ajjta2',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+)
+[ info ] [ PARAM ] array (
+  'bank_id' => '1',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Grid->banktree[ F:\www\bank.cn\app\admin\controller\Grid.php ]
+[ info ] [ VIEW ] F:\www\bank.cn/app/admin\view\grid\banktree.html [ array (
+  0 => 'user',
+  1 => 'nodes',
+  2 => 'bankname',
+  3 => 'client_manger',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:dbname=bank;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_bank` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT `bankname` FROM `ym_bank` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_role` [ RunTime:0.003001s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_rbac_role` WHERE  `id` = 13 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_access` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.* FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) ORDER BY `b`.`id`  asc [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `bankname` FROM `ym_bank` WHERE  `is_del` = 0  AND `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_user` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_rbac_user` WHERE  `bank_id` = 1  AND `role_id` = 10 [ RunTime:0.002001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_grid` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 22 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 36 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 37 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 38 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 107 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 108 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 109 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 137 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 138 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 139 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 150 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 151 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 152 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 153 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 155 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 156 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 157 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 158 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 159 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 160 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 161 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 162 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 163 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 164 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 165 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 166 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 167 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 168 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 169 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 182 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 183 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 184 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 185 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 186 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 187 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 188 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 189 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 190 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 191 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 192 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 193 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 238 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 239 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 244 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 250 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 251 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 253 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 254 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 257 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 258 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 259 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 262 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 263 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 264 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 265 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 266 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 267 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_grid` WHERE  `xiaoqu_manger` = 268 LIMIT 1 [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2017-11-18T08:53:14+08:00 ] 76.36.0.8 76.36.0.232 GET /admin/index/index.html
+[ info ] 76.36.0.8/admin/index/index.html [运行时间：5.637322s][吞吐率：0.18req/s] [内存消耗：2,817.25kb] [文件加载：54]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '76.36.0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; rv:55.0) Gecko/20100101 Firefox/55.0',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://76.36.0.8/admin/user/login.html',
+  'cookie' => 'PHPSESSID=i5sqf4dq35cbpf1e7lp5ajjta2',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Index->index[ F:\www\bank.cn\app\admin\controller\Index.php ]
+[ info ] [ VIEW ] F:\www\bank.cn/app/admin\view\index\index.html [ array (
+  0 => 'user',
+  1 => 'nodes',
+  2 => 'dep1',
+  3 => 'det1',
+  4 => 'dep2',
+  5 => 'det2',
+  6 => 'dep3',
+  7 => 'det3',
+  8 => 'resloan',
+  9 => 'banklist',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000000s ] mysql:dbname=bank;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_bank` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT `bankname` FROM `ym_bank` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_role` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_rbac_role` WHERE  `id` = 13 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_access` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.* FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) ORDER BY `b`.`id`  asc [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_dataconfig` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT `value` FROM `ym_dataconfig` WHERE  `code` = 'select_loantable' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT *  FROM ym_sign_analyse [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT SUM(provide_loan_money) AS sum,belong_organization FROM  ym_loan GROUP BY belong_organization having sum > 1 ORDER BY sum desc [ RunTime:0.560032s ]
+[ sql ] [ SQL ] SELECT SUM(remian_money) AS sum,belong_organization FROM ym_loan GROUP BY belong_organization having sum>10000000 ORDER BY sum desc [ RunTime:0.511029s ]
+[ sql ] [ SQL ] SELECT SUM(provide_loan_money) AS loannum  FROM ym_loan [ RunTime:0.312018s ]
+[ sql ] [ SQL ] select belong_organization,count(belong_organization) as count from ym_client GROUP BY belong_organization having count > 1 ORDER BY belong_organization asc [ RunTime:4.125236s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_user` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 1 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 24 LIMIT 1 [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 24 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 26 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 26 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 27 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 27 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 28 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 28 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 29 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 29 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 30 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 30 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 31 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 31 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 32 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 32 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 33 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 33 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 35 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 35 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 36 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 36 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 37 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 37 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 38 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 38 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 39 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 39 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 40 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 40 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 41 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 41 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 42 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 42 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 43 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 43 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 44 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 44 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 45 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 45 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `id` = 46 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_rbac_user` WHERE  `bank_id` = 46 LIMIT 1 [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2017-11-18T08:53:19+08:00 ] 76.36.0.8 76.36.0.232 GET /admin/client/clientlist
+[ info ] 76.36.0.8/admin/client/clientlist [运行时间：5.536317s][吞吐率：0.18req/s] [内存消耗：3,164.28kb] [文件加载：57]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'client',
+    2 => 'clientlist',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '76.36.0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; rv:55.0) Gecko/20100101 Firefox/55.0',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://76.36.0.8/admin/grid/banktree/bank_id/1.html',
+  'cookie' => 'PHPSESSID=i5sqf4dq35cbpf1e7lp5ajjta2',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Client->clientlist[ F:\www\bank.cn\app\admin\controller\Client.php ]
+[ info ] [ VIEW ] F:\www\bank.cn/app/admin\view\client\clientlist.html [ array (
+  0 => 'user',
+  1 => 'nodes',
+  2 => 'page',
+  3 => 'bank',
+  4 => 'class',
+  5 => 'class1708_int',
+  6 => 'title1',
+  7 => 'title2',
+  8 => 'clients',
+  9 => 'count',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010001s ] mysql:dbname=bank;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_bank` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT `bankname` FROM `ym_bank` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_role` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_rbac_role` WHERE  `id` = 13 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_access` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.* FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) ORDER BY `b`.`id`  asc [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_client` [ RunTime:0.004000s ]
+[ sql ] [ SQL ] SELECT COUNT(id) AS tp_count FROM `ym_client` LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_client` LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `id`,`client_number`,`name`,`sex`,`card_number`,`gridname` FROM `ym_client` ORDER BY grid desc,id desc LIMIT 0,20 [ RunTime:4.170239s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `is_del` = 0 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_dataconfig` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT `value` FROM `ym_dataconfig` WHERE  `code` = 'class' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `value` FROM `ym_dataconfig` WHERE  `code` = 'class1708' LIMIT 1 [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2017-11-18T08:53:23+08:00 ] 76.36.0.8 76.36.0.232 GET /admin/client/clientselect
+[ info ] 76.36.0.8/admin/client/clientselect [运行时间：7.912452s][吞吐率：0.13req/s] [内存消耗：4,157.16kb] [文件加载：59]
+[ info ] [ LANG ] F:\www\bank.cn\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'client',
+    2 => 'clientselect',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '76.36.0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; rv:55.0) Gecko/20100101 Firefox/55.0',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://76.36.0.8/admin/grid/banktree/bank_id/1.html',
+  'cookie' => 'PHPSESSID=i5sqf4dq35cbpf1e7lp5ajjta2',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ RUN ] app\admin\controller\Client->clientselect[ F:\www\bank.cn\app\admin\controller\Client.php ]
+[ info ] [ VIEW ] F:\www\bank.cn/app/admin\view\client\clientselect.html [ array (
+  0 => 'user',
+  1 => 'nodes',
+  2 => 'banklist',
+  3 => 'credit_class',
+  4 => 'business_type',
+  5 => 'sign_type',
+  6 => 'subject_number',
+  7 => 'rate_runmode',
+  8 => 'account_status',
+  9 => 'provide_type',
+  10 => 'manger',
+  11 => 'loan_using',
+  12 => 'deposit_type',
+  13 => 'loan_status',
+  14 => 'guarantee_way',
+  15 => 'client_grade',
+  16 => 'title1',
+  17 => 'title2',
+  18 => 'page',
+  19 => 'class1708_int',
+  20 => 'total',
+  21 => 'clients',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010000s ] mysql:dbname=bank;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_bank` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT `bankname` FROM `ym_bank` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_role` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_rbac_role` WHERE  `id` = 13 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_access` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.* FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) ORDER BY `b`.`id`  asc [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `pid` = 0 ORDER BY `id`  asc [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_bank` WHERE  `pid` = 1 ORDER BY `id`  asc [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_dataconfig` [ RunTime:0.003001s ]
+[ sql ] [ SQL ] SELECT `value` FROM `ym_dataconfig` WHERE  `code` = 'credit_class' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `value` FROM `ym_dataconfig` WHERE  `code` = 'business_type' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `value` FROM `ym_dataconfig` WHERE  `code` = 'sign_type' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `value` FROM `ym_dataconfig` WHERE  `code` = 'subject_number' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `value` FROM `ym_dataconfig` WHERE  `code` = 'rate_runmode' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `value` FROM `ym_dataconfig` WHERE  `code` = 'account_status' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `value` FROM `ym_dataconfig` WHERE  `code` = 'provide_type' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_user` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_rbac_user` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT `value` FROM `ym_dataconfig` WHERE  `code` = 'loan_using' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `value` FROM `ym_dataconfig` WHERE  `code` = 'deposit_type' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `value` FROM `ym_dataconfig` WHERE  `code` = 'loan_status' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `value` FROM `ym_dataconfig` WHERE  `code` = 'guarantee_way' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `value` FROM `ym_dataconfig` WHERE  `code` = 'client_grade' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_client` [ RunTime:0.003000s ]
+[ sql ] [ SQL ] SELECT COUNT(id) AS tp_count FROM `ym_client` LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ym_client` LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`client_number`,`name`,`sex`,`card_number`,`tel_number`,`client_grade`,`gridname` FROM `ym_client` ORDER BY grid desc,id desc LIMIT 0,20 [ RunTime:4.103235s ]
+[ sql ] [ SQL ] SELECT `value` FROM `ym_dataconfig` WHERE  `code` = 'class1708' LIMIT 1 [ RunTime:0.001000s ]

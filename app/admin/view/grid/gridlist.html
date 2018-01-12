@@ -1,0 +1,78 @@
+﻿{extend name="base" /}
+
+{block name="content"}
+
+<section class="Hui-article-box">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 网格列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<div class="Hui-article">
+		<article class="cl pd-20">
+
+			<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a href="{:url('admin/grid/gridadd')}" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加网格</a></span>  </div>
+			<div class="mt-20">
+				<table class="table table-border table-bordered table-hover table-bg table-sort">
+					<thead>
+						<tr class="text-c">
+							<th width="25"><input type="checkbox" name="" value=""></th>
+							<th width="80">ID</th>
+							<th width="100">名称</th>
+							<th width="150">备注</th>
+							<th width="120">操作</th>
+
+						</tr>
+					</thead>
+
+					<tbody>
+					{volist name="gridlist" id="vo"}
+						<tr class="text-c">
+							<td><input type="checkbox" value="{$vo.id}" name="id[]"></td>
+							<td>{$vo.id}</td>
+							<td>{$vo.name}</td>
+							<td>{$vo.remark}</td>
+							<td class="td-manage"> <a  href="javascript:" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i>删除</a>
+								<a href="{:url('admin/grid/gridadd',['id'=>$vo.id])}"><i class="Hui-iconfont"></i>编辑</a>
+							</td>
+						</tr>
+						{/volist}
+					</tbody>
+
+				</table>
+			</div>
+
+
+		</article>
+	</div>
+</section>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+
+<script type="text/javascript" src="/static/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+
+
+
+
+
+function datadel(){
+	 var $ids=$('input:checked');
+	$.ajax({
+		url: "",
+		type: 'post',
+		data: $('input:checked'),
+		dataType: 'json',
+		success:function(data) {
+			if (data.code == 0) {
+				layer.msg(data.msg);
+				location.reload();
+
+			} else {
+				layer.msg(data.msg);
+			}
+		}
+	});
+}
+
+</script>
+
+{/block}

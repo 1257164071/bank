@@ -1,0 +1,58 @@
+﻿{extend name="base" /}
+
+{block name="content"}
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont"></i> 首页 <span class="c-gray en">&gt;</span> 行为管理 <span class="c-gray en">&gt;</span> 行为列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont"></i></a></nav>
+    <div class="Hui-article">
+        <article class="cl pd-20">
+
+
+            <div class="cl pd-5 bg-1 bk-gray">
+                <span class="l f-20 text-success">行为列表</span>
+                <span class="r">
+                <a class="btn btn-primary" href="{:url('addaction')}">新 增</a>
+                </span>
+            </div>
+            <div class="mt-10 clearfix">
+                    <table class="table table-border table-bordered table-bg">
+                        <thead>
+                        <tr>
+                            <!-- <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th> -->
+                            <th class="">编号</th>
+                            <th class="">标识</th>
+                            <th class="">名称</th>
+                            <th class="">类型</th>
+                            <th class="">描述</th>
+                            <th class="">状态</th>
+                            <th class="">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {volist name="_list" id="vo"}
+                        <tr>
+                            <!-- <td><input class="ids" type="checkbox" name="ids[]" value="{$vo.id}" /></td> -->
+                            <td>{$vo.id} </td>
+                            <td>{$vo.name}</td>
+                            <td><a href="{:url('editAction?id='.$vo['id'])}">{$vo.title}</a></td>
+                            <td><span>{:get_action_type($vo['type'])}</span></td>
+                            <td>{$vo.remark}</td>
+                            <td>{$vo.status_text}</td>
+                            <td><a href="{:url('Action/editAction?id='.$vo['id'])}">编辑</a>
+                                <!--<a href="{:url('Action/setStatus?Model=action&status=-1&ids='.$vo['id'])}" class="confirm ajax-get">删除</a>-->
+                            </td>
+                        </tr>
+                        {/volist}
+                        </tbody>
+                    </table>
+            </div>
+            <!-- 分页 -->
+            <div class="page">{$_page}</div>
+            <!-- /分页 -->
+        </article>
+    </div>
+</section>
+
+
+
+{/block}
+

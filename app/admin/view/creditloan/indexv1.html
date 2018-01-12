@@ -1,0 +1,103 @@
+{extend name="base" /}
+
+{block name="content"}
+
+<div class="Hui-article-box">
+
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> {$title1}<span class="c-gray en">&gt;</span>{$title2}<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="Hui-article">
+
+    <div class="panel panel-default" >
+        <div class="panel-header">
+            <span>客户编号&nbsp;[{$client[0]['client_number']}]</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>客户名称&nbsp;[{$client[0]['name']}]</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>所属机构&nbsp;[{$client[0]['bankname']}]</span>
+        </div>
+    </div>
+
+        <div class="btn-group" style="text-align: center;">
+          {include file="clientmenu"}
+        </div>
+    <h4 style=" text-align: center;">信贷信息详情</h4>
+   
+    <div style="width:100%;margin: 0 auto;padding:10px;">
+        <div class="panel panel-default">
+            <div class="panel-header" style="display: flex;justify-content: space-between;"><span>贷款信息</span><a href="javascript:;" onclick="submit('添加贷款信息','{:url('Incredit/add',array('client_id'=>$client[0]['id']))}','','810')" ><i class="Hui-iconfont">&#xe600;</i>添加</a></div>
+            <div class="panel-body">
+                <table class="table table-border table-bordered table-hover table-bg table-sort">
+                    <thead >
+                    <tr class="text-c">
+					    <th>业务号</th>
+                        <th>贷款帐号</th>
+                        <th>贷款人</th>
+						<th>已收利息</th>
+                        <th>主担保方式</th>
+                        <th>贷款用途</th>
+                        <th>发放金额</th>
+                        <th>首贷日期</th>
+						<th>担保人数</th>
+                        <th>执行利率</th>
+                        
+                        <th width="360">操作</th>
+                    </tr>
+                    </thead>
+                    {volist name="incredit" id="list"}
+                    <tbody>
+                        <tr class="text-c">
+							<td>{$list.besiness_number}</td>
+                            <td>{$list.loan_account}</td>
+                            <td>{$list.client_name}</td>
+							<td>{$list.yishou_interest}</td>
+                            <td>
+                                {$list.besiness_type}
+                             </td>
+                            <td>{$list.loan_money}</td>
+                            <td>{$list.provide_loan_money}</td>
+                            <td>{$list.first_debt_time}</td>
+							<td>{$list.debt_number}</td>
+                            <td>{$list.use_rate}</td>
+                            <td class="td-manage">
+
+							</td>
+                        </tr>
+                    </tbody>
+                    {/volist}
+                    </table>
+            </div>
+        </div>
+    </div>
+   </div>
+
+<script type="text/javascript">
+    function submit(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+    
+    /*删除*/
+    function msg_del(obj,id){
+    	layer.confirm('删除须谨慎，确认要删除吗？',function(index){
+    		$.ajax({
+    			type: 'POST',
+    			url: "{:url('admin/incredit/del')}",
+    			dataType: 'json',
+    			data:'id='+id,
+    			success: function(data){
+    				if(data.code==0){
+    					$(obj).parents("tr").remove();
+    					layer.msg('已删除!',{icon:1,time:1000});
+    					//window.location.href = '{:url('admin/deposit/index',array('client_id'))}';
+    				}else{
+    					layer.msg(data.msg);
+    				}
+    			},
+    			error:function(data) {
+    				console.log(data.msg);
+    			},
+    		});		
+    	});
+    }
+</script>
+
+
+
+{/block}

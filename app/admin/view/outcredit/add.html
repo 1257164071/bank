@@ -1,0 +1,179 @@
+{extend name="base" /}
+
+{block name="main"}
+
+<article class="cl pd-20">
+    <form action="" method="post" class="form form-horizontal" id="form-member-add">
+        {if !empty($client_id)&&isset($client_id)}
+        <input type="hidden" name="client_id" value="{$client_id}" >
+        {else}
+        <input type="hidden" name="id" value="{$outcredit.id}" >
+        {/if}
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">合同号：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$outcredit.contact_number|default=''}" placeholder="业务号"  name="contact_number">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">借据号：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$outcredit.ious_number|default=''}" placeholder="借据号"  name="ious_number">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">担保人：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$outcredit.guarantor|default=''}" placeholder="担保人"  name="guarantor">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">担保方式：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$outcredit.guarantee_way|default=''}" placeholder="担保方式"  name="guarantee_way">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">贷款余额(万元)：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$outcredit.loan_remain|default=''}" placeholder="贷款余额"  name="loan_remain">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">欠息金额（万元）：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$outcredit.debt_money|default=''}" placeholder="欠息金额"  name="debt_money">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">发放金额（万元）：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$outcredit.provide_money|default=''}" placeholder="发放金额"  name="provide_money">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">执行利率：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$outcredit.use_rate|default=''}" placeholder="执行利率"  name="use_rate">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">贷款状态：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$outcredit.loan_status|default=''}" placeholder="贷款状态"  name="loan_status">
+            </div>
+        </div>
+
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">发放日期：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" onfocus="WdatePicker()" value="<?php echo (isset($outcredit['provide_time']) && ($outcredit['provide_time'] !== '')?date('Y-m-d',$outcredit['provide_time']):''); ?>"  name="provide_time"class="input-text Wdate" >
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">到期日期：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" onfocus="WdatePicker()" value="<?php echo (isset($outcredit['arrive_time']) && ($outcredit['arrive_time'] !== '')?date('Y-m-d',$outcredit['arrive_time']):''); ?>"  name="arrive_time"class="input-text Wdate" >
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">账户状态：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$outcredit.account_status|default=''}" placeholder="账户状态"  name="account_status">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">贷款形态：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$outcredit.loan_form|default=''}" placeholder="贷款形态"  name="loan_form">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">还款形态：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$outcredit.loan_form|default=''}" placeholder="还款形态"  name="loan_form">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">还款记录：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$outcredit.refund_record|default=''}" placeholder="还款记录"  name="refund_record">
+            </div>
+        </div>
+
+
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                {if isset($outcredit)&&$outcredit!=''}
+                <a class="btn btn-primary radius"  onclick="edit()"> 提交</a>
+                {else}
+                <a class="btn btn-primary radius"  onclick="add()"> 提交</a>
+                {/if}
+                <!--<input class="btn btn-primary radius" onclick="submit()" type="button" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">-->
+            </div>
+        </div>
+    </form>
+</article>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=33b529efc5e27ef1eb1f674704afd789"></script>
+<script type="text/javascript">
+    $(function(){
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+
+
+    });
+
+    function add(){
+        $.ajax({
+            url:'{:url("outcredit/add")}',
+            type:'post',
+            data:$('form').serialize(),
+            success:function (data) {
+                if(data.code==0){
+                    layer.msg(data.msg);
+                    parent.location.reload();
+                    setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))",2000);
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+    }
+    function edit(){
+        $.ajax({
+            url:'{:url("outcredit/edit")}',
+            type:'post',
+            data:$('form').serialize(),
+            success:function (data) {
+                if(data.code==0){
+                    layer.msg(data.msg);
+                    parent.location.reload();
+                    setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))",2000);
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+
+    }
+
+
+
+</script>
+
+{/block}

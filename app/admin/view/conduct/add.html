@@ -1,0 +1,180 @@
+{extend name="base" /}
+
+{block name="main"}
+
+<article class="cl pd-20">
+    <form action="" method="post" class="form form-horizontal" id="form-member-add">
+        {if !empty($client_id)&&(isset($client_id))}
+        <input type="hidden" name="client_id" value="{$client_id}" >
+        {else}
+        <input type="hidden" name="id" value="{$conduct.id}" >
+        {/if}
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">是否固定工作：</label>
+            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                <div class="radio-box">
+                    <input name="guding_work" type="radio"  value="1" id="is_poor-1" <?php echo (isset($client['guding_work']) && ($client['guding_work'] == '1')?'checked':''); ?> >
+                    <label for="is_poor-1">是</label>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" id="is_poor-2" value="0" name="guding_work" checked>
+                    <label for="is_poor-2">否</label>
+                </div>
+
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">工作单位名称：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$conduct.work_place|default=''}" placeholder="工作单位名称"  name="work_place">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">工作单位地址：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$conduct.work_address|default=''}" placeholder="工作单位地址"  name="work_address">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">单位地址邮编：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$conduct.work_postcode|default=''}" placeholder="单位地址邮编"  name="work_postcode">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">单位工作起始年份：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" onfocus="WdatePicker()" value="<?php echo (isset($conduct['start_work']) && ($conduct['start_work'] !== '')?date('Y-m-d',$conduct['start_work']):''); ?>"  name="start_work"class="input-text Wdate" >
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">职称：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <span class="select-box" style="width: 150px;">
+					<select class="select" name="job_title"  >
+                        <option value="">==请选择==</option>
+                        {volist name="job_title" id="list" key="key"}
+                        <option  {if isset($conduct)&&($conduct['job_title']==$key-1)} selected="selected"{/if} value="{$key-1}">{$list}</option>
+                        {/volist}
+                    </select>
+				</span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">职务：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <span class="select-box" style="width: 150px;">
+					<select class="select" name="duty"  >
+                        <option value="">==请选择==</option>
+                        {volist name="duty" id="list" key="key"}
+                        <option  {if isset($conduct)&&($conduct['duty']==$key-1)} selected="selected"{/if} value="{$key-1}">{$list}</option>
+                        {/volist}
+                    </select>
+				</span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">职务细分：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <span class="select-box" style="width: 150px;">
+					<select class="select" name="duty_xifen"  >
+                        <option value="">==请选择==</option>
+                        {volist name="duty_xifen" id="list" key="key"}
+                        <option  {if isset($conduct)&&($conduct['duty_xifen']==$key-1)} selected="selected"{/if} value="{$key-1}">{$list}</option>
+                        {/volist}
+                    </select>
+				</span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">职业：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$conduct.occupation|default=''}" placeholder="职业"  name="occupation">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">单位联系方式（固话）：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$conduct.unit_phone|default=''}" placeholder="单位联系方式（固话）"  name="unit_phone">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">医疗保险上年度合计缴纳金额：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$conduct.pay_amount|default=''}" placeholder="医疗保险上年度合计缴纳金额"  name="pay_amount">
+            </div>
+        </div>
+       
+
+
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                {if isset($conduct)&&$conduct!=''}
+                <a class="btn btn-primary radius"  onclick="edit()"> 提交</a>
+                {else}
+                <a class="btn btn-primary radius"  onclick="add()"> 提交</a>
+                {/if}
+                <!--<input class="btn btn-primary radius" onclick="submit()" type="button" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">-->
+            </div>
+        </div>
+    </form>
+</article>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=33b529efc5e27ef1eb1f674704afd789"></script>
+<script type="text/javascript">
+    $(function(){
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+
+
+    });
+
+    function add(){
+        $.ajax({
+            url:'{:url("conduct/add")}',
+            type:'post',
+            data:$('form').serialize(),
+            success:function (data) {
+                if(data.code==0){
+                    layer.msg(data.msg);
+                    parent.location.reload();
+                    setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))",2000);
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+    }
+    function edit(){
+        $.ajax({
+            url:'{:url("conduct/edit")}',
+            type:'post',
+            data:$('form').serialize(),
+            success:function (data) {
+                if(data.code==0){
+                    layer.msg(data.msg);
+                    parent.location.reload();
+                    setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))",2000);
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+
+    }
+
+
+
+</script>
+
+{/block}

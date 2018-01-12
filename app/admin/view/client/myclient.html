@@ -1,0 +1,155 @@
+﻿{extend name="base" /}
+
+{block name="content"}
+
+<section class="Hui-article-box">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> {$title1}<span class="c-gray en">&gt;</span>{$title2}<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			
+			
+
+
+			<div class="cl pd-5 bg-1 bk-gray mt-10">
+				<span class="l">
+					<!--<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>-->
+					<!-- <a href="javascript:;" onclick="member_add('添加客户','/admin/client/clientadd','900','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加客户</a> -->
+					<!-- <a href="javascript:;" onclick="member_add('导入数据','/admin/client/daoru','800','510')" class="btn btn-warning radius"><i class="Hui-iconfont">&#xe645;</i> 导入</a> -->
+					<!-- <a href="javascript:;" onclick="daochu()" class="btn btn-success radius"><i class="Hui-iconfont">&#xe645;</i> 导出</a>
+ -->
+
+				</span>
+				<span class="r"><strong>{$count}</strong> 个客户</span>
+				</div>
+			</form>
+			<div class="mt-10">
+				<table class="table table-border table-bordered table-hover table-bg table-sort">
+					<thead>
+						<tr class="text-c">
+						<!-- <th width="25"><input type="checkbox" name="" value=""></th> -->
+							<th>ID</th>
+							<th>客户编号</th>
+							<th>客户名称</th>
+							<th>证件号码</th>
+							<th>性别</th>
+							<th>所属区域</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+
+					<tbody>
+					{volist name="clients" id="clients"}
+						<tr class="text-c">
+						<!-- <td><input type="checkbox" value="{$clients.id}" name="id[]"></td> -->
+							<td>{$clients.id}</td>
+							<td>{$clients.client_number}</td>
+							<td>{$clients.name}</td>
+							<td>{$clients.card_number}</td>
+							<td>{$clients.sex_name|default=''}</td>
+							<td>{$clients.gridname}</td>
+							<td class="td-manage">
+								<a style="text-decoration:none"  href="{:url('clientdetail',array('client_id'=>$clients['id']))}" title="查看客户详情"><i class="Hui-iconfont">&#xe725;</i>查看</a>&nbsp;&nbsp;
+								<a title="删除客户" href="{:url('del',array('client_id'=>$clients['id']))}" class="ml-5" onclick="return confirm('确认删除');" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i>删除</a></td>
+
+						</tr>
+						{/volist}
+					</tbody>
+
+				</table>
+			</div>
+			<div class="page">{$page}</div>
+
+
+
+
+		</article>
+	</div>
+</section>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/static/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+$(function(){
+//	$('.table-sort').dataTable({
+//		"aaSorting": [[ 1, "desc" ]],//默认第几个排序
+//		"bStateSave": true,//状态保存
+//		"aLengthMenu": [16,20,25],
+//		"aoColumnDefs": [
+//			//{ targets: [0, 1], visible: true},
+//		  //{"bVisible": false, "aTargets": [1]}, //控制列的隐藏显示
+//		  {"orderable":false,"aTargets":[0,4,6,8]}// 制定列不参与排序
+//		]
+//	});
+//	$('.table-sort tbody').on( 'click', 'tr', function () {
+//		if ( $(this).hasClass('selected') ) {
+//			$(this).removeClass('selected');
+//		}
+//		else {
+//			table.$('tr.selected').removeClass('selected');
+//			$(this).addClass('selected');
+//		}
+//	});
+});
+/*导出*/
+function daochu(){
+	var input='<input name="names" type="hidden"value="daochu"/>';
+	$('form').append(input);
+	$('form').submit();
+}
+/*用户-添加*/
+function member_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+function research(){
+	$('form input[name="names"]').remove();
+	
+	$('form').submit();
+}
+
+//		$.get(self.)
+//		$.ajax({
+//			url: '{:url("client/clientlist",array("export"=>1))}',
+//			type: 'post',
+//			data: $('form').serialize(),
+////			success: function (data) {
+////				if (data.code == 0) {
+////					layer.msg(data.msg);
+////					parent.location.reload();
+////					setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))", 2000);
+////
+////				} else {
+////					layer.msg(data.msg);
+////				}
+////			}
+//		});
+
+
+
+
+	function datadel(){
+		 var $ids=$('input:checked');
+		$.ajax({
+			url: "{:url('client/delpatch')}",
+			type: 'post',
+			data: $('input:checked'),
+			dataType: 'json',
+			success:function(data) {
+				if (data.code == 0) {
+					layer.msg(data.msg);
+					location.reload();
+
+				} else {
+					layer.msg(data.msg);
+				}
+			}
+		});
+
+
+	}
+</script>
+
+{/block}

@@ -1,0 +1,244 @@
+{extend name="base" /}
+
+{block name="main"}
+
+<article class="cl pd-20">
+    <form action="" method="post" class="form form-horizontal" id="form-member-add">
+        {if !empty($client_id)&&(isset($client_id))}
+        <input type="hidden" name="client_id" value="{$client_id}" >
+        {else}
+        <input type="hidden" name="id" value="{:input('member_id');}" >
+        {/if}
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>成员名称：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$family.members_name|default=''}" placeholder="成员名称"  name="members_name">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>家庭关系：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$family.members_relation|default=''}" placeholder="家庭关系"  name="members_relation">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">性别：</label>
+            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                <div class="radio-box">
+                    <input name="sex" type="radio"  value="1" id="sex-1" checked >
+                    <label for="sex-1">男</label>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" id="sex-2" value="0" name="spouse_sex" <?php echo (isset($family['sex']) && ($family['sex'] == '0')?'checked':''); ?>>
+                    <label for="sex-2">女</label>
+                </div>
+
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">国籍：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$family.nationality|default=''}" placeholder="国籍"  name="nationality">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">民族：</label>
+            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                <div class="radio-box">
+                    <input name="nation_id" type="radio" value="1" id="nation-1" {if isset($family.nation_id) && ($family.nation_id == '1')}checked{else}checked{/if}>
+                    <label for="nation-1">汉族</label>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" id="nation-2" value="2" name="nation_id" {if isset($family.nation_id) && ($family.nation_id == '2')}checked{/if}>
+                    <label for="nation-2">少数民族</label>
+                </div>
+
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">证件类型：</label>
+            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                <div class="radio-box">
+                    <input name="card_type" type="radio"value="0"  id="card_type-1" checked  >
+                    <label for="card_type-1">身份证</label>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" id="card_type-2" value="1" name="card_type" <?php echo (isset($family['card_type']) && ($family['card_type'] == '1')?'checked':''); ?> >
+                    <label for="card_type-2" >其他</label>
+                </div>
+
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>证件号码：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$family.card_number|default=''}" placeholder="证件号码"  name="card_number">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">出生日期：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" onfocus="WdatePicker()" value="<?php echo (isset($family['born_date']) && ($family['born_date'] !== '')?date('Y-m-d',$family['born_date']):''); ?>"  name="born_date"class="input-text Wdate" style="width:300px;">&nbsp;(例如：2017-01-01)
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">住址：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$family.address|default=''}" placeholder="住址"  name="address">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">签发机关：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$family.issue_office|default=''}" placeholder="签发机关"  name="issue_office">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">身份证有效期：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" onfocus="WdatePicker()"value="<?php echo (isset($family['valid_time']) && ($family['valid_time'] != '')?date('Y-m-d',$family['valid_time']):''); ?>"  name="valid_time"class="input-text Wdate" style="width:300px;">&nbsp;(例如：2017-01-01)
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">联系方式（手机）：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$family.tel_number|default=''}" placeholder="联系方式（手机）"  name="tel_number">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">联系方式（电话）：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$family.phone_number|default=''}" placeholder="联系方式（电话）"  name="phone_number">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">工作单位：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$family.work_place|default=''}" placeholder="工作单位"  name="work_place">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">从事职业：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$family.professional|default=''}" placeholder="从事职业"  name="professional">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">健康状况：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+             <span class="select-box" style="width: 150px;">
+                <select class="select" name="physical_condition"  >
+                    <option value="">健康状况</option>
+                    {volist name="physical_condition" id="list" key="key"}
+                    <option  <?php echo (isset($family['physical_condition'])&&($family['physical_condition']==$key-1))? 'selected="sleected"':'';?>  value="{$key-1}">{$list}</option>
+                    {/volist}
+                </select>
+             </span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">保险情况：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$family.insurance|default=''}" placeholder="从事职业"  name="insurance">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">是否有独立经济收入：</label>
+            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                <div class="radio-box">
+                    <input name="is_independent_income" type="radio" value="0" id="farmer-1" checked >
+                    <label for="farmer-1">否</label>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" id="farmer-2" value="1" name="is_independent_income"<?php echo (isset($family['is_independent_income']) && ($family['is_independent_income'] == '1')?'checked':''); ?> >
+                    <label for="farmer-2">是</label>
+                </div>
+
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>创建人：</label>
+
+            <div class="formControls col-xs-8 col-sm-9">
+                <span class="select-box" style="width: 150px;">
+					<select class="select" name="user_id"  >
+                        <option value="">选择创建人</option>
+                        {volist name="build" id="build"}
+                        <option  {if isset($family)&&($family['user_id']==$build['id'])} selected="selected"{/if} value="{$build.id}">{$build.real_name}</option>
+                        {/volist}
+                    </select>
+				</span>
+            </div>
+        </div>
+
+
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                {if isset($family)&&$family!=''}
+                <a class="btn btn-primary radius"  onclick="edit()"> 提交</a>
+                {else}
+                <a class="btn btn-primary radius"  onclick="add()"> 提交</a>
+                {/if}
+                <input type="reset" value="重置" class="btn btn-primary radius" >
+            </div>
+        </div>
+    </form>
+</article>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+
+
+    });
+
+    function add(){
+        $.ajax({
+            url:'{:url("familymember/add")}',
+            type:'post',
+            data:$('form').serialize(),
+            success:function (data) {
+                if(data.code==0){
+                    layer.msg(data.msg);
+                    parent.location.reload();
+                    setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))",2000);
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+    }
+    function edit(){
+        $.ajax({
+            url:'{:url("familymember/edit")}',
+            type:'post',
+            data:$('form').serialize(),
+            success:function (data) {
+                if(data.code==0){
+                    layer.msg(data.msg);
+                    parent.location.reload();
+                    setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))",2000);
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+
+    }
+
+
+
+</script>
+
+{/block}

@@ -1,0 +1,9 @@
+  <span class="btn {if $controller == 'Client'}btn-primary{else/}btn-default{/if} radius"><a href="{:url('client/clientdetail',array('client_id'=>$client['id']))}">基本信息</a></span>
+  <span class="btn {if $controller == 'Deposit'}btn-primary{else/}btn-default{/if} radius"><a href="{:url('deposit/index',array('client_id'=>$client['id']))}">存款信息</a></span>
+  <span class="btn {if $controller == 'Creditloan'}btn-primary{else/}btn-default{/if} radius"><a href="{:url('creditloan/index',array('card_number'=>$client['card_number']))}">贷款信息</a></span>
+  <span class="btn {if $controller == 'Familymember'}btn-primary{else/}btn-default{/if} radius"><a href="{:url('familymember/index',array('client_id'=>$client['id']))}">家庭成员信息</a></span>
+  <span class="btn {if $controller == 'Sign'}btn-primary{else/}btn-default{/if} radius"><a href="{:url('sign/index',array('card_number'=>$client['card_number']))}">签约信息</a></span>
+  <span class="btn {if $controller == 'Familyfund'}btn-primary{else/}btn-default{/if} radius"><a href="{:url('familyfund/index',array('client_id'=>$client['id']))}">家庭资产查控</a></span>
+  <span class="btn {if $controller == 'Credit'}btn-primary{else/}btn-default{/if} radius"><a href="{:url('credit/index',array('client_id'=>$client['id']))}">授信信息</a></span>
+  <!--<span class="btn btn-default radius"><a href="{:url('Msgchange/index',array('client_id'=>$client['id']))}">客户信息变更记录</a></span>-->
+  <span class="btn {if $controller == 'Picupload'}btn-primary{else/}btn-default{/if} radius"><a href="{:url('picupload/index',array('client_id'=>$client['id']))}">附件上传</a></span>

@@ -1,0 +1,229 @@
+{extend name="base" /}
+
+{block name="content"}
+
+<div class="Hui-article-box">
+
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> {$title1}<span class="c-gray en">&gt;</span>{$title2}<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="Hui-article">
+
+    <div class="panel panel-default" >
+        <div class="panel-header">
+            <span>客户编号&nbsp;[{$client[0]['client_number']}]</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>客户名称&nbsp;[{$client[0]['name']}]</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>所属机构&nbsp;[{$client[0]['bankname']}]</span>
+        </div>
+    </div>
+
+        <div class="btn-group" style="text-align: center;">
+            <span class="btn btn-default radius"><a href="{:url('client/clientdetail',array('client_id'=>$client[0]['id']))}">基本信息</a></span>
+            <span class="btn btn-primary radius"><a href="{:url('creditloan/index',array('client_id'=>$client[0]['id']))}">信贷信息</a></span>
+            <span class="btn btn-default radius"><a href="{:url('deposit/index',array('client_id'=>$client[0]['id']))}">存款信息</a></span>
+            <span class="btn btn-default radius"><a href="{:url('familymember/index',array('client_id'=>$client[0]['id']))}">家庭成员信息</a></span>
+            <span class="btn btn-default radius"><a href="{:url('sign/index',array('client_id'=>$client[0]['id']))}">签约信息</a></span>
+            <span class="btn btn-default radius"><a href="{:url('personcredit/index',array('client_id'=>$client[0]['id']))}">个人征信信息</a></span>
+            <!--<span class="btn btn-default radius"><a href="{:url('Msgchange/index',array('client_id'=>$client[0]['id']))}">客户信息变更记录</a></span>-->
+            <span class="btn btn-default radius"><a href="{:url('picupload/index',array('client_id'=>$client[0]['id']))}">附件上传</a></span>
+        </div>
+    <h4 style=" text-align: center;">信贷信息详情</h4>
+    <div style="width: 1530px;margin: 0 auto;">
+        <div class="panel panel-default">
+            <div class="panel-header" style="display: flex;justify-content: space-between;"><span>额度信息</span><a href="javascript:;" onclick="submit('添加额度信息','{:url('moneylimit/add',array('client_id'=>$client[0]['id']))}','','510')" ><i class="Hui-iconfont">&#xe600;</i>添加</a></div>
+            <div class="panel-body">
+                <table class="table table-border table-bordered table-hover table-bg table-sort">
+                    <thead >
+                    <tr class="text-c">
+                        <th>额度编号</th>
+                        <th>额度类型</th>
+                        <th style="width: 200px;">额度信息</th>
+                        <th>业务品种</th>
+                        <th>起始日期</th>
+                        <th>结束日期</th>
+                        <th>最后到期日期</th>
+                        <th>使用币种</th>
+                        <th>额度金额</th>
+                        <th>占用金额</th>
+                        <th>可用金额</th>
+                        <th>使用方式</th>
+                        <th>业务载体</th>
+                        <th>额度状态</th>
+                        <th>使用机构</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    {volist name="moneyinfo" id="list"}
+                    <tbody>
+                    <tr class="text-c">
+                        <td>{$list.moneylimit_number}</td>
+                        <td>{$list.moneylimit_type}</td>
+                        <td>{$list.moneylimit_info}</td>
+                        <td>{$list.business_type}</td>
+                        <td>{:date('Y-m-d',$list.start_time)}</td>
+                        <td>{:date('Y-m-d',$list.end_time)}</td>
+                        <td>{:date('Y-m-d',$list.last_time)}</td>
+                        <td>{$list.money_type}</td>
+                        <td>{$list.moneylimit_money}</td>
+                        <td>{$list.occupy_money}</td>
+                        <td>{$list.usable_money}</td>
+                        <td>{$list.use_way}</td>
+                        <td>{$list.business_carrier}</td>
+                        <td>{$list.moneylimit_status}</td>
+                        <td>{$list.belong_organization}</td>
+                        <td class="td-manage"><a href="javascript:;" onclick="submit('修改额度信息','{:url('moneylimit/edit',array('id'=>$list['id']))}','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i>编辑</a>&nbsp;&nbsp;<a style="text-decoration:none"  href="{:url('moneylimit/del',array('id'=>$list['id']))}" title="删除额度信息"><i class="Hui-iconfont">&#xe6e2;</i>删除</a> </td>
+
+                    </tr>
+                    </tbody>
+                    {/volist}
+                    </table>
+            </div>
+        </div>
+    </div>
+    <div style="width: 1530px; margin: 0 auto;">
+        <div class="panel panel-default">
+            <div class="panel-header" style="display: flex;justify-content: space-between;"><span>授信用信信息</span><a href="javascript:;" onclick="submit('添加授信用信信息','{:url('credit/add',array('client_id'=>$client[0]['id']))}','','510')" ><i class="Hui-iconfont">&#xe600;</i>添加</a></div>
+            <div class="panel-body">
+                <table class="table table-border table-bordered table-hover table-bg table-sort">
+                    <thead >
+                    <tr class="text-c">
+                        <th>授信业务品种</th>
+                        <th>使用方式</th>
+                        <th >授信金额</th>
+                        <th>利率浮动幅度</th>
+                        <th>授信起始日期</th>
+                        <th>授信结束日期</th>
+                        <th>主办客户经理</th>
+                        <th>使用机构</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    {volist name="credit" id="credit"}
+                    <tbody>
+                        <td>{$credit.credit_type}</td>
+                        <td>{$credit.use_way}</td>
+                        <td>{$credit.credit_money}</td>
+                        <td>{$credit.cate_range}</td>
+                        <td>{:date('Y-m-d',$credit.credit_start_time)}</td>
+                        <td>{:date('Y-m-d',$credit.credit_end_time)}</td>
+                        <td>{$credit.belong_user_id}</td>
+                        <td>{$credit.use_organization}</td>
+                        <td class="td-manage" style="text-align: center;"><a href="javascript:;" onclick="submit('修改授信用信信息','{:url('credit/edit',array('id'=>$credit['id']))}','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i>编辑</a>&nbsp;&nbsp;<a style="text-decoration:none"  href="{:url('credit/del',array('id'=>$credit['id']))}" title="删除授信用信信息"><i class="Hui-iconfont">&#xe6e2;</i>删除</a> </td>
+
+                    </tbody>
+                    {/volist}
+                </table>
+            </div>
+        </div>
+    </div>
+    <div style="width: 1530px;margin: 0 auto;">
+        <div class="panel panel-default">
+            <div class="panel-header" style="display: flex;justify-content: space-between;"><span>表内用信信息</span><a href="javascript:;" onclick="submit('添加表内用信信息','{:url('Incredit/add',array('client_id'=>$client[0]['id']))}','','510')" ><i class="Hui-iconfont">&#xe600;</i>添加</a></div>
+            <div class="panel-body">
+                <table class="table table-border table-bordered table-hover table-bg table-sort">
+                    <thead >
+                    <tr class="text-c">
+                        <th>所属机构</th>
+                        <th>业务号</th>
+                        <th >业务品种</th>
+                        <th>合同号</th>
+                        <th>主担保方式</th>
+                        <th>担保人</th>
+                        <th>贷款用途</th>
+                        <th>贷款金额</th>
+                        <th>发放金额</th>
+                        <th>欠息金额</th>
+                        <th>执行利率</th>
+                        <th>发放日期</th>
+                        <th>到期日期</th>
+                        <th>结算日期</th>
+                        <th>账户状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    {volist name="incredit" id="list"}
+                    <tbody>
+                        <tr>
+                            <td>{$list.belong_organization}</td>
+                            <td>{$list.business_number}</td>
+                            <td>{$list.bubiness_type}</td>
+                            <td>{$list.contact_number}</td>
+                            <td>{$list.guarantee_way}</td>
+                            <td>{$list.guarantee_poeple}</td>
+                            <td>{$list.loan_purpose}</td>
+                            <td>{$list.loan_money}</td>
+                            <td>{$list.provide_loan_money}</td>
+                            <td>{$list.debt_money}</td>
+                            <td>{$list.use_rate}</td>
+                            <td>{$list.provide_time}</td>
+                            <td>{$list.arrive_time}</td>
+                            <td>{$list.settlement_time}</td>
+                            <td>{$list.account_status}</td>
+                            <td class="td-manage" style="text-align: center;"><a href="javascript:;" onclick="submit('修改表内用信信息','{:url('incredit/edit',array('id'=>$credit['id']))}','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i>编辑</a>&nbsp;&nbsp;<a style="text-decoration:none"  href="{:url('Incredit/del',array('id'=>$list['id']))}" title="删除表内用信信息"><i class="Hui-iconfont">&#xe6e2;</i>删除</a> </td>
+
+                        </tr>
+                    </tbody>
+                    {/volist}
+                    </table>
+            </div>
+        </div>
+    </div>
+    <div style="width: 1530px;margin: 0 auto;">
+        <div class="panel panel-default">
+            <div class="panel-header" style="display: flex;justify-content: space-between;"><span>表外用信信息</span><a href="javascript:;" onclick="submit('添加额度信息','{:url('outcredit/add',array('client_id'=>$client[0]['id']))}','','510')" ><i class="Hui-iconfont">&#xe6df;</i>添加</a></div>
+            <div class="panel-body">
+                <table class="table table-border table-bordered table-hover table-bg table-sort">
+                    <thead >
+                    <tr class="text-c">
+                        <th>合同号</th>
+                        <th>借据号</th>
+                        <th >担保人</th>
+                        <th>贷款余额</th>
+                        <th>欠息金额</th>
+                        <th>发放金额</th>
+                        <th>执行利率</th>
+                        <th>贷款状态</th>
+                        <th>发放时间</th>
+                        <th>到期时间</th>
+                        <th>账户状态</th>
+                        <th>贷款形态</th>
+                        <th>担保方式</th>
+                        <th>还款形态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    {volist name="outcredit" id="list"}
+                    <tbody>
+                    <tr>
+                        <td>{$list.contact_number}</td>
+                        <td>{$list.ious_number}</td>
+                        <td>{$list.guarantor}</td>
+                        <td>{$list.loan_remain}</td>
+                        <td>{$list.debt_money}</td>
+                        <td>{$list.provide_money}</td>
+                        <td>{$list.use_rate}</td>
+                        <td>{$list.loan_status}</td>
+                        <td>{:date('Y-m-d',$list.provide_time)}</td>
+                        <td>{:date('Y-m-d',$list.arrive_time)}</td>
+                        <td>{$list.account_status}</td>
+                        <td>{$list.loan_form}</td>
+                        <td>{$list.guarantee_way}</td>
+                        <td>{$list.refund_record}</td>
+                        <td class="td-manage" style="text-align: center;"><a href="javascript:;" onclick="submit('修改表外用信信息','{:url('outcredit/edit',array('id'=>$credit['id']))}','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i>编辑</a>&nbsp;&nbsp;<a style="text-decoration:none"  href="{:url('Outcredit/del',array('id'=>$list['id']))}" title="删除表外用信信息"><i class="Hui-iconfont">&#xe6e2;</i>删除</a> </td>
+
+                    </tr>
+                    </tbody>
+                    {/volist}
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+<script type="text/javascript">
+    function submit(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+</script>
+
+
+
+{/block}

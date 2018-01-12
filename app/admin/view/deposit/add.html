@@ -1,0 +1,170 @@
+{extend name="base" /}
+
+{block name="main"}
+
+<article class="cl pd-20">
+    <form action="" method="post" class="form form-horizontal" id="form-member-add">
+        {if !empty($client_id)&&isset($client_id)}
+        <input type="hidden" name="client_id" value="{$client_id}" >
+        {else}
+        <input type="hidden" name="id" value="{$deposit.id}" >
+        {/if}
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>账号：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$deposit.account|default=''}" placeholder="账号"  name="account">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>存款金额：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$deposit.save_amt|default=''}" placeholder="账号"  name="save_amt" style="width:90%;"> &nbsp;元&nbsp;(￥)
+            </div>
+        </div>
+       <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开户银行：</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box" style="width:390px;">
+				<select class="select" name="bank_id" size="1">
+					<option value="">==请选择==</option>
+					{volist name="banklist" id="bank"}
+						<option value="{$bank.id}" {if condition="isset($deposit.bank_id) && ($bank.id eq $deposit.bank_id)"}selected="selected"{/if}>{$bank.bankname}</option>
+						{volist name="bank.child" id="b"}
+						    <option value="{$b.id}" {if condition="isset($deposit.bank_id) && ($b.id eq $deposit.bank_id)"}selected="selected"{/if} style="padding-left:30px;">|—{$b.bankname}</option>
+						{/volist}
+					{/volist}
+				</select>
+				</span> 
+			</div>
+		</div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">开户日期：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" onfocus="WdatePicker()" value="{$deposit.opening_time|default=''}"  name="opening_time"class="input-text Wdate" >
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">账户状态：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="radio" name="account_status" value="0" {if condition="!isset($deposit.account_status) || $deposit.account_status neq 1"}checked="checked"{/if}>
+                                          正常&nbsp;&nbsp;                        
+                <input type="radio" name="account_status" value="1" {if condition="isset($deposit.account_status) && $deposit.account_status eq 1"}checked="checked"{/if}>
+                                          冻结&nbsp;&nbsp;                        
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">存款方式：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <strong>定期</strong>&nbsp;&nbsp;        
+                <input type="radio" name="deposit_type" value="2" {if condition="!isset($deposit.deposit_type) || $deposit.deposit_type eq 2"}checked="checked"{/if}>
+                                          整存整取&nbsp;&nbsp;                        
+                <input type="radio" name="deposit_type" value="3" {if condition="isset($deposit.deposit_type) && $deposit.deposit_type eq 3"}checked="checked"{/if}>
+                                          零存整取&nbsp;&nbsp;                        
+                <input type="radio" name="deposit_type" value="4" {if condition="isset($deposit.deposit_type) && $deposit.deposit_type eq 4"}checked="checked"{/if}>
+                                          整存零取&nbsp;&nbsp;                           
+                <input type="radio" name="deposit_type" value="5" {if condition="isset($deposit.deposit_type) && $deposit.deposit_type eq 5"}checked="checked"{/if}>
+                                          存本取息&nbsp;&nbsp;                          
+                <input type="radio" name="deposit_type" value="6" {if condition="isset($deposit.deposit_type) && $deposit.deposit_type eq 6"}checked="checked"{/if}>
+                                          定活两便&nbsp;&nbsp;                         
+                <input type="radio" name="deposit_type" value="7" {if condition="isset($deposit.deposit_type) && $deposit.deposit_type eq 7"}checked="checked"{/if}>
+                                          通知存款<br/>
+                <strong>活期</strong>&nbsp;&nbsp; 
+                <input type="radio" name="deposit_type" value="1" {if condition="isset($deposit.deposit_type) && $deposit.deposit_type eq 1"}checked="checked"{/if}>
+                                          活期存款
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">币种：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="radio" name="currency" value="1" checked="checked">
+                                          人民币
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">存款日期：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" onfocus="WdatePicker()" value="{$deposit.save_time|default=''}"  name="save_time"class="input-text Wdate" >
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">揽存员工：</label>
+            <div class="formControls col-xs-8 col-sm-9"> <span class="select-box" style="width:120px;">
+				<select class="select" name="lancun_worker" size="1">
+					<option value="">==请选择==</option>
+					{volist name="lanchu_workers" id="worker"}
+						<option value="{$worker.id}" {if condition="isset($deposit.lancun_worker) && ($worker.id eq $deposit.lancun_worker)"}selected="selected"{/if}>{$worker.real_name}</option>
+					{/volist}
+				</select>
+				</span> 
+			</div>
+        </div>
+
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                {if !empty($client_id)&&isset($client_id)}
+                <a class="btn btn-primary radius"  onclick="add()"> 提交</a>
+                {else}
+                <a class="btn btn-primary radius"  onclick="edit()"> 提交</a>
+                {/if}
+                <!--<input class="btn btn-primary radius" onclick="submit()" type="button" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">-->
+            </div>
+        </div>
+    </form>
+</article>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+
+
+    });
+    
+    function add(){
+        $.ajax({
+            url:'{:url("admin/deposit/add")}',
+            type:'post',
+            data:$('form').serialize(),
+            success:function (data) {
+                if(data.code==0){
+                    layer.msg(data.msg);
+                    parent.location.reload();
+                    setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))",2000);
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+    }
+    
+    function edit(){
+        $.ajax({
+            url:'{:url("admin/deposit/edit")}',
+            type:'post',
+            data:$('form').serialize(),
+            success:function (data) {
+                if(data.code==0){
+                    layer.msg(data.msg);
+                    parent.location.reload();
+                    setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))",2000);
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+
+    }
+
+</script>
+
+{/block}

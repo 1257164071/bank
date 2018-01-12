@@ -1,0 +1,73 @@
+﻿{extend name="base" /}
+
+{block name="content"}
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont"></i> 首页 <span class="c-gray en">&gt;</span> 操作管理 <span class="c-gray en">&gt;</span> 操作日志 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont"></i></a></nav>
+    <div class="Hui-article">
+        <article class="cl pd-20">
+
+            <div class="cl pd-5 bg-1 bk-gray">
+                <span class="l f-20 text-success">操作记录</span>
+                <span class="r">
+                {if $user.role_id ==13}
+                <a class="btn btn-primary" href="{:url('clear')}">清空记录</a>
+                {/if}
+                </span>
+            </div>
+            <div class="mt-10 clearfix">
+                    <table class="table table-border table-bordered table-bg">
+                        <thead>
+                        <tr>
+                        <tr>
+                            <!-- <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th> -->
+                            <th class="">编号</th>
+                            <th class="">操作</th>
+                            <th class="">操作人</th>
+                            <th class="">时间</th>
+                            <th class="">ip地址</th>
+                            {if $user.role_id ==13}<th class="">操作</th>{/if}
+                        </tr>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {notempty name="_list"}
+                        {volist name="_list" id="vo"}
+                        <tr>
+                           <!--  <td><input class="ids" type="checkbox" name="ids[]" value="{$vo.id}" /></td> -->
+                            <td>{$vo.id} </td>
+                            <td>{:get_action($vo['action_id'],'title')}</td>
+                            <td>{$vo['real_name']}</td>
+                            <td><span>{$vo.create_time|time_format}</span></td>
+                            <td><span>{:long2ip($vo['action_ip'])}</span></td>
+                            {if $user.role_id ==13}
+                            <td>
+                                <a href="{:url('Action/edit?id='.$vo['id'])}">详细</a>
+                                <a class="confirm ajax-get" href="{:url('Action/remove?ids='.$vo['id'])}">删除</a>
+                            </td>
+                            {/if}
+                        </tr>
+                        {/volist}
+                        {else/}
+                        <td colspan="6" class="text-center"> aOh! 暂时还没有内容! </td>
+                        {/notempty}
+                        </tbody>
+                    </table>
+            </div>
+            <!-- 分页 -->
+            <div class="page">{$_list->render()}</div>
+            <!-- /分页 -->
+        </article>
+    </div>
+</section>
+
+<style>
+    .pagination {padding:10px 0; text-align:center;}
+    .pagination li{  border:1px solid #dfdfdf;display:inline-block; }
+    .pagination li a,.pagination li span{padding:3px 12px;margin:2px 2px;display:inline-block;}
+    .pagination .active{ background:#5a98de; color:#FFF; border-color:#09F; margin:0 2px;}
+    .pagination li:hover{background:#5a98de; color:#FFF; border-color:#09F; }
+
+</style>
+
+{/block}
+

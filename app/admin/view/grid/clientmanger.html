@@ -1,0 +1,75 @@
+{extend name="base" /}
+
+{block name="content"}
+<style type="text/css">
+    table a{color:#043C99;}
+</style>
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 网格列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"href="javascript:history.go(-1);" title="返回" >返回</a></nav>
+    <div class="Hui-article">
+        <article class="cl pd-20">
+            <h4 class="text-c">{$name}管理的小区</h4><br/>
+            <div class="mt-10">
+                <table class="table table-border table-bordered table-hover table-bg table-sort">
+                    <thead>
+                    <tr class="text-c">
+                        <th>ID</th>
+                        <th>小区名称</th>
+                        <th>客户数量</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {volist name="$grid" id="vo"}
+                    <tr class="text-c">
+
+                        <td>{$vo.id}</td>
+                        <td><a href="{:url('admin/grid/wangge',['id'=>$vo.id])}">{$vo.name}</a></td>
+
+                        <td>{$vo.count}</td>
+
+                    </tr>
+                    {/volist}
+                    </tbody>
+
+                </table>
+            </div>
+
+
+        </article>
+    </div>
+</section>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+
+<script type="text/javascript" src="/static/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+
+
+
+
+
+    function datadel(){
+        var $ids=$('input:checked');
+        $.ajax({
+            url: "",
+            type: 'post',
+            data: $('input:checked'),
+            dataType: 'json',
+            success:function(data) {
+                if (data.code == 0) {
+                    layer.msg(data.msg);
+                    location.reload();
+
+                } else {
+                    layer.msg(data.msg);
+                }
+            }
+        });
+    }
+
+</script>
+
+{/block}

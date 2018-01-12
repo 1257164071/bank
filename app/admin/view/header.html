@@ -1,0 +1,37 @@
+<header class="navbar-wrapper">
+    <div class="navbar navbar-fixed-top">
+        <div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10" href="{:url('admin/index/index')}">罗庄农商银行网格化管理系统</a>  <span class="logo navbar-slogan f-l mr-10 hidden-xs"> </span> <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
+
+            <nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
+                <ul class="cl">
+                    <li> （{$user.bankname}-{$Think.session.user.real_name |default=''}） </li>
+                    <li class="dropDown dropDown_hover"> <a href="#" class="dropDown_A" style="min-width: 95px;">{$Think.session.username} <i class="Hui-iconfont">&#xe6d5;</i></a>
+                        <ul class="dropDown-menu menu radius box-shadow">
+                        <li><a href="/public/Eloan.doc"><i class="Hui-iconfont Hui-iconfont-xiangpicha"></i> "信e贷"手册</a></li>
+                        <li><a href="{:url('admin/index/clearcache')}"><i class="Hui-iconfont Hui-iconfont-xiangpicha"></i> 清理缓存</a></li>
+                         <li><a  onclick="edit_pwd('修改密码','{:url('admin/user/edit_pwd',array('user_id'=>$Think.session.user.id))}','800','510')" href="javascript:;"><i class="Hui-iconfont Hui-iconfont-fabu"></i> 修改密码</a></li>
+                            <li><a href="{:url('admin/user/logout')}"><i class="Hui-iconfont Hui-iconfont-power"></i> 退出系统</a></li>
+                        </ul>
+                    </li>
+                    <!--<li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>-->
+                    <li id="Hui-skin" class="dropDown right dropDown_hover"> <a href="javascript:" class="dropDown_A" title="换肤"><i class="Hui-iconfont" style="font-size:18px">&#xe62a;</i></a>
+                        <ul class="dropDown-menu menu radius box-shadow">
+                            <li><a href="javascript:" data-val="default" title="默认">默认</a></li>
+                            <li><a href="javascript:" data-val="black" title="黑色">黑色</a></li>
+                            <li><a href="javascript:" data-val="green" title="绿色">绿色</a></li>
+                            <li><a href="javascript:" data-val="red" title="红色">红色</a></li>
+                            <li><a href="javascript:" data-val="yellow" title="黄色">黄色</a></li>
+                            <li><a href="javascript:" data-val="orange" title="橙色">橙色</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+<script type="text/javascript" src="/static/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+    function edit_pwd(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+</script>

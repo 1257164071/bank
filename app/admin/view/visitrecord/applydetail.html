@@ -1,0 +1,78 @@
+{extend name="base" /}
+
+{block name="content"}
+
+<div class="Hui-article-box">
+
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 营销管理<span class="c-gray en">&gt;</span>审批详情<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:history.go(-1);" title="返回" >返回</a></nav>
+
+
+    <h4 style=" text-align: center;">审批详情</h4>
+    <div style="width: 1000px;margin: 0 auto;">
+        <div class="panel panel-default">
+            <div class="panel-header" style="display: flex;justify-content: space-between;"><span>审批详情</span>{if $info.status==1}<a href="javascript:;" onclick="submit('修改审批','{:url('applyedit',array('id'=>$info.id))}','','510')" ><i class="Hui-iconfont">&#xe60c;</i>修改</a>{/if}</div>
+            <div class="panel-body">
+
+                <table class="table table-border table-bordered table-hover table-bg table-sort">
+                    <thead >
+                    <tr class="text-c">
+                        <th>编号</th>
+                        <th>客户名称</th>
+                        <th>申请类型</th>
+                        <th>申请描述</th>
+                        <th>审批人</th>
+                        <th>审批时间</th>
+                        <th>状态</th>
+                        <th>审批描述</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-c">
+                            <td>{$info.id}</td>
+                            <td>{$info.name}</td>
+                            <td>{if $info.type ==1}申请继续拜访{else}申请停止拜访{/if}</td>
+                            <td>{$info.apply_content}</td>
+                            <td>{$info.real_name}</td>
+                            <td>{if !empty($info.approve_time)}{:date('Y-m-d',$info.approve_time)}{/if}</td>
+                            <td>{if !empty($info.status)}{:get_name('apply_status',$info.status)}{/if}</td>
+                            <td>{$info.shenpi_content}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function(){
+        $('.table-sort').dataTable({
+            "aaSorting": [[ 1, "desc" ]],//默认第几个排序
+            "bStateSave": true,//状态保存
+            "aoColumnDefs": [
+                //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+                {"orderable":false,"aTargets":[0,4,6,8]}// 制定列不参与排序
+            ]
+        });
+        $('.table-sort tbody').on( 'click', 'tr', function () {
+            if ( $(this).hasClass('selected') ) {
+                $(this).removeClass('selected');
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });
+    });
+    function submit(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+</script>
+
+
+
+{/block}

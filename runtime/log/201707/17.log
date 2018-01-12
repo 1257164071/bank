@@ -1,0 +1,20 @@
+---------------------------------------------------------------
+[ 2017-07-17T09:29:06+08:00 ] 127.0.0.1 127.0.0.1 POST /admin/user/login.html
+[ sql ] [ DB ] CONNECT:[ UseTime:0.051003s ] mysql:dbname=bank;host=139.129.108.136;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_user` [ RunTime:0.047003s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_rbac_user` WHERE  `username` = 'admin'  AND `is_del` = 0 LIMIT 1 [ RunTime:0.034002s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_action` [ RunTime:0.036002s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_action` WHERE  `name` = 'user_login' LIMIT 1 [ RunTime:0.033002s ]
+[ sql ] [ SQL ] SELECT `username` FROM `ym_rbac_user` WHERE  `id` = 6 LIMIT 1 [ RunTime:0.033002s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_action_log` [ RunTime:0.036002s ]
+[ sql ] [ SQL ] INSERT INTO `ym_action_log` (`action_id` , `user_id` , `action_ip` , `model` , `record_id` , `create_time` , `remark`) VALUES (1 , 6 , 2130706433 , 'rbac_user' , 6 , 1500254945 , 'admin在2017-07-17 09:29登录了后台') [ RunTime:0.033002s ]
+[ sql ] [ SQL ] UPDATE `ym_rbac_user`  SET `last_login_time`=1500254945,`last_login_ip`='127.0.0.1',`login_count`=45  WHERE  `id` = 6 [ RunTime:0.036002s ]
+---------------------------------------------------------------
+[ 2017-07-17T09:29:09+08:00 ] 127.0.0.1 127.0.0.1 GET /admin/index/index.html
+[ sql ] [ DB ] CONNECT:[ UseTime:0.057003s ] mysql:dbname=bank;host=139.129.108.136;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_role` [ RunTime:0.041002s ]
+[ sql ] [ SQL ] SELECT * FROM `ym_rbac_role` WHERE  `id` = 13 LIMIT 1 [ RunTime:0.038003s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ym_rbac_access` [ RunTime:0.041002s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.* FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) ORDER BY `b`.`id`  asc [ RunTime:0.040002s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` [ RunTime:0.041003s ]
+[ sql ] [ SQL ] SELECT `b`.`name` FROM `ym_rbac_access` `a` INNER JOIN `ym_rbac_node` `b` ON `b`.`id`=`a`.`node_id` WHERE  (  a.role_id = 13 ) [ RunTime:0.039002s ]

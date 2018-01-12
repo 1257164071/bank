@@ -1,0 +1,84 @@
+{extend name="base" /}
+
+{block name="main"}
+<style type="text/css">
+.table tr td{width:2%;height:20px;padding:0;overflow: hidden;min-width: 65px;}
+.table tr td a{display:block;width:100%;height:20px;line-height:20px;text-decoration:none; color:#043C99;font-size:14px}
+.c-buliang{background-color:red;}
+.c-whites{background-color:#fff;}
+.c-blue{background-color:#ddd;}
+.c-yellow{background-color:#2EA0F1;}
+.c-baijin{background-color:#86DB49;}
+.c-red{background-color:#CB4A2A;}
+.c-green{background-color:yellow;}
+#intro{float:right;}
+#intro li{float:left;height:35px;line-height:25px;}
+#intro li span{display:inline-block;width:60px;height:20px;margin-left:20px; margin-right:10px;}
+</style>
+<article class="cl pd-20">
+	<h4 class="text-c">{$gridmsg.name|default=''}-客户分布图</h4><br/>
+	<ul id="intro">
+	    <li><span class="c-buliang"></span>逾期客户</li>
+		<li><span class="c-blue"></span>有记录客户</li>
+		<li><span class="c-whites"></span>普通客户</li>
+		<li><span class="c-yellow"></span>潜在客户</li>
+		<li><span class="c-baijin"></span>优质客户</li>
+		<li><span class="c-green"></span>金钻客户</li>
+	</ul>
+	<div style="clear:both;"></div>
+	      <!-- 无户号 -->
+		 	  {if isset($pos['wu'])}
+		 	  无户号客户：
+              <table class="table table-border table-bordered">
+			  <tr class="text-c">
+				    {foreach name="$pos.wu" item="vo" key="k" }
+		             <td>
+		                  <a href="{:url('admin/client/clientdetail',array('client_id'=>$vo['id']))}" {if condition="$vo['class_result'] eq 1"}class="c-buliang"{/if}{if condition="$vo['class_result'] eq 2"}class="c-blue"{/if}{if condition="$vo['class_result'] eq 3"}class="c-whites"{/if}{if condition="$vo['class_result'] eq 4"}class="c-yellow"{/if}{if condition="$vo['class_result'] eq 5"}class="c-baijin"{/if}{if condition="$vo['class_result'] eq 6"}class="c-green"{/if} {if condition="isset($vo) && !empty($vo)"}title="姓名：{$vo['name']|default=''} 住址：{$vo['hunit']|default=''}  身份证：{$vo['card_number']|default=''}"{/if} target="_blank">{$vo['name']|default=''}</a>
+		             </td>
+		             {if condition="($k+1)%20 eq 0"}  
+		              </tr><tr class="text-c">    
+		             {/if} 
+	                 {/foreach}   
+	            </tr> 
+	            </table>
+	            <br/>
+		 	  {/if}
+         <!-- 有户号 -->
+	     {if isset($gridmsg) && !empty($gridmsg['gridtype'])}
+			 {foreach name="$pos.you" item="vo" key="k" }
+			 <h3>{$k}号楼</h3>
+			  <table class="table table-border table-bordered">
+			  <tr class="text-c">
+			     {for start="1" end="161" name="i" }
+		             <td>
+		             	 <a {if condition="isset($vo[$i]) && !empty($vo[$i])"}href="{:url('admin/client/clientdetail',array('client_id'=>$vo[$i]['id']))}"{else/}href="javascript:void(0)"{/if} {if condition="isset($vo[$i]) && !empty($vo[$i])"}{if condition="$vo[$i]['class_result'] eq 1"}class="c-buliang"{/if}{if condition="$vo[$i]['class_result'] eq 2"}class="c-blue"{/if}{if condition="$vo[$i]['class_result'] eq 3"}class="c-whites"{/if}{if condition="$vo[$i]['class_result'] eq 4"}class="c-yellow"{/if}{if condition="$vo[$i]['class_result'] eq 5"}class="c-baijin"{/if}{if condition="$vo[$i]['class_result'] eq 6"}class="c-green"{/if}{/if} {if condition="isset($vo[$i]) && !empty($vo[$i])"}title="姓名：{$vo[$i]['name']|default=''} 住址：{$vo[$i]['hunit']|default=''}  身份证：{$vo[$i]['card_number']|default=''}"{/if} target="_blank">{$vo[$i]['name']|default=''}</a>
+		             </td>
+		             {if condition="$i%20 eq 0"}  
+		              </tr><tr class="text-c">    
+		             {/if} 
+	             {/for}   
+	            </tr> 
+	            </table>
+	            <br>
+			 {/foreach}
+		 {else}
+		      
+			  <table class="table table-border table-bordered">
+			  <tr class="text-c">
+				    {for start="1" end="10001" name="i" }
+		             <td>
+		                 {if condition="isset($pos[$i]) && !empty($pos[$i])"}
+		             	 <a {if condition="isset($pos[$i]) && !empty($pos[$i])"}href="{:url('admin/client/clientdetail',array('client_id'=>$pos[$i]['id']))}"{else/}href="javascript:void(0)"{/if} {if condition="isset($pos[$i]) && !empty($pos[$i])"}{if condition="$pos[$i]['class_result'] eq 1"}class="c-buliang"{/if}{if condition="$pos[$i]['class_result'] eq 2"}class="c-blue"{/if}{if condition="$pos[$i]['class_result'] eq 3"}class="c-whites"{/if}{if condition="$pos[$i]['class_result'] eq 4"}class="c-yellow"{/if}{if condition="$pos[$i]['class_result'] eq 5"}class="c-baijin"{/if}{if condition="$pos[$i]['class_result'] eq 6"}class="c-green"{/if}{/if}title="姓名：{$pos[$i]['name']|default=''} 住址：{$pos[$i]['hunit']|default=''}  身份证：{$pos[$i]['card_number']|default=''} 户号：{$pos[$i]['hu']|default=''}号" target="_blank">{$pos[$i]['name']|default=''}<!-- <sub>{$pos[$i]['hu']|default=''}</sub> --></a>
+		             	 {/if}
+		             </td>
+		             {if condition="$i%20 eq 0"}  
+		              </tr><tr class="text-c">    
+		             {/if} 
+	                 {/for}   
+	            </tr> 
+	            </table>
+	            <br>
+		 {/if}
+		</article>
+       <br><br>
+{/block}

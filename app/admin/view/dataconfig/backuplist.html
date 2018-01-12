@@ -1,0 +1,87 @@
+{extend name="base" /}
+
+{block name="content"}
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont"></i> 首页 <span class="c-gray en">&gt;</span> 备份记录 </nav>
+    <div class="Hui-article">
+        <article class="cl pd-20">
+                    <div class="cl pd-5 bg-1 bk-gray">
+                    <span class="l f-20 text-success">数据备份记录</span>
+                    <span class="r">
+                    <a href="{:url('admin/dataconfig/backupadd')}" class="btn btn-primary"> <i class="Hui-iconfont"></i> 数据备份</a>
+                    </span>
+                    </div>
+
+                        <div class="mt-10 clearfix">
+                            <!-- 应用列表 -->
+                            <table class="table table-border table-bordered table-bg">
+                                <thead>
+                                <tr>
+                                    <th width="200">备份名称</th>
+                                    <th width="80">卷数</th>
+                                    <th width="80">压缩</th>
+                                    <th width="80">数据大小</th>
+                                    <th width="200">备份时间</th>
+                                    <th>状态</th>
+                                    <th width="120">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {volist name="list" id="data"}
+                                <tr>
+                                    <td>{$data.time|date='Ymd-His',###}</td>
+                                    <td>{$data.part}</td>
+                                    <td>{$data.compress}</td>
+                                    <td>{$data.size|format_bytes}</td>
+                                    <td>{$key}</td>
+                                    <td>-</td>
+                                    <td class="action">
+                                        <a class="btn btn-success size-S db-import" href="{:url('import?time='.$data['time'])}">还原</a>
+                                        &nbsp;
+                                        <a class="btn btn-danger size-S" href="{:url('backupdel?time='.$data['time'])}">删除</a>
+                                    </td>
+                                </tr>
+                                {/volist}
+                                </tbody>
+                            </table>
+                        </div>
+        </article>
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(".db-import").click(function(){
+        var self = this, status = ".";
+        $.get(self.href, success, "json");
+        window.onbeforeunload = function(){ return "正在还原数据库，请不要关闭！" };
+        return false;
+
+        function success(data){
+            if(data.code){
+                if(data.data.gz){
+                    data.msg += status;
+                    if(status.length === 5){
+                        status = ".";
+                    } else {
+                        status += ".";
+                    }
+                }
+                $(self).parent().prev().text(data.msg);
+                if(data.data.part){
+                    $.get(self.href,
+                        {"part" : data.data.part, "start" : data.data.start},
+                        success,
+                        "json"
+                    );
+                }  else {
+                    window.onbeforeunload = function(){ return null; }
+                }
+            } else {
+                updateAlert(data.msg,'alert-error');
+            }
+        }
+    });
+</script>
+
+{/block}
+

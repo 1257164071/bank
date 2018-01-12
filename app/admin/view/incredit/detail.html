@@ -1,0 +1,714 @@
+{extend name="base" /}
+
+{block name="main"}
+<article class="cl pd-20">
+                 <br/>
+                 <table class="table table-border table-bordered table-hover">
+                     <tr>
+                        <td scope="col" colspan="2" style="text-align: center;font-weight: bold;">贷款信息</td>
+                    </tr>
+                    <tr class="text-c">
+                    	<td>业务种类</td>
+                    	<td>{if(!empty($loan.business_type))}{:get_name('business_type',$loan.business_type)}{/if}</td>
+                    </tr>
+                    <tr class="text-c">
+                    	<td>贷款账号</td>
+                    	<td>{$loan.loan_account}</td>
+                    </tr>
+                    <tr class="text-c">
+                    	<td>扣款账号</td>
+                    	<td>{$loan.koukuan_account}</td>
+                    </tr>
+                     <tr class="text-c">
+                         <td>科目号</td>
+                         <td>{$loan.subject_number}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>借据号</td>
+                         <td>{$loan.ious_number}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>发放时间</td>
+                         <td>{$loan.provide_time_int|date="Y-m-d",###}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>发放金额</td>
+                         <td>{$loan.provide_loan_money}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>客户号</td>
+                         <td>{$loan.client_number}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>客户名称</td>
+                         <td>{$loan.client_name}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>担保方式</td>
+                         <td>{$loan.guarantee_way}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td style="color:red;">账户形态</td>
+                         <td>{$loan.account_status}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>五星分类</td>
+                         <td>{$loan.fivestar_type}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>贷款形态（五级）</td>
+                         <td>{$loan.five_loan_form}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>贷款形态（十级）</td>
+                         <td>{$loan.ten_loan_form}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>支付方式</td>
+                         <td>{$loan.pay_way}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>主营业务</td>
+                         <td>{$loan.main_business}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>企业状态</td>
+                         <td>{$loan.holding_way}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>控股方式</td>
+                         <td>{$loan.guarantee_way}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>关系人类型</td>
+                         <td>{$loan.relation_type}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>到期日</td>
+                         <td>{$loan.arrive_time_int|date="Y-m-d",###}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>期限</td>
+                         <td>{$loan.time_limit}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>展期到期时间</td>
+                         <td>{$loan.zhanqi_arrive_time}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>首贷日</td>
+                         <td>{$loan.firstloan_time}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>贷款用途</td>
+                         <td>{$loan.loan_using}</td>
+                     </tr>
+
+                     <tr class="text-c">
+                         <td>贷款用途说明</td>
+                         <td>{$loan.loan_using_detail}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>发放类型</td>
+                         <td>{if !empty($loan.provide_type)}{:get_name('provide_type',$loan.provide_type)}{/if}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>利率</td>
+                         <td>{$loan.use_rate}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>利率执行方式</td>
+                         <td>{if !empty($loan.rate_runmode)}{:get_name('rate_runmode',$loan.rate_runmode)}{/if}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>利率浮动比例</td>
+                         <td>{$loan.float_rate}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>贷款余额</td>
+                         <td>{$loan.remian_money}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>借新还旧次数</td>
+                         <td>{$loan.jxhj_number}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>首次借新还旧日期</td>
+                         <td>{$loan.first_jxhj_time}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>已收利息</td>
+                         <td>{$loan.yishou_interest}</td>
+                     </tr>
+                      <tr class="text-c">
+                         <td style="color:red;">本金逾期次数</td>
+                         <td>{$loan.outdate_number}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>逾期本金</td>
+                         <td>{$loan.outdate_benji}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>本金逾期天数</td>
+                         <td>{$loan.benjin_outdate_day}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>利息逾期天数</td>
+                         <td>{$loan.interest_outdate_day}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>合同金额</td>
+                         <td>{$loan.loan_money}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>授权金额</td>
+                         <td>{$loan.shouquan_money}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>欠息金额</td>
+                         <td>{$loan.debt_money}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>表内欠息金额</td>
+                         <td>{$loan.intable_debt_money}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>表外欠息金额</td>
+                         <td>{$loan.outtable_debt_money}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>第一责任人</td>
+                         <td>{$loan.first_dutyofficer}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>责任金额</td>
+                         <td>{$loan.duty_money}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>业务号</td>
+                         <td>{$loan.business_number}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>担保人</td>
+                         <td>{$loan.garantor}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>主办客户经理</td>
+                         <td>{$loan.main_manager}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>协办客户经理</td>
+                         <td>{$loan.assist_manager}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>证件号码</td>
+                         <td>{$loan.card_number}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>信用等级</td>
+                         <td>{$loan.credit_class}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>结息方式</td>
+                         <td>{$loan.jiexi_way}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>结清日期</td>
+                         <td>{$loan.jieqing_time}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>核心入账机构</td>
+                         <td>{$loan.core_inorganization}</td>
+                     </tr>                  
+                     <tr class="text-c">
+                         <td>所属机构</td>
+                         <td>{$loan.belong_organization}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>行业分类</td>
+                         <td>{$loan.hangye_class}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>行业细分</td>
+                         <td>{$loan.hangye_xifen}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>贷款天数</td>
+                         <td>{$loan.loan_day}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>欠息日期</td>
+                         <td>{$loan.debt_time}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>日期</td>
+                         <td>{$loan.date}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>过期日期</td>
+                         <td>{$loan.outdate}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>日息</td>
+                         <td>{$loan.daily_interest}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>逾期</td>
+                         <td>{$loan.outdate_money}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>首次欠息日期</td>
+                         <td>{$loan.first_debt_time}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>欠息天数</td>
+                         <td>{$loan.debt_day}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td style="colorred;">欠息次数</td>
+                         <td>{$loan.debt_number}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>逾期天数</td>
+                         <td>{$loan.outdate_day}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>联系电话</td>
+                         <td>{$loan.contact_phone}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>对私移动电话</td>
+                         <td>{$loan.duisi_phone}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>通讯地址</td>
+                         <td>{$loan.corresponding_address}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>居住地址</td>
+                         <td>{$loan.address}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>比种</td>
+                         <td>{$loan.currency}</td>
+                     </tr>
+                     <tr class="text-c">
+                         <td>特色产品</td>
+                         <td>{$loan.tese_product}</td>
+                     </tr>
+
+                 </table>
+                 <br>
+         <div class="cl pd-5  bk-gray">
+        <span>  <?php if(count($Guarantorlist) < 7){ ?><a href="javascript:;" onclick="guarantor_add('添加担保人','{:url('admin/incredit/guarantoradd',array('client_id'=>$client_id,'loan_id'=>$loan_id))}','600','500')" class="btn btn-primary radius">添加担保人</a><?php }else{ ?>至多可以添加6个担保人<?php } ?> </span>
+        <!-- <span>共有：<strong><?php echo count($Guarantorlist);?></strong> 个</span> -->
+        &nbsp;&nbsp;
+        <span>  <a href="javascript:;" onclick="backrecord_add('添加清收记录','{:url('admin/incredit/backrecordadd',array('loan_id'=>$loan_id))}','600','500')" class="btn btn-primary radius">添加清收记录</a> </span>
+        <!-- <span>共有：<strong><?php echo count($backrecordlist);?></strong> 个</span> -->
+        <span>  <a href="javascript:;" onclick="backrecord_add('添加贷款涉诉状态','{:url('admin/incredit/dkss_add',array('loan_id'=>$loan_id))}','600','500')" class="btn btn-primary radius">涉诉状态</a> </span>
+
+        <span>  <a href="javascript:;" onclick="backrecord_add('添加审理情况','{:url('admin/incredit/loan_shenli_add',array('loan_id'=>$loan_id))}','600','500')" class="btn btn-primary radius">审理情况</a> </span>
+
+        <span>  <a href="javascript:;" onclick="backrecord_add('添加执行情况','{:url('admin/incredit/loan_zhixing_add',array('loan_id'=>$loan_id))}','600','500')" class="btn btn-primary radius">执行情况</a> </span>
+
+        <span>  <a href="javascript:;" onclick="backrecord_add('添加保全情况','{:url('admin/incredit/loan_baoquan_add',array('loan_id'=>$loan_id))}','600','500')" class="btn btn-primary radius">保全情况</a> </span>
+    </div>
+        <div class="mt-20">
+            <table class="table table-border table-bordered table-hover table-bg table-sort">
+                <thead>
+                    <tr>
+                        <td scope="col" colspan="9" style="text-align: center;font-weight: bold;">担保人列表</td>
+                    </tr>
+                    <tr class="text-c">
+                        <td style="display:none;"></td>
+                        <td>姓名</td>
+                        <td>性别</td>
+                        <td>身份关系</td>
+                        <td>身份证号</td>
+                        <td>单位</td>
+                        <td>地址</td>
+                        <td>优先赔偿</td>
+                        <td>还款意愿</td>
+                        <td>操作</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {volist name="$Guarantorlist" id="msg"}
+                    <tr class="text-c">
+                        <td style="display:none;"><input type="checkbox" name="id[]" value="{$msg.id}"></td>
+                        <td>{$msg.real_name}</td>
+                        <td>{if condition="$msg.sex eq 1"}男{else/}女{/if}</td>
+                        <td>{$msg.relation}</td>
+                        <td>{$msg.card}</td>
+                        <td>{$msg.workunit}</td>
+                        <td>{$msg.address}</td>
+                        <td>{if condition="$msg.rightfirst eq 1"}<span class="c-red">优先</span>{else/}否{/if}</td>
+                        <td>{if condition="$msg.returnwant eq 1"}<span class="c-red">有</span>{/if}</td>
+                        <td class="td-status">
+                        <a title="编辑" href="javascript:;" onclick="guarantor_edit('管理员编辑','{:url('admin/incredit/guarantoredit',array('id'=>$msg['id']))}','1','600','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i> 编辑</a>
+                        <a title="删除" href="javascript:;" onclick="guarantor_del(this,'{$msg.id}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i> 删除</a>
+                        </td>
+                    </tr>
+                    {/volist}
+                </tbody>
+            </table>
+        </div>
+        <!-- 担保人 -->
+        <br>
+        <!-- 清收记录 -->
+        <div class="mt-20">
+            <table class="table table-border table-bordered table-hover table-bg table-sort">
+                <thead>
+                    <tr>
+                        <td scope="col" colspan="9" style="text-align: center;font-weight: bold;">清收列表</td>
+                    </tr>
+                    <tr class="text-c">
+                        <td style="display:none;"></td>
+                        <td>清收时间</td>
+                        <td>清收处置进度</td>
+                        <td>调查人</td>
+                        <td>录入时间</td>
+                        <td>操作</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {volist name="backrecordlist" id="msg"}
+                    <tr class="text-c">
+                        <td style="display:none;"><input type="checkbox" name="id[]" value="{$msg.id}"></td>
+                        <td>{$msg.back_time|date="Y-m-d",###}</td>
+                        <td>{$msg.process}</td>
+                        <td>{$msg.back_name}</td>
+                        <td>{$msg.addtime|date="Y-m-d",###}</td>
+                        <td class="td-status">
+                        <a title="编辑" href="javascript:;" onclick="backrecord_edit('编辑','{:url('admin/incredit/backrecordedit',array('id'=>$msg['id']))}','1','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i> 编辑</a>
+                        <a title="删除" href="javascript:;" onclick="backrecord_del(this,'{$msg.id}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i> 删除</a>
+                        </td>
+                    </tr>
+                    {/volist}
+                </tbody>
+            </table>
+        </div>
+        <!-- 清收记录 -->
+        <br>
+          <!-- 贷款涉诉状态 -->
+    {if !empty($loan_ss_info)}
+    <div class="mt-20">
+        <table class="table table-border table-bordered table-hover table-bg table-sort">
+            <thead>
+            <tr>
+                <td scope="col" colspan="9" style="text-align: center;font-weight: bold;">贷款涉诉状态</td>
+            </tr>
+            <tr class="text-c">
+                <th style="display:none;"></th>
+                <th>诉前审查</th>
+                <th>一审</th>
+                <th>上诉</th>
+                <th>申请执行</th>
+                <th>执行异议</th>
+                <th>检察院检察</th>
+                <th>其他</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="text-c">
+                <td style="display:none;"></td>
+                <td>{:date('Y-m-d',$loan_ss_info.sqshencha)}</td>
+                <td>{if $loan_ss_info.yishen==1}再审{else}重审{/if}</td>
+                <td>{if $loan_ss_info.shangsu==1}再审{else}重审{/if}</td>
+                <td>{if $loan_ss_info.sqzhixing==1}是{else}否{/if}</td>
+                <td>{if $loan_ss_info.zxyiyi==1}是{else}否{/if}</td>
+                <td>{$loan_ss_info.jcyjiancha}</td>
+                <td>{$loan_ss_info.ss_other}</td>
+                <td>
+                    <a href="javascript:;" onclick="backrecord_add('修改贷款涉诉状态','{:url('admin/incredit/loan_ss_edit',array('id'=>$loan_ss_info.id))}','600','500')" ><i class="Hui-iconfont">&#xe6df;</i>编辑</a>
+                    <a title="删除" href="{:url('loan_ss_del',array('id'=>$loan_ss_info.id))}" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i>删除</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    {/if}
+    <!-- 贷款涉诉状态 -->
+    <!--审理情况开始-->
+    {if !empty($loan_shenli_info)}
+    <div class="mt-20">
+        <table class="table table-border table-bordered table-hover table-bg table-sort">
+            <thead>
+            <tr>
+                <td scope="col" colspan="9" style="text-align: center;font-weight: bold;">审理情况</td>
+            </tr>
+            </thead>
+            <thead>
+            <tr class="text-c" >
+                <th>贷款形态</th>
+                <th>起诉标的</th>
+                <th>立案时间</th>
+                <th>审理案号</th>
+                <th>受理法院</th>
+                <th>案件负责人</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="text-c">
+                <td>{if(!empty($loan_shenli_info.account_status))}{:get_name('account_status',$loan_shenli_info.account_status)}{/if}</td>
+                <td>{$loan_shenli_info.qsbiaodi}</td>
+                <td>{:date('Y-m-d',$loan_shenli_info.lian_time)}</td>
+                <td>{$loan_shenli_info.shenli_anhao}</td>
+                <td>{$loan_shenli_info.shouli_fayuan}</td>
+                <td>{$loan_shenli_info.anjian_fzr}</td>
+
+
+            </tr>
+            </tbody>
+            <thead>
+            <tr class="text-c">
+                <th>经办人</th>
+                <th>经办法官</th>
+                <th>诉讼费</th>
+                <th>开庭送达时间</th>
+                <th>开庭时间</th>
+                <th>撤诉或驳回</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="text-c">
+                <td>{$loan_shenli_info.jingbanren}</td>
+                <td>{$loan_shenli_info.jingbanfg}</td>
+                <td>{$loan_shenli_info.susongfei}</td>
+                <td>{:date('Y-m-d',$loan_shenli_info.ktsd_time)}</td>
+                <td>{:date('Y-m-d',$loan_shenli_info.kt_time)}</td>
+                <td>{if !empty($loan_shenli_info.csbh)&&$loan_shenli_info.csbh==1}撤诉{elseif $loan_shenli_info.csbh==2}撤诉{/if}</td>
+
+
+            </tr>
+            </tbody>
+            <thead>
+            <tr class="text-c">
+                <th>判决或调解</th>
+                <th>判决结果</th>
+                <th>判决(调解)时间</th>
+                <th>判决送达时间</th>
+                <th>上诉时间</th>
+                <th>再、重审案号</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="text-c">
+                <td>{if !empty($loan_shenli_info.pjtiaojie)&&$loan_shenli_info.pjtiaojie==1}判决{elseif $loan_shenli_info.pjtiaojie==2}调解{/if}</td>
+                <td>{if !empty($loan_shenli_info.pjjieguo)&&$loan_shenli_info.pjjieguo==1}胜诉{elseif $loan_shenli_info.pjjieguo==2}全部败诉{elseif $loan_shenli_info.pjjieguo==3}部分败诉{/if}</td>
+                <td>{:date('Y-m-d',$loan_shenli_info.pj_time)}</td>
+                <td>{:date('Y-m-d',$loan_shenli_info.pjsd_time)}</td>
+                <td>{:date('Y-m-d',$loan_shenli_info.ss_time)}</td>
+                <td>{$loan_shenli_info.zsanhao}</td>
+
+
+            </tr>
+            </tbody>
+            <thead>
+            <tr class="text-c">
+                <th>判决生效时间</th>
+                <th>操作</th><th colspan="4"> </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="text-c">
+                <td>{:date('Y-m-d',$loan_shenli_info.pjsx_time)}</td>
+                <td>
+                    <a href="javascript:;" onclick="backrecord_add('修改审理情况','{:url('admin/incredit/loan_shenli_edit',array('id'=>$loan_shenli_info.id))}','600','500')" ><i class="Hui-iconfont">&#xe6df;</i>编辑</a>
+                    <a title="删除" href="{:url('loan_shenli_del',array('id'=>$loan_shenli_info.id))}" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i>删除</a>
+                </td>
+                <td colspan="4"> </td>
+            </tr>
+            </tbody>
+
+
+
+        </table>
+    </div>
+    {/if}
+    <!-- 审理情况结束 -->
+    <!-- 执行情况开始 -->
+    {if !empty($loan_zhixing_info)}
+    <div class="mt-20">
+        <table class="table table-border table-bordered table-hover table-bg table-sort">
+            <thead>
+            <tr>
+                <td scope="col" colspan="9" style="text-align: center;font-weight: bold;">执行情况</td>
+            </tr>
+            </thead>
+            <thead>
+            <tr class="text-c" >
+                <th>执行标的</th>
+                <th>申请执行时间</th>
+                <th>执行案号</th>
+                <th>经办人</th>
+                <th>经办法官</th>
+                <th>执行送达时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="text-c" >
+                <td>{$loan_zhixing_info.zzbiaodi}</td>
+                <td>{:date('Y-m-d',$loan_zhixing_info.sszx_time)}</td>
+                <td>{$loan_zhixing_info.zx_anhao}</td>
+                <td>{$loan_zhixing_info.zxjingbanren}</td>
+                <td>{$loan_zhixing_info.zxjbfg}</td>
+                <td>{:date('Y-m-d',$loan_zhixing_info.zxsd_time)}</td>
+            </tr>
+            </tbody>
+            <thead>
+            <tr class="text-c" >
+                <th>是否提出执行异议</th>
+                <th>执行异议内容</th>
+                <th>回收标的</th>
+                <th>未回收标的</th>
+                <th>终结本次执行时间</th>
+                <th>恢复执行时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="text-c" >
+                <td>{if !empty($loan_zhixing_info.has_zxyy)&&$loan_zhixing_info.has_zxyy==1}是{else}否{/if}</td>
+                <td>{$loan_zhixing_info.zxyy_content}</td>
+                <td>{$loan_zhixing_info.shbiaodi}</td>
+                <td>{$loan_zhixing_info.wshbiaodi}</td>
+                <td>{:date('Y-m-d',$loan_zhixing_info.zjbczx_time)}</td>
+                <td>{:date('Y-m-d',$loan_zhixing_info.hfzx_time)}</td>
+            </tr>
+            </tbody>
+            <thead>
+            <tr class="text-c" >
+                <th>终结执行时间</th>
+                <th>操作</th>
+                <th colspan="4"> </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="text-c" >
+                <td>{:date('Y-m-d',$loan_zhixing_info.zjzx_time)}</td>
+                <td>
+                    <a href="javascript:;" onclick="backrecord_add('修改执行情况','{:url('admin/incredit/loan_zhixing_edit',array('id'=>$loan_zhixing_info.id))}','600','500')" ><i class="Hui-iconfont">&#xe6df;</i>编辑</a>
+                    <a title="删除" href="{:url('loan_zhixing_del',array('id'=>$loan_zhixing_info.id))}" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i>删除</a>
+                </td>
+                <td colspan="4"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    {/if}
+    <!-- 执行情况结束 -->
+        <!-- 保全情况 -->
+    {if !empty($loan_baoquan_info)}
+    <div class="mt-20">
+        <table class="table table-border table-bordered table-hover table-bg table-sort">
+            <thead>
+            <tr>
+                <td scope="col" colspan="9" style="text-align: center;font-weight: bold;">保全情况</td>
+            </tr>
+            </thead>
+            <thead>
+            <tr class="text-c" >
+                <th>保全标的</th>
+                <th>查封财产类别</th>
+                <th>查封起日</th>
+                <th>查封止日</th>
+                <th>续封止日</th>
+                <th>是否提出财产保全异议</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            {volist name='loan_baoquan_info' id='loan_baoquan_info'}
+            <tbody>
+            <tr  class="text-c">
+                <td><a style="color: blue;" href="javascript:;" onclick="backrecord_add('保全情况详情','{:url('admin/incredit/loan_baoquan_detail',array('id'=>$loan_baoquan_info.id))}','600','500')" >{$loan_baoquan_info.bqbiaodi}</a></td>
+                <td>{if(!empty($loan_baoquan_info.cfcc_type))}{:get_name('cfcc_type',$loan_baoquan_info.cfcc_type)}{/if}</td>
+                <td>{:date('Y-m-d',$loan_baoquan_info.cfqr_time)}</td>
+                <td>{:date('Y-m-d',$loan_baoquan_info.cfzr_time)}</td>
+                <td>{:date('Y-m-d',$loan_baoquan_info.xfzr_time)}</td>
+                <td>{if !empty($loan_baoquan_info.is_bqyy)&&$loan_baoquan_info.is_bqyy==1}是{else}否{/if}</td>
+                <td>
+                    <a href="javascript:;" onclick="backrecord_add('修改保全情况','{:url('admin/incredit/loan_baoquan_edit',array('id'=>$loan_baoquan_info.id))}','600','500')" ><i class="Hui-iconfont">&#xe6df;</i>编辑</a>
+                    <a title="删除" href="{:url('loan_baoquan_del',array('id'=>$loan_baoquan_info.id))}" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i>删除</a>
+                </td>
+            </tr>
+            </tbody>
+            {/volist}
+          
+        </table>
+    </div>
+    {/if}
+    <!-- 保全情况 -->
+		</article>
+
+      
+
+<script type="text/javascript" src="/static/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/static/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+
+function guarantor_add(title,url,w,h){
+    layer_show(title,url,w,h);
+}
+/*删除*/
+function guarantor_del(obj,id){
+    layer.confirm('删除须谨慎，确认要删除吗？',function(index){
+        $.ajax({
+            type: 'POST',
+            url: '{:url('admin/incredit/guarantordel')}',
+            dataType: 'json',
+            data:'id='+id,
+            success: function(data){
+                if(data.code==0){
+                    $(obj).parents("tr").remove();
+                    layer.msg('已删除!',{icon:1,time:1000});
+                    //window.location.href = '{:url('admin/admin/adminlists')}';
+                }else{
+                    layer.msg(data.msg);
+                }
+            },
+            error:function(data) {
+                console.log(data.msg);
+            },
+        });     
+    });
+}
+/*管理员-编辑*/
+function guarantor_edit(title,url,id,w,h){
+    layer_show(title,url,w,h);
+}
+/*清收记录-编辑*/
+function backrecord_add(title,url,w,h){
+    layer_show(title,url,w,h);
+}
+
+function backrecord_edit(title,url,id,w,h){
+    layer_show(title,url,w,h);
+}
+/*删除*/
+function backrecord_del(obj,id){
+    layer.confirm('删除须谨慎，确认要删除吗？',function(index){
+        $.ajax({
+            type: 'POST',
+            url: '{:url('admin/incredit/backrecorddel')}',
+            dataType: 'json',
+            data:'id='+id,
+            success: function(data){
+                if(data.code==0){
+                    $(obj).parents("tr").remove();
+                    layer.msg('已删除!',{icon:1,time:1000});
+                    //window.location.href = '{:url('admin/admin/adminlists')}';
+                }else{
+                    layer.msg(data.msg);
+                }
+            },
+            error:function(data) {
+                console.log(data.msg);
+            },
+        });     
+    });
+}
+
+
+</script>
+{/block}

@@ -1,0 +1,74 @@
+{extend name="base" /}
+
+{block name="content"}
+
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 网格列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="Hui-article">
+        <article class="cl pd-20">
+            <h4 class="text-c">罗庄农村商业银行</h4>
+            <div class="text-r"><span class="btn btn-success radius">{$count}个</span></div>
+            <div class="mt-10">
+                <table class="table table-border table-bordered table-hover table-bg table-sort">
+                    <thead>
+                    <tr class="text-c">
+                        <th>ID</th>
+                        <th>银行名称</th>
+                        <th>客户经理数目</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {volist name="bank" id="vo"}
+                    <tr class="text-c">
+
+                        <td>{$vo.id}</td>
+                        <td><a href="{:url('admin/grid/banktree',array('bank_id'=>$vo['id']))}">{$vo.bankname}</a></td>
+
+                        <td>{$vo.manager}</td>
+
+                    </tr>
+                    {/volist}
+                    </tbody>
+
+                </table>
+            </div>
+
+
+        </article>
+    </div>
+</section>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+
+<script type="text/javascript" src="/static/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+
+
+
+
+
+    function datadel(){
+        var $ids=$('input:checked');
+        $.ajax({
+            url: "",
+            type: 'post',
+            data: $('input:checked'),
+            dataType: 'json',
+            success:function(data) {
+                if (data.code == 0) {
+                    layer.msg(data.msg);
+                    location.reload();
+
+                } else {
+                    layer.msg(data.msg);
+                }
+            }
+        });
+    }
+
+</script>
+
+{/block}

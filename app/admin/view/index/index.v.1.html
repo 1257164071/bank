@@ -1,0 +1,277 @@
+{extend name="base" /}
+
+{block name="content"}
+<style type="text/css">
+table{ font: 9pt Tahoma, Verdana; color: #000000; }
+.header{ font: 9pt Tahoma, Verdana; color: #FFFFFF; font-weight: bold; background-color: #4FB4DE }
+.header th{ color: #FFFFFF;text-align: center;font-weight: bold;background-color:#3BB4F2;}
+.tableborder{  border: 1px solid #4FB4DE;width:60%; margin:0 auto;} 
+table th,td{border:1px solid #C9F1FF;}
+a:hover {text-decoration: none;}
+table a{color:#043C99;}
+.cmain{min-height: 500px;}
+</style>
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont"></i> <a href="/" class="maincolor">首页</a>
+        <span class="c-999 en">&gt;</span>
+        <span class="c-666">欢迎</span>
+        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
+    </nav>
+    <div class="Hui-article" >
+        <article class="cl pd-20" style="padding-bottom: 0">
+            <!--<p class="f-20 text-success">欢迎使用网格化管理系统</p>-->
+            <p>您好 <b> {$Think.session.user.real_name} </b>，欢迎使用网格化管理系统！ </p>
+            <p>这是您第 <b>{$Think.session.user.login_count}</b> 次登录系统，上次登录IP为 <b>{$Think.session.user.last_login_ip}</b> ,上次登录时间为 <b>{:date('Y-m-d H:i:s',$Think.session.user.last_login_time)}</b></p>
+        </article>
+        <div class="cmain">
+        <article class="cl pd-20" style="">
+        
+            {if $user.role_id == 7 or $user.role_id == 13 or $user.role_id == 20}
+            <div class="quare btn-primary" style="width:20%;">
+                <a href="{:url('admin/grid/allbank')}"><p>  网格化管理 </p></a>
+            </div>
+            <div class="quare btn-warning" style="width:20%;">
+                <a href="{:url('admin/analyse/chart1')}"><p> 数据分析</p></a>
+            </div>
+            {/if}
+
+            <div class="quare btn-secondary" style="width:20%;">
+                <a href="{:url('admin/client/clientlist')}"><p> 管理客户</p></a>
+            </div>
+            <div class="quare btn-success" style="width:20%;">
+                <a href="{:url('admin/client/ebank')}"><p> 客户筛选</p></a>
+            </div>
+            
+            {if $user.role_id == 10 or $user.role_id == 9}
+            <div class="quare btn-primary">
+                <a href="{:url('admin/Visitrecord/activeshow')}"><p>  营销活动 </p></a>
+            </div>
+            <div class="quare btn-warning">
+                <a href="{:url('admin/Visitrecord/lists')}"><p> 拜访记录</p></a>
+            </div>
+            {/if}
+           
+
+        </article>
+       
+        {if $user.role_id == 7 or $user.role_id == 9 or $user.role_id == 13 or $user.role_id == 20}
+            <div style="text-align: center;font-weight: bold;">网格化管理</div><br>
+            <table border="0" align="center" cellpadding="3" cellspacing="1" class="tableborder" style="border-collapse:normal;border-spacing: 1;">
+                    <tr class="header">
+                       <th height="30px">营业网点</th>
+                       <th>客户数量</th>
+                       <th>客户经理数量</th>
+                       <!-- <th>管辖小区数量</th> -->
+                    </tr>
+                    {volist name="banklist" id="vo"}
+                    <tr bgcolor="#FFFFFF" height="26px">
+                        <td  align="center"> <a href="{:url('admin/grid/banktree',array('bank_id'=>$vo['belong_organization']))}">{$vo.bankname|default=''}</a> </td>
+                        <td  align="center"> {$vo.count|default=''} </td>
+                        <td  align="center"> <a href="{:url('admin/grid/banktree',array('bank_id'=>$vo['belong_organization']))}">{$vo.jl_num|default=''}</a> </td>
+                       <!--  <td  align="center"> 已审核 </td> -->
+                    </tr>      
+                    {/volist}
+            </table>
+        {/if}
+
+        {if $user.role_id == 10}
+         <table border="0" align="center" cellpadding="3" cellspacing="1" class="tableborder" style="border-collapse:normal;border-spacing: 1;">
+                <tr class="header">
+                   <th height="30px">ID</th>
+                   <th>小区名</th>
+                   <th>客户数量</th>
+                   <!-- <th>管辖小区数量</th> -->
+                </tr>
+                {volist name="gridlist" id="vo"}
+                <tr bgcolor="#FFFFFF" height="26px">
+                    <td  align="center"> {$vo.id|default=''} </td>
+                    <td align="center"> <a href="{:url('admin/grid/wangge',array('id'=>$vo['id']))}">{$vo.name|default=''}</a> </td>
+                    <td align="center"> <a href="{:url('admin/grid/wangge',array('id'=>$vo['id']))}">{$vo.count|default=''}</a> </td>
+                   <!--  <td  align="center"> 已审核 </td> -->
+                </tr>      
+                {/volist}
+        </table>
+         {/if} 
+         </div>
+         <br/><br/><br/>
+         
+        {if $user.role_id != 10}
+        <div id="chart3" style="width:90%;height:500px;display: inline-block;"></div>
+        <br/><br/><br/>
+        <div id="chart2" style="width:90%;height:500px;display: inline-block;"></div>
+        <br/><br/><br/>
+        <div id="chart1" style="width:90%;height:500px;display: inline-block;"></div>
+        
+        <!--请在下方写此页面业务相关的脚本-->
+        <script src="/static/lib/echarts/echarts.simple.min.js"></script>
+        <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+            var myChart1 = echarts.init(document.getElementById('chart1'));
+            // 指定图表的配置项和数据
+            option1 = option1 = {
+                title: {
+                    text: '签约统计',
+                    subtext: ''
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                legend: {
+                    data: ['数量']
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                yAxis: {
+                    type: 'value',
+                    boundaryGap: [0, 0.01]
+                },
+                xAxis: {
+                    type: 'category',
+                    data: {$dep1}
+                },
+                series: [
+                    {
+                        name: '数量',
+                        type: 'bar',
+                        data: {$det1}
+                    }
+                ]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart1.setOption(option1);
+
+            // 基于准备好的dom，初始化echarts实例
+            var myChart2 = echarts.init(document.getElementById('chart2'));
+            // 指定图表的配置项和数据
+            option2 = {
+                title: {
+                    text: '贷款业务款统计',
+                    subtext: '2010年-2017年06月'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                legend: {
+                    data: ['发放贷款总额']
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                yAxis: {
+                    type: 'value',
+                    boundaryGap: [0, 0.01]
+                },
+                xAxis: {
+                    type: 'category',
+                    data: {$dep2}
+                },
+                series: [
+                    {
+                        name: '发放贷款总额',
+                        type: 'bar',
+                        areaStyle: {normal: {color: '#33CC99'}},
+                        itemStyle: {
+                            normal: {
+                                // 设置扇形的颜色
+                                color: '#33CC99',
+                                lineStyle:{color: '#33CC99'}
+                            }
+                        },
+                        data: {$det2}
+                    }
+                ]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart2.setOption(option2);
+           
+                       // 基于准备好的dom，初始化echarts实例
+            var myChart3 = echarts.init(document.getElementById('chart3'));
+            // 指定图表的配置项和数据
+            option3 = {
+                title: {
+                    text: '  各支行发放贷款排名',
+                    subtext: '  依据最新月份台帐'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                legend: {
+                    data: ['发放贷款总额']
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                yAxis: {
+                    type: 'value',
+                    boundaryGap: [0, 0.01]
+                },
+                xAxis: {
+                    type: 'category',
+                    data: {$dep3}
+                },
+                series: [
+                    {
+                        name: '发放贷款总额',
+                        type: 'bar',
+                        areaStyle: {normal: {color: '#33CC99'}},
+                        itemStyle: {
+                            normal: {
+                                // 设置扇形的颜色
+                                color: 'red',
+                                lineStyle:{color: '#33CC99'}
+                            }
+                        },
+                        data: {$det3}
+                    }
+                ]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart3.setOption(option3);
+        </script>
+        {/if}
+
+        <footer class="footer">
+            <p> © 2017 罗庄农村商业银行 . All rights reserved.  (请使用IE9+、Chrome 或 Firefox 浏览器访问本系统以获得更好的体验.) <br> 本系统由<a href="javascript:" target="_blank" >沂蒙软件研发中心</a> 提供技术支持</p>
+        </footer>
+    </div>
+</section>
+
+    <style>
+
+        .quare{
+            width: 260px;
+            height: 90px;
+            display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 20px;
+        }
+        .quare p{
+            line-height: 90px;
+            text-align: center;
+            font-size: 20px;
+            color: #FFFFFF;
+        }
+
+    </style>
+
+{/block}
+

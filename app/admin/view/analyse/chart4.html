@@ -1,0 +1,61 @@
+{extend name="base" /}
+
+{block name="content"}
+
+<section class="Hui-article-box">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 数据分析 <span class="c-gray en">&gt;</span> 客户等级 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<div class="Hui-article">
+		<article class="cl pd-20">
+
+			<div id="chart1" style="min-width:700px;min-height:500px"></div>
+
+		</article>
+	</div>
+</section>
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script src="/static/lib/echarts/echarts.simple.min.js"></script>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart1 = echarts.init(document.getElementById('chart1'));
+    // 指定图表的配置项和数据
+    option1 = {
+        title : {
+            text: '客户等级占比',
+            subtext: '',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} 个 ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: {$dep}
+        },
+        series : [
+            {
+                name: '客户等级',
+                type: 'pie',
+                radius : '80%',
+                center: ['50%', '55%'],
+                data:{$det},
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart1.setOption(option1);
+
+</script>
+
+{/block}

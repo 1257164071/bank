@@ -1,0 +1,225 @@
+{extend name="base" /}
+
+{block name="content"}
+<style type="text/css">
+.sear span,.sear input,.sear a{margin-bottom: 10px;}
+</style>
+<section class="Hui-article-box">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> {$title1}<span class="c-gray en">&gt;</span>{$title2}<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			
+			<form  method="get" action="">
+			<div class="text-l sear" > 
+				<input type="text" class="input-text" style="width:10%;" placeholder="客户名称" value="{$post.name|default=''}" name="name">
+				<input type="text" class="input-text" style="width:20%" placeholder="证件号码" value="{$post.card_number|default=''}"  name="card_number">
+				<span class="select-box" style="width: 10%;">
+					<select class="select" name="wangyin"  >
+						<option value="">网银</option>
+						<option  <?php if(isset($post['wangyin'])&&$post['wangyin']=='未'){ echo  'selected="selected"'; }?> value="未">未开通</option>
+						<option  <?php if(isset($post['wangyin'])&&$post['wangyin']==1){ echo  'selected="selected"'; }?> value="1">开通</option>
+						
+						
+					</select>
+				</span>
+				<span class="select-box" style="width: 10%;">
+					<select class="select" name="duanxinban"  >
+						<option value="">短信版</option>
+						<option  <?php if(isset($post['duanxinban'])&&$post['duanxinban']=='未'){ echo  'selected="selected"'; }?> value="未">未开通</option>
+						<option  <?php if(isset($post['duanxinban'])&&$post['duanxinban']==1){ echo  'selected="selected"'; }?> value="1">开通</option>
+						<!-- <option <?php if(isset($post['duanxinban'])&&$post['duanxinban']==2){ echo  'selected="selected"'; }?> value="2">2个</option>
+						<option <?php if(isset($post['duanxinban'])&&$post['duanxinban']==3){ echo  'selected="selected"'; }?> value="3">3个</option>
+						<option <?php if(isset($post['duanxinban'])&&$post['duanxinban']==4){ echo  'selected="selected"'; }?> value="4">4个</option> -->
+						
+					</select>
+				</span>
+				<span class="select-box" style="width: 10%;">
+					<select class="select" name="kehuduan"  >
+						<option value="">客户端</option>
+						<option  <?php if(isset($post['kehuduan'])&&$post['kehuduan']=='未'){ echo  'selected="selected"'; }?> value="未">未开通</option>
+						<option  <?php if(isset($post['kehuduan'])&&$post['kehuduan']==1){ echo  'selected="selected"'; }?> value="1">开通</option>
+						<!-- <option <?php if(isset($post['kehuduan'])&&$post['kehuduan']==2){ echo  'selected="selected"'; }?> value="2">2个</option>
+						<option <?php if(isset($post['kehuduan'])&&$post['kehuduan']==3){ echo  'selected="selected"'; }?> value="3">3个</option>
+						<option <?php if(isset($post['kehuduan'])&&$post['kehuduan']==4){ echo  'selected="selected"'; }?> value="4">4个</option> -->
+						
+					</select>
+				</span>
+
+				<span class="select-box" style="width: 10%;">
+					<select class="select" name="wap"  >
+						<option value="">wap</option>
+						<option  <?php if(isset($post['wap'])&&$post['wap']=='未'){ echo  'selected="selected"'; }?> value="未">未开通</option>
+						<option  <?php if(isset($post['wap'])&&$post['wap']==1){ echo  'selected="selected"'; }?> value="1">开通</option>
+						<!-- <option <?php if(isset($post['wap'])&&$post['wap']==2){ echo  'selected="selected"'; }?> value="2">2个</option>
+						<option <?php if(isset($post['wap'])&&$post['wap']==3){ echo  'selected="selected"'; }?> value="3">3个</option>
+						<option <?php if(isset($post['wap'])&&$post['wap']==4){ echo  'selected="selected"'; }?> value="4">4个</option> -->
+						
+					</select>
+				</span>
+				<span class="select-box" style="width: 10%;">
+					<select class="select" name="duanxintong"  >
+						<option value="">短信通</option>
+						<option  <?php if(isset($post['duanxintong'])&&$post['duanxintong']=='未'){ echo  'selected="selected"'; }?> value="未">未开通</option>
+						<option  <?php if(isset($post['duanxintong'])&&$post['duanxintong']==1){ echo  'selected="selected"'; }?> value="1">开通</option>
+						<!-- <option <?php if(isset($post['duanxintong'])&&$post['duanxintong']==2){ echo  'selected="selected"'; }?> value="2">2个</option>
+						<option <?php if(isset($post['duanxintong'])&&$post['duanxintong']==3){ echo  'selected="selected"'; }?> value="3">3个</option>
+						<option <?php if(isset($post['duanxintong'])&&$post['duanxintong']==4){ echo  'selected="selected"'; }?> value="4">4个</option> -->
+						
+					</select>
+				</span>
+				<!-- <span class="select-box" style="width:10%;">
+					<select class="select" name="pos"  >
+						<option value="">pos</option>
+						<option  <?php if(isset($post['pos'])&&$post['pos']=='未'){ echo  'selected="selected"'; }?> value="未">未开通</option>
+						<option  <?php if(isset($post['pos'])&&$post['pos']==1){ echo  'selected="selected"'; }?> value="1">1个</option>
+						<option <?php if(isset($post['pos'])&&$post['pos']==2){ echo  'selected="selected"'; }?> value="2">2个</option>
+						<option <?php if(isset($post['pos'])&&$post['pos']==3){ echo  'selected="selected"'; }?> value="3">3个</option>
+						<option <?php if(isset($post['pos'])&&$post['pos']==4){ echo  'selected="selected"'; }?> value="4">4个</option>
+						
+					</select>
+				</span> -->
+				<span class="select-box" style="width: 10%;">
+					<select class="select" name="quickpay"  >
+						<option value="">快捷支付</option>
+						<option  <?php if(isset($post['quickpay'])&&$post['quickpay']=='未'){ echo  'selected="selected"'; }?> value="未">未开通</option>
+						<option  <?php if(isset($post['quickpay'])&&$post['quickpay']==1){ echo  'selected="selected"'; }?> value="1">开通</option>
+						<!-- <option <?php if(isset($post['quickpay'])&&$post['quickpay']==2){ echo  'selected="selected"'; }?> value="2">2个</option>
+						<option <?php if(isset($post['quickpay'])&&$post['quickpay']==3){ echo  'selected="selected"'; }?> value="3">3个</option>
+						<option <?php if(isset($post['quickpay'])&&$post['quickpay']==4){ echo  'selected="selected"'; }?> value="4">4个</option> -->
+						
+					</select>
+				</span>
+			
+				<a href="javascript:;" onclick="research()" class="btn btn-success radius"><i class="Hui-iconfont">&#xe665;</i>  搜索</a>
+				
+			</div>
+
+			<div class="cl pd-5 bg-1 bk-gray mt-10">
+				<span class="l">
+					<!-- <a href="javascript:;" onclick="member_add('添加','/admin/client/clientadd','1200','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加</a> -->
+					<a href="javascript:;" onclick="member_add('导入数据','/admin/client/ebank_daoru','800','510')" class="btn btn-warning radius"><i class="Hui-iconfont">&#xe645;</i> 导入</a>
+					<a href="javascript:;" onclick="daochu()" class="btn btn-success radius"><i class="Hui-iconfont">&#xe645;</i> 导出</a>
+				</span>
+				<span class="r"><strong>{$count}</strong> 个客户</span>
+			</div>
+			</form>
+			<div class="mt-10">
+				<table class="table table-border table-bordered table-hover table-bg table-sort">
+					<thead>
+						<tr class="text-c">
+						
+							<th>ID</th>
+							<th>网点名称</th>
+							<th>姓名</th>
+							<th>证件号码</th>
+							<th>网银</th>
+							<th>短信版</th>
+							<th>客户端</th>
+							<th>wap</th>
+							<th>短信通</th>
+							<!-- <th>pos</th> -->
+							<th>快捷支付</th>
+							<th>有效复合卡</th>
+							<th>有效磁条卡</th>
+							<th>揽存人员</th>
+							
+							<th width="120">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+					{volist name="info" id="list"}
+						<tr class="text-c">
+						
+							<td>{$list.id}</td>
+							<td>{$list.sign_website_name}</td>
+							<td><a style="text-decoration:none"  href="{:url('clientdetail',array('card_number'=>$list['card_number']))}" title="查看客户详情">{$list.name}</a></td>
+							<td>{$list.card_number}</td>
+							{if empty($list.wangyin)}
+								<td>未开通</td>
+							{else}
+								<td style="color: red;">已开通</td>
+							{/if}
+							{if empty($list.duanxinban)}
+								<td>未开通</td>
+							{else}
+								<td style="color: red;">已开通</td>
+							{/if}
+							{if empty($list.kehuduan)}
+								<td>未开通</td>
+							{else}
+								<td style="color: red;">已开通</td>
+							{/if}
+							{if empty($list.wap)}
+								<td>未开通</td>
+							{else}
+								<td style="color: red;">已开通</td>
+							{/if}
+							{if empty($list.duanxintong)}
+								<td>未开通</td>
+							{else}
+								<td style="color: red;">已开通</td>
+							{/if}
+							<!-- {if empty($list.pos)}
+								<td></td>
+							{else}
+								<td>{$list.pos}</td>
+							{/if} -->
+							{if empty($list.quickpay)}
+								<td>未开通</td>
+							{else}
+								<td style="color: red;">已开通</td>
+							{/if}
+							
+								<td>{$list.fuhe_card}</td>
+							
+								<td>{$list.citiao_card}</td>
+								<td>{$list.lancun_man}</td>
+							
+							
+							
+							
+							<td class="td-manage">
+								<!-- <a href="javascript:;" onclick="member_add('编辑','/admin/client/clientadd','1200','510')" ><i class="Hui-iconfont">&#xe6df;</i> 编辑</a> -->
+								<a title="删除本条信息" href="{:url('delete',array('id'=>$list['id']))}" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i>删除</a></td>
+
+						</tr>
+						{/volist}
+					</tbody>
+
+				</table>
+			</div>
+			<div class="page">{$page}</div>
+
+		</article>
+	</div>
+</section>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/static/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+
+/*导出*/
+function daochu(){
+	var input='<input name="names" type="hidden"value="daochu"/>';
+	$('form').append(input);
+	$('form').submit();
+}
+function research(){
+	$('form input[name="names"]').remove();
+	
+	$('form').submit();
+}
+/*用户-添加*/
+function member_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+
+
+
+</script>
+
+{/block}

@@ -1,0 +1,521 @@
+{extend name="base" /}
+
+{block name="main"}
+
+<article class="cl pd-20">
+    <form action="" method="post" class="form form-horizontal" id="form-member-add">
+        {if isset($add) && $add==1}
+        <input type="hidden" name="client_id" value="{$client_id}" >
+        <input type="hidden" name="card_number" value="{$card_number}" >
+        <input type="hidden" name="bank_id" value="{$bank_id}" >
+        {else}
+        <input type="hidden" name="client_id" value="{$incredit.client_id}" >
+        <input type="hidden" name="id" value="{$incredit.id}" >
+        {/if}
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">业务种类</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <span class="select-box" >
+                    <select class="select" name="business_type"  >
+                        <option value="">==请选择==</option>
+                        {volist name="business_type" id="list" key="key"}
+                            <option <?php echo (isset($incredit['business_type'])&&($incredit['business_type']==$key-1))? 'selected="sleected"':'';?> value="{$key-1}">{$list}</option>
+                        {/volist}
+                    </select>
+                </span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">贷款账号</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.loan_account|default=''}" placeholder="贷款账号"  name="loan_account">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">扣款账号</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.koukuan_account|default=''}" placeholder="扣款账号"  name="koukuan_account">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">科目号</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.subject_number|default=''}" placeholder="科目号"  name="subject_number">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">借据号</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.ious_number|default=''}" placeholder="借据号"  name="ious_number">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">发放时间</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" onfocus="WdatePicker()" value="<?php echo (isset($incredit['provide_time_int']) && ($incredit['provide_time_int'] !== '')?date('Y-m-d',$incredit['provide_time_int']):''); ?>"  name="provide_time_int"class="input-text Wdate" >
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">发放金额</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.provide_loan_money|default=''}" placeholder="发放金额"  name="provide_loan_money">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">客户号</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.client_number|default=''}" placeholder="客户号"  name="client_number">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">客户名称</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.client_name|default=''}" placeholder="客户名称"  name="client_name">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">担保方式</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.guarantee_way|default=''}" placeholder="担保方式"  name="guarantee_way">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3" style="color:red;">账户形态</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="radio" name="account_status_int" value="1" {if isset($add) && $add==1}checked="checked"{/if} {if isset($incredit.account_status_int) && $incredit.account_status_int == 1}checked="checked"{/if}/>正常&nbsp;&nbsp;
+                <input type="radio" name="account_status_int" value="2" {if isset($incredit.account_status_int) && $incredit.account_status_int == 2}checked="checked"{/if}/>逾期&nbsp;&nbsp;
+                <input type="radio" name="account_status_int" value="3" {if isset($incredit.account_status_int) && $incredit.account_status_int == 3}checked="checked"{/if}/>部分逾期&nbsp;&nbsp;
+                <input type="radio" name="account_status_int" value="4" {if isset($incredit.account_status_int) && $incredit.account_status_int == 4}checked="checked"{/if}/>非应计&nbsp;&nbsp;
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">五星分类</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.fivestar_type|default=''}" placeholder="五星分类"  name="fivestar_type">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">贷款形态（五级）</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.five_loan_form|default=''}" placeholder="贷款形态（五级）"  name="five_loan_form">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">贷款形态（十级）</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.ten_loan_form|default=''}" placeholder="贷款形态（十级）"  name="ten_loan_form">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">支付方式</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.pay_way|default=''}" placeholder="支付方式"  name="pay_way">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">主营业务</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.main_business|default=''}" placeholder="主营业务"  name="main_business">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">企业状态</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.holding_way|default=''}" placeholder="企业状态"  name="holding_way">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">控股方式</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.guarantee_way|default=''}" placeholder="控股方式"  name="guarantee_way">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">关系人类型</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.relation_type|default=''}" placeholder="关系人类型"  name="relation_type">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">到期日</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                 <input type="text" onfocus="WdatePicker()" value="<?php echo (isset($incredit['arrive_time_int']) && ($incredit['arrive_time_int'] !== '')?date('Y-m-d',$incredit['arrive_time_int']):''); ?>"  name="arrive_time_int"class="input-text Wdate" >
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">期限</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.time_limit|default=''}" placeholder="到期日"  name="time_limit">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">展期到期时间</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" onfocus="WdatePicker()" value="<?php echo (isset($incredit['zhanqi_arrive_time']) && ($incredit['zhanqi_arrive_time'] !== '')?$incredit['zhanqi_arrive_time']:''); ?>"  name="zhanqi_arrive_time"class="input-text Wdate" >
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">首贷日</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                 <input type="text" onfocus="WdatePicker()" value="<?php echo (isset($incredit['firstloan_time']) && ($incredit['firstloan_time'] !== '')?$incredit['firstloan_time']:''); ?>"  name="firstloan_time"class="input-text Wdate" >
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">贷款用途</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.loan_using|default=''}" placeholder="贷款用途"  name="loan_using">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">贷款用途说明</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.loan_using_detail|default=''}" placeholder="贷款用途"  name="loan_using_detail">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">发放类型</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.provide_type|default=''}" placeholder="贷款用途"  name="provide_type">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">利率</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.use_rate|default=''}" placeholder="贷款用途"  name="use_rate">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">利率执行方式</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.rate_runmode|default=''}" placeholder="利率执行方式"  name="rate_runmode">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">利率浮动比例</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.float_rate|default=''}" placeholder="利率浮动比例"  name="float_rate">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">贷款余额</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.remian_money|default=''}" placeholder="贷款余额"  name="remian_money">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">借新还旧次数</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.jxhj_number|default=''}" placeholder="借新还旧次数"  name="jxhj_number">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">首次借新还旧日期</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                 <input type="text" onfocus="WdatePicker()" value="<?php echo (isset($incredit['first_jxhj_time']) && ($incredit['first_jxhj_time'] !== '')?$incredit['first_jxhj_time']:''); ?>"  name="first_jxhj_time"class="input-text Wdate" >
+            </div>
+        </div>
+		<div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">已收利息</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.yishou_interest|default=''}" placeholder="已收利息"  name="yishou_interest">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">本金逾期次数</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.outdate_number|default=''}" placeholder="本金逾期次数"  name="outdate_number">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">逾期本金</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.outdate_benji|default=''}" placeholder="逾期本金"  name="outdate_benji">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">本金逾期天数</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.benjin_outdate_day|default=''}" placeholder="本金逾期天数"  name="benjin_outdate_day">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">利息逾期天数</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.interest_outdate_day|default=''}" placeholder="利息逾期天数"  name="interest_outdate_day">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">合同金额</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.loan_money|default=''}" placeholder="合同金额"  name="loan_money">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">授权金额</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.shouquan_money|default=''}" placeholder="授权金额"  name="shouquan_money">
+            </div>
+        </div>
+		<div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">欠息金额</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.debt_money|default=''}" placeholder="欠息金额"  name="debt_money">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">表内欠息金额</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.intable_debt_money|default=''}" placeholder="表内欠息金额"  name="intable_debt_money">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">表外欠息金额</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.outtable_debt_money|default=''}" placeholder="表外欠息金额"  name="outtable_debt_money">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">第一责任人</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.first_dutyofficer|default=''}" placeholder="第一责任人"  name="first_dutyofficer">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">责任金额</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.duty_money|default=''}" placeholder="责任金额"  name="duty_money">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">业务号</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.business_number|default=''}" placeholder="业务号"  name="business_number">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">担保人</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.garantor|default=''}" placeholder="担保人"  name="garantor">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">主办客户经理</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.main_manager|default=''}" placeholder="主办客户经理"  name="main_manager">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">协办客户经理</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.assist_manager|default=''}" placeholder="协办客户经理"  name="assist_manager">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">信用等级</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.credit_class|default=''}" placeholder="信用等级"  name="credit_class">
+            </div>
+        </div>
+         <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">结息方式</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.jiexi_way|default=''}" placeholder="结息方式"  name="jiexi_way">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">结清日期</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" onfocus="WdatePicker()" value="<?php echo (isset($incredit['jieqing_time']) && ($incredit['jieqing_time'] !== '')?$incredit['jieqing_time']:''); ?>"  name="jieqing_time"class="input-text Wdate" >
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">核心入账机构</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.core_inorganization|default=''}" placeholder="核心入账机构"  name="core_inorganization">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">所属机构</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.belong_organization|default=''}" placeholder="所属机构"  name="belong_organization">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">行业分类</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.hangye_class|default=''}" placeholder="行业分类"  name="hangye_class">
+            </div>
+        </div>
+         <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">行业细分</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.hangye_xifen|default=''}" placeholder="行业细分"  name="hangye_xifen">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">贷款天数</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.loan_day|default=''}" placeholder="贷款天数"  name="loan_day">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">欠息日期</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                 <input type="text" onfocus="WdatePicker()" value="<?php echo (isset($incredit['debt_time']) && ($incredit['debt_time'] !== '')?$incredit['debt_time']:''); ?>"  name="debt_time"class="input-text Wdate" >
+            </div>
+        </div>
+       <!--  <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">日期</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.date|default=''}" placeholder="日期"  name="date">
+            </div>
+        </div> -->
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">过期日期</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                 <input type="text" onfocus="WdatePicker()" value="<?php echo (isset($incredit['outdate']) && ($incredit['outdate'] !== '')?$incredit['outdate']:''); ?>"  name="outdate"class="input-text Wdate" >
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">日息</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.daily_interest|default=''}" placeholder="日息"  name="daily_interest">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">逾期</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.outdate_money|default=''}" placeholder="逾期"  name="outdate_money">
+            </div>
+        </div>
+       <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">首次欠息日期</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                 <input type="text" onfocus="WdatePicker()" value="<?php echo (isset($incredit['first_debt_time']) && ($incredit['first_debt_time'] !== '')?$incredit['first_debt_time']:''); ?>"  name="first_debt_time"class="input-text Wdate" >
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">欠息天数</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.debt_day|default=''}" placeholder="欠息天数"  name="debt_day">
+            </div>
+        </div>
+         <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">欠息次数</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.debt_number|default=''}" placeholder="欠息次数"  name="debt_number">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">逾期天数</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.outdate_day|default=''}" placeholder="逾期天数"  name="outdate_day">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">联系电话</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.contact_phone|default=''}" placeholder="联系电话"  name="contact_phone">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">对私移动电话</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.duisi_phone|default=''}" placeholder="对私移动电话"  name="duisi_phone">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">通讯地址</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.corresponding_address|default=''}" placeholder="通讯地址"  name="corresponding_address">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">居住地址</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.address|default=''}" placeholder="居住地址"  name="address">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">币种</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.currency|default=''}" placeholder="币种"  name="currency">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">特色产品</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.tese_product|default=''}" placeholder="特色产品 如买卖通、养殖贷款"  name="tese_product">
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                {if isset($add)&&$add==1}
+                <a class="btn btn-primary radius"  onclick="add()"> 提交</a>
+                {else}
+                <a class="btn btn-primary radius"  onclick="edit()"> 提交</a>
+                {/if}
+                <!--<input class="btn btn-primary radius" onclick="submit()" type="button" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">-->
+            </div>
+        </div>
+    </form>
+</article>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=33b529efc5e27ef1eb1f674704afd789"></script>
+<script type="text/javascript">
+    $(function(){
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+    });
+
+    function add(){
+        $.ajax({
+            url:'{:url("admin/incredit/add")}',
+            type:'post',
+            data:$('form').serialize(),
+            success:function (data) {
+                if(data.code==0){
+                    layer.msg(data.msg);
+                    parent.location.reload();
+                    setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))",2000);
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+    }
+    function edit(){
+        $.ajax({
+            url:'{:url("admin/incredit/edit")}',
+            type:'post',
+            data:$('form').serialize(),
+            success:function (data) {
+                if(data.code==0){
+                    layer.msg(data.msg);
+                    parent.location.reload();
+                    setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))",2000);
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+
+    }
+
+
+
+</script>
+
+{/block}

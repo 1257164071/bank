@@ -1,0 +1,135 @@
+{extend name="base" /}
+
+{block name="main"}
+
+<article class="cl pd-20">
+	<form action="" method="post" class="form form-horizontal" id="form-admin-add">
+		{if !empty($loan_baoquan_info)}
+			<input type="hidden" name="id" value="{$loan_baoquan_info.id}">
+		{else}
+			<input type="hidden" name="loan_id" value="{:input('loan_id')}">
+		{/if}
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">保全标的:</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$loan_baoquan_info.bqbiaodi|default=''}" placeholder="保全标的"  name="bqbiaodi">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">查封财产类别:</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<span class="select-box" >
+					<select class="select" name="cfcc_type"  >
+						<option value="">==请选择==</option>
+					 	{volist name="cfcc_type" id="list" key="key"}
+                            <option <?php echo (isset($loan_baoquan_info['cfcc_type'])&&($loan_baoquan_info['cfcc_type']==$key-1))? 'selected="sleected"':'';?> value="{$key-1}">{$list}</option>
+                        {/volist}
+					</select>
+				</span>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">查封起日:</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" onfocus="WdatePicker()" value="<?php echo (isset($loan_baoquan_info['cfqr_time']) && ($loan_baoquan_info['cfqr_time'] !== '')?date('Y-m-d',$loan_baoquan_info['cfqr_time']):''); ?>"  name="cfqr_time" class="input-text Wdate" >
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">查封止日:</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" onfocus="WdatePicker()" value="<?php echo (isset($loan_baoquan_info['cfzr_time']) && ($loan_baoquan_info['cfzr_time'] !== '')?date('Y-m-d',$loan_baoquan_info['cfzr_time']):''); ?>"  name="cfzr_time" class="input-text Wdate" >
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">续封止日:</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" onfocus="WdatePicker()" value="<?php echo (isset($loan_baoquan_info['xfzr_time']) && ($loan_baoquan_info['xfzr_time'] !== '')?date('Y-m-d',$loan_baoquan_info['xfzr_time']):''); ?>"  name="xfzr_time" class="input-text Wdate" >
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">查封财产详情</label>
+			<div class="formControls col-xs-8 col-sm-9">
+			<textarea name="cf_detail"  class="formControls col-xs-12 col-sm-12">
+			{$loan_baoquan_info.cf_detail|default=''}</textarea>
+				
+				<!-- <input type="text" class="input-text" value="{$loan_baoquan_info.zx_anhao|default=''}" placeholder="执行案号"  name="zx_anhao"> -->
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">是否提出财产保全异议:</label>
+			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+				<div class="radio-box">
+					<input name="is_bqyy" type="radio"  value="1" id="sqzhixing_1" checked>
+					<label for="sqzhixing_1">是</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="sqzhixing_2" value="0" name="is_bqyy"<?php echo (isset($loan_baoquan_info['is_bqyy']) && ($loan_baoquan_info['is_bqyy'] == '0')?'checked':''); ?> >
+					<label for="sqzhixing_2">否</label>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">财产保全异议内容:</label>
+			<div class="formControls col-xs-8 col-sm-9">
+			<textarea name="bqyy_content" class="formControls col-xs-12 col-sm-12" >{$loan_baoquan_info.bqyy_content|default=''}</textarea>
+				<!-- <input type="text" class="input-text" value="{$loan_baoquan_info.zxyy_content|default=''}" placeholder="执行异议内容"  name="zxyy_content"> -->
+			</div>
+		</div>
+		
+		
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-6 col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+
+			</div>
+		</div>
+	</form>
+</article>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+	
+	$("#form-admin-add").validate({
+
+		onkeyup:false,
+		focusCleanup:true,
+		success:"valid",
+		submitHandler:function(form){
+			var $form = $(form);
+			$.ajax({
+				url:'{$url}',
+				type:'post',
+				data:$form.serialize(),
+				success:function (data) {
+					if(data.code==0){
+						layer.msg(data.msg);
+						parent.location.reload();
+						setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))",2000);
+					}else{
+						layer.msg(data.msg);
+					}
+				}
+			});
+		}
+	});
+
+})
+
+
+      
+</script>
+
+{/block}

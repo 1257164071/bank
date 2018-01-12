@@ -1,0 +1,139 @@
+{extend name="base" /}
+
+{block name="main"}
+
+<article class="cl pd-20">
+    <form action="" method="post" class="form form-horizontal" id="form-member-add">
+        {if !empty($client_id)&&(isset($client_id))}
+        <input type="hidden" name="client_id" value="{$client_id}" >
+        {else}
+        <input type="hidden" name="id" value="{$info.id}" >
+        {/if}
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>配偶名称：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$info.spouse_name|default=''}" placeholder="配偶名称"  name="spouse_name">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">性别：</label>
+            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                <div class="radio-box">
+                    <input name="spouse_sex" type="radio"  value="1" id="sex-1" checked >
+                    <label for="sex-1">男</label>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" id="sex-2" value="0" name="spouse_sex" <?php echo (isset($info['spouse_sex']) && ($info['spouse_sex'] == '0')?'checked':''); ?>>
+                    <label for="sex-2">女</label>
+                </div>
+
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">证件类型：</label>
+            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                <div class="radio-box">
+                    <input name="card_type" type="radio"value="0"  id="card_type-1" checked  >
+                    <label for="card_type-1">身份证</label>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" id="card_type-2" value="1" name="card_type" <?php echo (isset($info['card_type']) && ($info['card_type'] == '1')?'checked':''); ?> >
+                    <label for="card_type-2" >其他</label>
+                </div>
+
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>证件号码：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$info.card_number|default=''}" placeholder="证件号码"  name="card_number">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">联系方式（手机）：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$info.tel_number|default=''}" placeholder="联系方式（手机）"  name="tel_number">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">联系方式（电话）：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$info.phone_number|default=''}" placeholder="联系方式（电话）"  name="phone_number">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">工作单位：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$info.work_place|default=''}" placeholder="工作单位"  name="work_place">
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                {if isset($info)&&$info!=''}
+                <a class="btn btn-primary radius" onclick="edit()"> 提交</a>
+                {else}
+                <a class="btn btn-primary radius" onclick="add()"> 提交</a>
+                {/if}
+                <input type="reset" value="重置" class="btn btn-primary radius">
+            </div>
+        </div>
+    </form>
+</article>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+
+
+    });
+
+    function add(){
+        $.ajax({
+            url:'{:url("familymember/spouseadd")}',
+            type:'post',
+            data:$('form').serialize(),
+            success:function (data) {
+                if(data.code==0){
+                    layer.msg(data.msg);
+                    parent.location.reload();
+                    setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))",2000);
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+    }
+    function edit(){
+        $.ajax({
+            url:'{:url("familymember/spouseedit")}',
+            type:'post',
+            data:$('form').serialize(),
+            success:function (data) {
+                if(data.code==0){
+                    layer.msg(data.msg);
+                    parent.location.reload();
+                    setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))",2000);
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+
+    }
+
+
+
+</script>
+
+{/block}

@@ -1,0 +1,68 @@
+{extend name="base" /}
+
+{block name="content"}
+<link href="/static/lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
+<div class="Hui-article-box">
+
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 营销活动<span class="c-gray en">&gt;</span>活动详情<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:history.go(-1);" title="返回" >返回</a></nav>
+    <div class="Hui-article">
+
+
+
+        <h4 style=" text-align: center;">活动详情</h4>
+        <div style="width: 1000px; margin: 0 auto">
+            <div class="panel panel-default">
+                <div class="panel-header" style="display: flex;justify-content: space-between;"><span>营销活动</span></div>
+                <div class="panel-body">
+
+                        <table class="table table-border table-bordered table-hover">
+                            <tr class="text-c">
+                                <td style="width: 55px;">组织人</td><td style="width: 200px;">{$activity.real_name}</td>
+                                <td style="width: 55px;">举行时间</td><td style="width: 200px;">{:date('Y-m-d',$activity.hold_time)}</td>
+                            </tr>
+                            <tr class="text-c">
+                                <td style="width: 55px;">标题</td><td colspan="3" style="width: 200px;">{$activity.title}</td>
+                            </tr>
+                            <tr class="text-c">
+                                <td style="width: 55px;">摘要</td><td  colspan="3" style="width: 200px;">{$activity.description}</td>
+                            </tr>
+                        </table>
+
+
+
+                </div>
+            </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-header" style="display: flex;justify-content: space-between;"><span>活动照片</span></div>
+                <div class="panel-body">
+                    {foreach name="list" item="vo"}
+                    <table class="table table-border table-bordered table-hover">
+                    <tr class="text-c">
+                        <td ><img  style="width: 800px; height: 400px; " src="{$vo}"/></td>
+
+                    </tr>
+
+                    </table>
+                    {/foreach}
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</div>
+
+<script type="text/javascript">
+    function submit(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+</script>
+
+
+
+
+
+{/block}

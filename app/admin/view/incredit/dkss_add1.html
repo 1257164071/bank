@@ -1,0 +1,172 @@
+{extend name="base" /}
+
+{block name="main"}
+
+<article class="cl pd-20">
+	<form action="" method="post" class="form form-horizontal" id="form-admin-add">
+	    {if condition="isset($add) && ($add eq 1)"}
+	    <input type="hidden" name="loan_id" value="{$loan_id}" >
+		{else/}
+		<input type="hidden" name="id" value="{$msg.id}" >
+		{/if}
+
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3">诉前审查：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$msg.fund?$msg.fund:''}" placeholder="" id="fund" name="fund">
+				查控（设置查控期限）  <input type="text" onfocus="WdatePicker()" value=""  name="fund_ck_date" class="input-text Wdate" >
+			</div>
+		</div>
+      
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>担保人姓名：</label>
+			<div class="formControls col-xs-8 col-sm-9 ">
+				<input type="text" class="input-text" value="{$msg.real_name?$msg.real_name:''}" placeholder="" id="realname" name="real_name">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>性别：</label>
+			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+				<div class="radio-box">
+					<input name="sex" type="radio" id="sex-1" {if condition="!isset($msg.sex)"}checked="checked"{else/}{if condition="$msg.sex eq 1"}checked="checked"{/if}{/if} value="1">
+					<label for="sex-1">男</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="sex-2" name="sex" {if condition="!isset($msg.sex)"}{else/}{if condition="$msg.sex eq 0"}checked="checked"{/if}{/if} value="0">
+					<label for="sex-2">女</label>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3">存款股金类：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$msg.fund?$msg.fund:''}" placeholder="" id="fund" name="fund">
+				查控（设置查控期限）  <input type="text" onfocus="WdatePicker()" value=""  name="fund_ck_date" class="input-text Wdate" >
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3">还款意愿：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+					<div class="radio-box">
+					<input name="returnwant" type="radio" id="sex-1" {if condition="!isset($msg.returnwant)"}{else/}{if condition="$msg.returnwant eq 1"}checked="checked"{/if}{/if} value="1">
+					<label>有</label>
+				</div>
+				<div class="radio-box">
+					<input name="returnwant" type="radio" id="sex-2" {if condition="!isset($msg.returnwant)"}checked="checked"{else/}{if condition="$msg.returnwant eq 0"}checked="checked"{/if}{/if} value="0">
+					<label>无</label>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3">涉诉信息：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<textarea name="inlaw" cols="" rows="" class="textarea"  placeholder="说点什么...100个字符以内" dragonfly="true" onKeyUp="textarealength(this,100)">{$msg.inlaw?$msg.inlaw:''}</textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3">其他：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<textarea name="other" cols="" rows="" class="textarea"  placeholder="说点什么...100个字符以内" dragonfly="true" onKeyUp="textarealength(this,100)">{$msg.other?$msg.other:''}</textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+			<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+				
+			</div>
+		</div>
+	</form>
+</article>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+	
+	$("#form-admin-add").validate({
+		rules:{
+			username:{
+				required:true,
+				minlength:4,
+				maxlength:16
+			},
+		   {if condition="!isset($msg.username)"}
+			password:{
+				required:true,
+			},
+			{/if}
+			password2:{
+				{if condition="!isset($msg.username)"}
+				required:true,
+				{/if}
+				equalTo: "#password"
+			},
+			
+			sex:{
+				required:true,
+			},
+			role_id:{
+				required:true,
+			}
+		},
+		messages:{
+			username:{
+				required:'用户名不能为空'
+			},
+			password:{
+				required:'密码不能为空'
+			},
+			password2:{
+				required:'密码必须一致'
+			},
+			sex:{
+				required:'性别必须选择'
+			},
+			role_id:{
+				required:'角色必须选择'
+			}
+		},
+		onkeyup:false,
+		focusCleanup:true,
+		success:"valid",
+		submitHandler:function(form){
+			var $form = $(form);
+			$.ajax({
+				url:'{$url}',
+				type:'post',
+				data:$form.serialize(),
+				success:function (data) {
+					if(data.code==0){
+						layer.msg(data.msg);
+						parent.location.reload();
+						setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))",2000);
+					}else{
+						layer.msg(data.msg);
+					}
+				}
+			});
+		}
+	});
+
+})
+
+
+      
+</script>
+
+{/block}

@@ -1,0 +1,81 @@
+{extend name="base" /}
+
+{block name="content"}
+<style type="text/css">
+    table a{color:#043C99;}
+    #map{max-width:500px;margin:0 auto 20px 30%;}
+</style>
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 网格列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:history.go(-1);" title="返回" >返回</a></nav>
+    <div class="Hui-article">
+        <article class="cl pd-20">
+            <div class="mt-10">
+
+                <img style="max-height: 300px;" src="/static/wangge/images/{$id}.png" alt="" border="0" id="map"/>
+                <table class="table table-border table-bordered table-hover table-bg table-sort" >
+                    <thead>
+                    <tr class="text-c">
+                        <th>ID</th>
+                        <th>客户经理</th>
+                        <th>管理的小区</th>
+                        <th>管理的小区数量</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {volist name="$client_manger" id="vo"}
+                    <tr class="text-c">
+
+                        <td>{$vo.id}</td>
+                        <td><a href="{:url('clientmanger',array('manger_id'=>$vo['id'],'name'=>$vo['real_name']))}">{$vo.real_name}</a></td>
+                        <td>
+                            {foreach name='$vo.grid_name' item='values'}
+                            <a class="btn btn-primary-outline radius" href="{:url('grid/wangge',array('id'=>$values.id))}">{$values.name}</a> 
+                            {/foreach}
+                        </td>
+                        <td>{$vo.grid}</td>
+
+                    </tr>
+                    {/volist}
+                    </tbody>
+                </table>
+            </div>
+
+
+        </article>
+    </div>
+</section>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+
+<script type="text/javascript" src="/static/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+
+
+
+
+
+    function datadel(){
+        var $ids=$('input:checked');
+        $.ajax({
+            url: "",
+            type: 'post',
+            data: $('input:checked'),
+            dataType: 'json',
+            success:function(data) {
+                if (data.code == 0) {
+                    layer.msg(data.msg);
+                    location.reload();
+
+                } else {
+                    layer.msg(data.msg);
+                }
+            }
+        });
+    }
+
+</script>
+
+{/block}

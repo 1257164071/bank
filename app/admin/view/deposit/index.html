@@ -1,0 +1,118 @@
+{extend name="base" /}
+
+{block name="content"}
+<style type="text/css">
+.table tr td{text-align:center;}
+.btn-group 
+</style>
+<div class="Hui-article-box">
+
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> {$title1}<span class="c-gray en">&gt;</span>{$title2}<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:history.go(-1);" title="返回" >返回</a></nav>
+    <div class="panel panel-default" >
+        <div class="panel-header">
+            <span>客户编号&nbsp;[{$client['client_number']}]</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>客户名称&nbsp;[{$client['name']}]</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>所属机构&nbsp;[{$client['bankname']|default='罗庄农村商业银行'}]</span>
+        </div>
+    </div>
+    <div class="btn-group" style="text-align: center;">
+        {include file="clientmenu"}
+    </div>
+    <h4 style=" text-align: center;">存款信息详情</h4>
+    <div>
+        <div class="panel panel-default">
+            <div class="panel-header" style="display: flex;justify-content: space-between;"><span>存款信息</span><a href="javascript:;" onclick="submit('添加存款信息','{:url('Deposit/add',array('client_id'=>$client['id']))}','','710')" ><i class="Hui-iconfont">&#xe600;</i>添加</a></div>
+            <div class="panel-body">
+
+                <table class="table table-border table-bordered table-hover table-bg table-sort">
+                    <thead>
+                    <tr class="text-c">
+                        <th>账号</th>
+                        <th>存款额</th>
+                        <th>开户行</th>
+                        <th>账户状态</th>
+                        <th>存款类型</th>
+                        <th>存款日期</th>
+                        <th>揽存员工</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    {volist name="info" id="list"}
+                    <tbody>
+                        <tr>
+                            <td>{$list.account}</td>
+                            <td>{$list.save_amt}</td>
+                            <td>{$list.bankname}</td>
+                            <td>{if $list.account_status==0}正常{else/}冻结{/if}</td>
+                            <td>{if $list.deposit_type==1}活期存款 {elseif $list.deposit_type==2}整存整取{elseif $list.deposit_type==3}零存整取{elseif $list.deposit_type==4}整存零取{elseif $list.deposit_type==5}存本取息{elseif $list.deposit_type==6}定活两便{elseif $list.deposit_type==7}通知存款{/if}</td>
+                            <td>{:date('Y-m-d',$list.save_time)}</td>
+                            <td>{$list.real_name}</td>
+                            <td class="td-manage">
+                            <!-- 
+                            <a href="javascript:;" onclick="submit('修改存款信息','{:url('deposit/edit',array('deposit_id'=>$list['id']))}','','710')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i>编辑</a>&nbsp;&nbsp;
+                             -->
+                            <a style="text-decoration:none"  href="javascript:;" onclick="msg_del(this,'{$list.id}')" title="删除存款信息"><i class="Hui-iconfont">&#xe6e2;</i>删除</a> </td>
+                        </tr>
+                    </tbody>
+                    {/volist}
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+$(function(){
+    $('.table-sort').dataTable({
+        "aaSorting": [[ 1, "desc" ]],//默认第几个排序
+        "bStateSave": true,//状态保存
+        "aoColumnDefs": [
+            //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+            {"orderable":false,"aTargets":[0,4,6,8]}// 制定列不参与排序
+        ]
+    });
+    $('.table-sort tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+        }
+        else {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    });
+});
+
+function submit(title,url,w,h){
+    layer_show(title,url,w,h);
+}
+
+/*删除*/
+function msg_del(obj,id){
+	layer.confirm('删除须谨慎，确认要删除吗？',function(index){
+		$.ajax({
+			type: 'POST',
+			url: "{:url('admin/deposit/del')}",
+			dataType: 'json',
+			data:'id='+id,
+			success: function(data){
+				if(data.code==0){
+					$(obj).parents("tr").remove();
+					layer.msg('已删除!',{icon:1,time:1000});
+					//window.location.href = '{:url('admin/deposit/index',array('client_id'))}';
+				}else{
+					layer.msg(data.msg);
+				}
+			},
+			error:function(data) {
+				console.log(data.msg);
+			},
+		});		
+	});
+}
+</script>
+
+
+
+{/block}

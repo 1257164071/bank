@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="罗庄农村商业银行不良资产查控计酬奖励计算器">
+    <meta name="description" content="罗庄农村商业银行不良资产查控计酬奖励计算器">
+    <title>罗庄农村商业银行不良资产查控计酬奖励计算器</title>
+    <meta name="description" content="">
+    <meta http-equiv="cleartype" content="on">
+    <link rel="stylesheet" href="css/platform-1.css">
+    <link rel="stylesheet" href="js/easyform/easyform.css">
+    <link rel="stylesheet" href="css/tab.css">
+    <script src="js/jquery-2.1.0.min.js"></script>
+    <script src="js/easyform/easyform.js"></script>
+    <link href="css/mobiscroll.custom-2.6.2.min.css" rel="stylesheet" type="text/css" />
+    <script src="js/mobiscroll.custom-2.6.2.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            var curr = new Date().getFullYear();
+            var opt = {
+
+            }
+
+            opt.date = {preset : 'date'};
+            opt.datetime = { preset : 'datetime', minDate: new Date(2012,3,10,9,22), maxDate: new Date(2014,7,30,15,44), stepMinute: 5  };
+            opt.time = {preset : 'time'};
+            opt.tree_list = {preset : 'list', labels: ['Region', 'Country', 'City']};
+            opt.image_text = {preset : 'list', labels: ['Cars']};
+            opt.select = {preset : 'select'};
+            <!--Script-->
+
+            $('select.changes').bind('change', function() {
+                var demo = "date";
+                $(".demos").hide();
+                if (!($("#demo_"+demo).length))
+                    demo = 'default';
+
+                $("#demo_" + demo).show();
+                $('#test_'+demo).val('').scroller('destroy').scroller($.extend(opt["date"], { theme: "default", mode: "mixed", display: "modal", lang: "zh" }));
+                $('#test_date').val('').scroller('destroy').scroller($.extend(opt["date"], { theme: "default", mode: "mixed", display: "modal", lang: "zh" }));
+
+            });
+
+            $('#demo').trigger('change');
+            $('#tri').click();
+
+        });
+
+
+        function getToAge(){
+            var dateVal = $("#test_default").val();
+            var dateVals = ages(dateVal);
+            $("#ageVal").val(dateVals);
+        }
+
+        function getTodate(){
+            var dateVal = $("#test_date").val();
+            var dateVals = ages(dateVal);
+            $("#ageVal").val(dateVals);
+        }
+
+        function ages(str)
+        {
+            var r = str.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/);
+            if(r==null)return   0;
+            var d = new Date(r[1], r[3]-1, r[4]);
+            if(d.getFullYear()==r[1]&&(d.getMonth()+1)==r[3]&&d.getDate()==r[4])
+            {
+                var Y = new Date().getFullYear();
+                return((Y-r[1]));
+            }
+            return 0;
+        }
+
+        function jineshow(){
+            $(".jine").show();
+             $(".dat").show();
+        }
+
+        function jineclose(){
+            $(".jine").hide();
+            $(".dat").show();
+        }
+        function panhuoclose(){
+            $(".jine").hide();
+            $(".dat").hide();
+        }
+    </script>
+    <style type="text/css">
+        .method input{margin-right: 10px;}
+        .hetong{width:60px;border-radius:30px;margin-left:10px;height: 40px;line-height:40px; border:1px solid #D4D4D4;box-shadow:inset 0 2px 5px #eee;}
+    </style>
+
+</head>
+<body>
+<div style="display: none;">
+    <label for="demo">Demo</label>
+    <select name="demo" id="demo" class="changes">
+        <!--Demos-->
+    </select>
+</div>
+<div class="page">
+    <div class="header">
+        <h1 style="margin:0;padding:0;font-size:50px;font-weight: bold;">不良资产-清收计酬奖励-计算器</h1>
+        <br>
+    </div>
+
+    <div class="form-div">
+        <form id="reg-form" action="index.php" method="post">
+            <?php if(!empty($_POST)){ ?>
+            <h2 style="text-align:center;font-weight: normal;height:80px;line-height:40px;font-size:20px;color:red;">
+                <?php if(!empty($_POST['arrive_time'] && $_POST['qs_method'] !='盘活重组')){ ?><strong>贷款到期日：</strong><?php echo $_POST['arrive_time'];?>&nbsp;&nbsp;<?php } ?>
+                <?php if(isset($benji)){ ?><strong>本金奖励：</strong><?php echo $benji;?>&nbsp;&nbsp;<?php } ?>
+                <?php if(isset($lixi)){ ?><strong>利息奖励：</strong><?php echo $lixi;?>&nbsp;&nbsp;<?php } ?>
+                <?php if(isset($feiyong)){ ?><strong>费用奖励：</strong><?php echo $feiyong;?><?php } ?>
+                <?php if(isset($edu)){ ?><br/><strong>折算比例：</strong>(清收本金+清收利息+清收费用)/(贷款余额+应计利息) = <?php echo $edu;?><?php } ?>
+            </h2>
+            </h2>
+            <?php } ?>
+            <table>
+                <tr>
+                    <td>清收方式</td>
+                    <td class="method" style="height:40px;line-height: 40px;">
+                        <input type="radio" name="qs_method"  value="现金"  onclick="jineclose()" <?php if($_POST['qs_method']=='现金'|| !isset($_POST['qs_method'])){ ?>checked="checked"<?php } ?> <?php if(empty($_POST)){ ?>id="tri"<?php } ?>>现金
+                        <input type="radio" name="qs_method" onclick="jineshow()"  value="债权转让" <?php if(isset($_POST['qs_method'])){ if($_POST['qs_method']=='债权转让'){ ?>checked="checked"<?php }} ?>>债权转让
+                        <input type="radio" name="qs_method" onclick="jineshow()" value="内部招标" <?php if(isset($_POST['qs_method'])){ if($_POST['qs_method']=='内部招标'){ ?>checked="checked"<?php }} ?>>内部招标
+                        <input type="radio" name="qs_method" onclick="panhuoclose()" value="盘活重组" <?php if(isset($_POST['qs_method'])){ if($_POST['qs_method']=='盘活重组'){ ?>checked="checked"<?php }} ?>>盘活重组
+                    </td>
+                </tr>
+                <tr class="dat" <?php if($_POST['qs_method'] == '盘活重组'){ ?>style="display:none;"<?php } ?>>
+                    <td>贷款到期日</td>
+                    <td><input name="arrive_time" type="text" data-easyform="number;length:0 8;"
+                               data-message="日期格式不正确" data-easytip="class:easy-red;"  value="<?php echo $arrive_time;?>"> 格式：（20070807）
+                    </td>
+                </tr>
+                <!--<tr>-->
+                    <!--<td style="width:30%;">业务号</td>-->
+                    <!--<td><input name="uid" type="text" id="uid"-->
+                               <!--data-easyform="length:4 26;char-normal;"-->
+                               <!--data-message="业务号必填"-->
+                               <!--data-easytip="position:top;class:easy-red;">-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td style="width:30%;">贷款欠息日期</td>-->
+                    <!--<td><input name="uid" type="text" id="test_date"-->
+                               <!--data-easyform="length:4 26;char-normal;"-->
+                               <!--data-message="业务号必填"-->
+                               <!--data-easytip="position:top;class:easy-red;" onBlur="getTodate()">-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td style="width:30%;">贷款合同利率</td>-->
+                    <!--<td style="height: 40px;line-height:40px; ">-->
+                        <!--<input name="psw1" type="text" id="psw1" data-easyform="length:6 16;"-->
+                               <!--data-message="贷款金额必须为6—16位"-->
+                               <!--data-easytip="class:easy-red;"></td>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <tr <?php if($_POST['qs_method']=='现金' || $_POST['qs_method']=='盘活重组' || !isset($_POST['qs_method'])){ ?>style="display:none;"<?php } ?> class="jine">
+                    <td>贷款金额</td>
+                    <td><input name="provide_loan_money" type="text"  data-easyform="length:2 16;" data-message="贷款金额2—16位" data-easytip="class:easy-red;" value="<?php echo $_POST['provide_loan_money'];?>"></td>
+                </tr>
+
+                <tr <?php if($_POST['qs_method']=='现金' || $_POST['qs_method']=='盘活重组' || !isset($_POST['qs_method'])){ ?>style="display:none;"<?php } ?> class="jine">
+                <td>贷款余额</td>
+                <td><input name="remian_money" type="text"  data-easyform="money;" data-message="贷款余额格式不正确" data-easytip="class:easy-red;" value="<?php echo $_POST['remian_money'];?>"></td>
+                </tr>
+
+                <tr <?php if($_POST['qs_method']=='现金' || $_POST['qs_method']=='盘活重组' || !isset($_POST['qs_method'])){ ?>style="display:none;"<?php } ?> class="jine">
+                <td>应计利息</td>
+                <td><input name="yj_lixi" type="text"  data-easyform="money;" data-message="应计利息格式不正确" data-easytip="class:easy-red;" value="<?php echo $_POST['yj_lixi'];?>"></td>
+                </tr>
+
+                <tr <?php if($_POST['qs_method'] == '盘活重组'){ ?>style="display:none;"<?php } ?> class="dat">
+                    <td>收回本金</td>
+                    <td>
+                        <input name="qs_bj_money" type="text" data-easyform="null;" value="<?php echo $_POST['qs_bj_money'];?>" style="width:120px;">
+                        <input name="qs_jl_benji_money" type="text" data-easyform="null;" value="<?php echo $qs_jl_benji_money;?>"  style="width:120px;color:red;">
+                        奖励
+                    </td>
+                </tr>
+                <tr>
+                    <td>收回利息</td>
+                    <td>
+                        <input name="qs_lixi_money" type="text" data-easyform="null;"  style="width:120px;" value="<?php echo $_POST['qs_lixi_money'];?>">
+                        <input name="qs_jl_lixi_money" type="text" data-easyform="null;"  style="width:120px;color:red;" value="<?php echo $qs_jl_lixi_money;?>">
+                        奖励
+                    </td>
+                </tr>
+                <tr <?php if($_POST['qs_method'] == '盘活重组'){ ?>style="display:none;"<?php } ?> class="dat">
+                    <td>收回费用</td>
+                    <td>
+                        <input name="qs_fy_money" type="text" data-easyform="null;" style="width:120px;" value="<?php echo $_POST['qs_fy_money'];?>">
+                        <input name="qs_jl_fy_money" type="text" data-easyform="null;"  style="width:120px;color:red;" value="<?php echo $qs_jl_fy_money;?>">
+                        奖励
+                    </td>
+                </tr>
+                <tr>
+                    <td>合计奖励金额</td>
+                    <td><input name="qs_js_sum" type="text" data-easyform="null;" value="<?php echo $jl_sum;?>" style="color:red;"></td>
+                </tr>
+            </table>
+
+            <div class="buttons" style="margin-bottom: 50px;margin-right:40%;">
+                <input value="计算" type="submit">
+                <?php if(empty($_POST)){ ?>
+                <input value="重置" type="reset" style="border-radius:30px;width:80px;height:30px; margin-top:20px;border:1px solid #ccc;background-color:#fff;">
+                <?php }else{ ?>
+                <a href="http://76.36.0.8/xiulei/loanjc/index.php" style="float:right;display:block;border-radius:30px;width:80px;height:30px;line-height:30px;border:1px solid #ccc;background-color:#fff;text-decoration: none;margin-top:8px;padding-left:15px;color:#000;">重新计算</a>
+                <?php } ?>
+            </div>
+
+            <br class="clear">
+        </form>
+    </div>
+<br><br>
+
+   
+
+</div>
+
+<script>
+
+    $(document).ready(function ()
+    {
+        var v = $('#reg-form').easyform();
+
+        $('#demo-form').easyform();
+
+        v.is_submit = false;
+
+        v.error = function (ef, i, r)
+        {
+            //v.show("#email", "自定义消息");
+            //console.log("Error事件：" + i.id + "对象的值不符合" + r + "规则");
+        };
+
+        v.success = function (ef)
+        {
+            //console.log("成功");
+        };
+
+        v.complete = function (ef)
+        {
+            console.log("完成");
+        };
+
+        $('#tip-test1').easytip();
+        $('#tip-test2').easytip();
+        $('#tip-test3').easytip();
+        $('#tip-test4').easytip();
+
+        $("#uid").on("easyform-success-length", function (e, input)
+        {
+            alert("#uid的长度正确！");
+        });
+
+    });
+
+    function ajax_demo(p)
+    {
+        $("#uid").trigger("easyform-ajax", true);
+    }
+
+
+</script>
+
+</body>
+</html>

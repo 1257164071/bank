@@ -1,0 +1,83 @@
+{extend name="base" /}
+
+{block name="content"}
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont"></i> <a href="/" class="maincolor">首页</a>
+        <span class="c-999 en">&gt;</span>
+        <span class="c-666">地图统计</span>
+        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="Hui-article">
+
+        <div id="mapContainer" style="width: auto;height:700px;border: 2px #ddd solid;border-radius: 5px;">
+
+        </div>
+
+
+        <script type="text/javascript" src="/static/mapv2/baidumap_offline_v2_load.js"></script>
+        <script type="text/javascript" src="/static/mapv2/tools/AreaRestriction_min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="/static/mapv2/css/baidu_map_v2.css"/>
+        <script type="text/javascript">
+            // 百度地图API功能
+            var map = new BMap.Map("mapContainer", {minZoom:6,maxZoom:15});
+            var point = new BMap.Point(118.277856,35.000972);
+            var b = new BMap.Bounds(new BMap.Point(59.188676,5.0598),new BMap.Point(161.919181,57.893376));
+            try {
+                BMapLib.AreaRestriction.setBounds(map, b);
+            } catch (e) {
+                alert(e);
+            }
+            map.centerAndZoom(point, 8);
+            map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+            map.addControl(new BMap.NavigationControl());   //缩放按钮
+
+            // 向地图添加标注
+
+            var markerArr = {$locs};
+
+            var opts = {
+                width : 200,     // 信息窗口宽度
+                height: 50,     // 信息窗口高度
+                title : "客户信息" , // 信息窗口标题
+                enableMessage:true//设置允许信息窗发送短息
+            };
+
+
+            for (var i = 0; i < markerArr.length; i++) {
+                console.log(i);
+                var p0 = markerArr[i].center.split(",")[0];
+                var p1 = markerArr[i].center.split(",")[1];
+                //var maker = addMarker(new BMap.Point(p0, p1), i);
+
+                var marker = new BMap.Marker(new BMap.Point(p0,p1));
+                var content = markerArr[i]['name']+markerArr[i]['card_number']+" <a style='color:#148cf1' href='"+markerArr[i]['href']+"'>详细</a>";
+                map.addOverlay(marker);
+                addClickHandler(content,marker);
+            }
+
+            function addClickHandler(content,marker){
+                marker.addEventListener("click",function(e){
+                    openInfo(content,e)}
+                );
+            }
+            function openInfo(content,e){
+
+                var point = new BMap.Point(e.point.lng,e.point.lat);
+                var infoWindow = new BMap.InfoWindow(content,opts);  // 创建信息窗口对象
+                map.openInfoWindow(infoWindow,point); //开启信息窗口
+            }
+
+
+
+
+        </script>
+        <style>
+            .BMap_cpyCtrl{display: none;}
+        </style>
+
+
+    </div>
+</section>
+
+{/block}
+

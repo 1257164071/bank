@@ -1,0 +1,84 @@
+{extend name="base" /}
+
+{block name="content"}
+
+<div class="Hui-article-box">
+
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 客户信息<span class="c-gray en">&gt;</span>资产信息<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:history.go(-1);" title="返回" >返回</a></nav>
+    <div class="Hui-article">
+        <div class="panel panel-default" >
+            <div class="panel-header">
+                <span>客户编号&nbsp;[{$client['client_number']}]</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <span>客户名称&nbsp;[{$client['name']}]</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <span>所属机构&nbsp;[{$client['bankname']|default='罗庄农村商业银行'}]</span>
+            </div>
+        </div>
+           <div class="btn-group" style="text-align: center;">
+          {include file="clientmenu"}
+        </div>
+    <h4 style=" text-align: center;">资产信息详情</h4>
+   
+    <div style="width:100%;margin: 0 auto;padding:10px;">
+        <div class="panel panel-default">
+            <div class="panel-header" style="display: flex;justify-content: space-between;"><span>资产信息</span>
+            {if condition="isset($clients) && !empty($clients)"}
+            <a href="javascript:;" onclick="submit('修改资产信息','{:url('admin/familyfund/edit',array('id'=>$clients['id']))}','','810')" ><i class="Hui-iconfont">&#xe600;</i>修改</a></div>
+            {else/}
+            <a href="javascript:;" onclick="submit('添加资产信息','{:url('admin/familyfund/add',array('client_id'=>$client_id))}','','810')" ><i class="Hui-iconfont">&#xe600;</i>添加</a></div>
+            {/if}
+            <div class="panel-body">
+                 <table class="table table-border table-bordered table-hover">
+                    <tr class="text-c">
+                    	<td style="width:50%;">股票基金类</td>
+                    	<td>{$clients.fund|default=""}</td>
+                    </tr>
+                    <tr class="text-c">
+                    	<td>股票基金类-查控:</td>
+                    	<td>{if condition="isset($clients.fund_ck_date) && ($clients.fund_ck_date gt 0)"}已查控-{$clients.fund_ck_date|date="Y-m-d",###}{/if} </td>
+                    </tr>
+                     <tr class="text-c">
+                    	<td style="width:50%;">房产类</td>
+                    	<td>{$clients.house|default=""}</td>
+                    </tr>
+                     <tr class="text-c">
+                    	<td>房产类-查控:</td>
+                    	<td>{if condition="isset($clients.house_ck_date) && ($clients.house_ck_date gt 0)"}已查控-{$clients.house_ck_date|date="Y-m-d",###}{/if} </td>
+                    </tr>
+                     <tr class="text-c">
+                    	<td style="width:50%;">车产类</td>
+                    	<td>{$clients.car|default=""}</td>
+                    </tr>
+                     <tr class="text-c">
+                    	<td>车产类-查控:</td>
+                    	<td>{if condition="isset($clients.car_ck_date) && ($clients.car_ck_date gt 0)"}已查控-{$clients.car_ck_date|date="Y-m-d",###}{/if} </td>
+                    </tr>
+                     <tr class="text-c">
+                    	<td style="width:50%;">地产类</td>
+                    	<td>{$clients.land|default=""}</td>
+                    </tr>
+                     <tr class="text-c">
+                    	<td>地产类-查控:</td>
+                    	<td>{if condition="isset($clients.land_ck_date) && ($clients.land_ck_date gt 0)"}已查控-{$clients.land_ck_date|date="Y-m-d",###}{/if} </td>
+                    </tr>
+                     <tr class="text-c">
+                    	<td style="width:50%;">设备存货类类</td>
+                    	<td>{$clients.device|default=""}</td>
+                    </tr>
+                     <tr class="text-c">
+                    	<td>设备存货类-查控:</td>
+                    	<td>{if condition="isset($clients.device_ck_date) && ($clients.device_ck_date gt 0)"}已查控-{$clients.device_ck_date|date="Y-m-d",###}{/if} </td>
+                    </tr>
+            </div>
+        </div>
+    </div>
+   </div>
+
+<script type="text/javascript">
+    function submit(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+</script>
+
+
+
+{/block}

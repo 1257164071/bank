@@ -1,0 +1,201 @@
+{extend name="base" /}
+
+{block name="content"}
+
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> {$title1}<span class="c-gray en">&gt;</span>{$title2}<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="Hui-article">
+        <form action="{:url('client/depositres')}" method="get">
+            <div class="panel panel-secondary mt-21">
+                <div class="panel-header">选择筛选条件</div>
+                <div class="panel-body">
+                    <table class="table table-border table-bordered table-hover">
+                        <div id="cleint">
+                          
+
+                        <!--存款-->
+                        <tr>
+                            <td>存款开户行</td>
+                            <td>
+                                <span class="select-box" >
+                                    <select class="select" name="bank_id"  >
+                                        <option value="">==请选择==</option>
+                                        {volist name="banklist" id="bank"}
+                                        <option value="{$bank.id}" >{$bank.bankname}</option>
+                                        {volist name="bank.child" id="b"}
+                                        <option value="{$b.id}"  style="padding-left:30px;">|—{$b.bankname}</option>
+                                        {/volist}
+                                        {/volist}
+                                    </select>
+                                </span>
+                            </td>
+                            <td>存款类型</td>
+                            <td>
+                                 <span class="select-box" >
+                                    <select class="select" name="deposit_type"  >
+                                        <option value="">==请选择==</option>
+                                        {volist name="deposit_type" id="list" key="key"}
+                                        <option value="{$key-1}">{$list}</option>
+                                        {/volist}
+                                    </select>
+                                </span>
+                            </td>
+                            <td>存款范围</td>
+                            <td><input type="text" style="width: 35%;" class="input-text" name="start_save_amt"/>万元-<input type="text" style="width: 35%;" class="input-text" name="end_save_amt"/>万元</td>
+                            <td>存款账号</td>
+                            <td>
+                                <input type="text" class="input-text" name="account"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>账户状态</td>
+                            <td>
+                                 <span class="select-box" >
+                                    <select class="select" name="account_status"  >
+                                        <option value="">==请选择==</option>
+                                        <option value="0">正常</option>
+                                        <option value="1">冻结</option>
+                                    </select>
+                                </span>
+                            </td>
+                            <td >存款时间</td>
+                            <td>
+                                <input style="width: 45%;"type="text" onfocus="WdatePicker()"value=""  name="start_save_time"class="input-text Wdate" >-<input type="text" style="width: 45%;" onfocus="WdatePicker()"value=""  name="end_save_time"class="input-text Wdate" >
+                            </td>
+                            <td colspan="4"></td>
+
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+            <div class="panel panel-success  mt-21">
+                <div class="panel-header">选择查看的字段</div>
+                <div class="panel-body">
+                    <table class="table table-border table-bordered table-hover table-bg " >
+                        <thead>
+                        <tr >
+                            <th style="width: 25%;text-align: center;"><strong>结果字段</strong> <span class="r"><a href="javascript:;"  class="btn radius btn-warning" onclick="add_all();">添加全部<i class="Hui-iconfont">&#xe67a;</i></a></span></th>
+                            <th style="width:  25%;text-align: center;"><span class="l"><a href="javascript:;"  class="btn radius btn-warning" onclick="remove_all();"><i class="Hui-iconfont">&#xe678;</i>移除全部</a></span><strong>展示字段</strong></th>
+                            <th style=" width: 50%;">
+
+                            </th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr >
+                            <td  style="text-align: center;" >
+                                <div style="overflow-y: scroll;height: 180px;"id="select">
+                                    <a href="#" id="deposit-account" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="存款账号">存款账号</a><br>
+                                    <a href="#" id="deposit-bank_id" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="开户行">开户行</a><br>
+                                    <a href="#" id="deposit-deposit_type" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="存款类型">存款类型</a><br>
+                                    <a href="#" id="deposit-account_status" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="账户状态">账户状态</a><br>
+                                    <a href="#" id="deposit-save_time" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="存款时间">存款时间</a><br>
+                                    
+
+                                </div>
+                            </td>
+                            <td rowspan="5" style="text-align: center;" >
+                                <div style="overflow-y: scroll;height: 180px;" id="list"></div>
+                            </td>
+                            <td >
+                                <a class="btn btn-success size-L radius"onclick="submit()" style="position: relative ;left:3%;top: 70%" href="javascript:;">确认</a>
+
+
+                                <!--<a class="btn btn-success size-L radius"onclick="submit()" style="position: relative ;left:3%;top: 70%" href="javascript:;">提交</a>-->
+                            </td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+
+</section>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/static/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+    $('#select').on('click','a',function(){
+        var tra=$(this).attr('data-tra');
+        var id=$(this).attr('id');
+
+        $(this).next('br').remove();
+        $(this).remove();
+
+        var input='<a id="'+id+'" style="width: 200px;margin-top: 5px;" hre="#" class="btn btn-primary-outline radius hui-rotateinLT" data-tra="'+tra+'">'+tra+'</a><br/>';
+        $('#list').append(input);
+    });
+
+
+    $('#list').on('click','a',function() {
+        var tra = $(this).attr('data-tra');
+        var id = $(this).attr('id');
+        $(this).removeClass();
+        $(this).addClass('btn btn-primary-outline radius hui-rotateoutLT');
+        var find=$('#select').children('#'+id).attr('id');
+        if(find==undefined){
+            var input = '<a id="' + id + '" style="width: 200px;margin-top: 5px;" hre="#" class="btn btn-primary-outline radius hui-animation"data-tra="'+tra+'">' + tra + '</a><br/>';
+            $('#select').append(input);
+        }
+        setTimeout(function(){
+            $('#list').children('#'+id).next('br').remove();
+            $('#list').children('#'+id).remove();
+        },1000);
+    });
+
+    function submit(){
+
+
+        var len=$('#list > a').length;
+        if(len>=1){
+            var list=$('#list').children('a').attr('id');
+            var names=list+',';
+            for(var i=1;i<len;i++){
+                var id=$('#'+list).next('br').next('a').attr('id');
+                names+=id+',';
+                list=id;
+            }
+        }
+        var input='<input name=names type="hidden"value="'+names+'"/>';
+        $('form').append(input);
+        $('form').submit();
+
+
+    }
+    function add_all(){
+        var html = $('#select').html();
+        $('#select').children().remove();
+        $('#list').append(html);
+    }
+    function remove_all()
+    {
+        var html = $('#list').html();
+        $('#list').children().remove();
+        $('#select').append(html);
+    }
+
+
+
+    /*用户-添加*/
+    function member_add(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+
+
+
+
+
+
+</script>
+
+{/block}

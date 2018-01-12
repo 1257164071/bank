@@ -1,0 +1,326 @@
+{extend name="base" /}
+
+{block name="main"}
+<article class="cl pd-20">
+          <h4 class="text-c">不良贷款尽职调查分类管理简表</h4><br/>
+		  <table class="table table-border table-bordered table-hover">
+                    <tr class="text-c">
+                    	<td rowspan="5">基本信息</td>
+                    	<td>贷出日</td>
+                    	<td colspan="2">到期日</td>
+                    	<td colspan="2">合同金额</td>
+                    	<td colspan="2">余额</td>
+                    	<td colspan="2">担保方式</td>
+                    	<td colspan="2">帐户形态</td>
+                    </tr>
+                    <tr class="text-c">
+                    	<td>{$loan.provide_time_int|date="Y-m-d",###}</td>
+                    	<td colspan="2">{$loan.arrive_time_int|date="Y-m-d",###}</td>
+                    	<td colspan="2">{$loan.loan_money}</td>
+                    	<td colspan="2">{$loan.remian_money}</td>
+                    	<td colspan="2"> 
+                        
+
+                                {if condition="$loan.guarantee_way eq 1"}保证 
+                                {elseif condition="$loan.guarantee_way eq 2"}抵押 
+                                {elseif condition="$loan.guarantee_way eq 3"}质押
+                                {elseif condition="$loan.guarantee_way eq 4"}留置
+                                {elseif condition="$loan.guarantee_way eq 5"}定金
+                                {/if}
+                        </td>
+                    	<td colspan="2"> 
+                        {$loan.account_status}
+                        </td>
+                    </tr>
+                    <tr class="text-c">
+                    	<td rowspan="3">涉诉信息</td>
+                    	<td>诉讼状态</td>
+                    	<td colspan="8">
+                   				{if condition="isset($loan.ss_status)"}
+								{if condition="$loan.ss_status eq 1"}未诉
+                                {elseif condition="$loan.ss_status eq 2"}审理
+                                {elseif condition="$loan.ss_status eq 3"}判决
+                                {elseif condition="$loan.ss_status eq 4"}执行
+                                {elseif condition="$loan.ss_status eq 5"}上诉
+								{elseif condition="$loan.ss_status eq 6"}再审
+								{elseif condition="$loan.ss_status eq 7"}结案
+                                {/if}
+								{/if}
+                        </td>
+                    </tr>
+                    <tr class="text-c">
+                    	<td>审理案号</td>
+                    	<td colspan="8">{$loan.ss_num|default=""}</td>
+                    </tr>
+                    <tr class="text-c">
+                    	<td>执行案号</td>
+                    	<td colspan="8">{$loan.ss_zx_num|default=""}</td>
+                    </tr>
+                    <tr class="text-c">
+                        <td colspan="2">尽职调查项目</td>
+                    	<td>借款人</td>
+                    	<td>担保人</td>
+                        <td>担保人</td>
+                        <td>担保人</td>
+                        <td>担保人</td>
+                        <td>担保人</td>
+                        <td>担保人</td>
+                        <td>担保人</td>
+                    	<td>其他</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="8">借款基本信息</td>
+                        <td>姓名</td>
+                        <td>{$client.name|default=''}</td>
+                        <td>{$LoanGuarantor['0']['real_name']|default=''}{$loan.garantor|default=""}</td>
+                        <td>{$LoanGuarantor['1']['real_name']|default=''}</td>
+                        <td>{$LoanGuarantor['2']['real_name']|default=''}</td>
+                        <td>{$LoanGuarantor['3']['real_name']|default=''}</td>
+                        <td>{$LoanGuarantor['4']['real_name']|default=''}</td>
+                        <td>{$LoanGuarantor['5']['real_name']|default=''}</td>
+                        <td>{$LoanGuarantor['6']['real_name']|default=''}</td>
+                        <td>{$LoanGuarantor['7']['real_name']|default=''}</td>
+                    </tr>
+                    <tr>
+                        <td>责任关系</td>
+                        <td>本人</td>
+                        <td>{$LoanGuarantor['0']['relation']|default=''}</td>
+                        <td>{$LoanGuarantor['1']['relation']|default=''}</td>
+                        <td>{$LoanGuarantor['2']['relation']|default=''}</td>
+                        <td>{$LoanGuarantor['3']['relation']|default=''}</td>
+                        <td>{$LoanGuarantor['4']['relation']|default=''}</td>
+                        <td>{$LoanGuarantor['5']['relation']|default=''}</td>
+                        <td>{$LoanGuarantor['6']['relation']|default=''}</td>
+                        <td>{$LoanGuarantor['7']['relation']|default=''}</td>
+                    </tr>
+                    <tr>
+                        <td>身份证号码</td>
+                        <td>{$client.card_number|default=''}</td>
+                        <td>{$LoanGuarantor['0']['card']|default=''}</td>
+                        <td>{$LoanGuarantor['1']['card']|default=''}</td>
+                        <td>{$LoanGuarantor['2']['card']|default=''}</td>
+                        <td>{$LoanGuarantor['3']['card']|default=''}</td>
+                        <td>{$LoanGuarantor['4']['card']|default=''}</td>
+                        <td>{$LoanGuarantor['5']['card']|default=''}</td>
+                        <td>{$LoanGuarantor['6']['card']|default=''}</td>
+                        <td>{$LoanGuarantor['7']['card']|default=''}</td>
+                    </tr>
+                    <tr>
+                        <td>现住址</td>
+                        <td>{$client.address|default=''}{$base_msg.current_address|default=''}</td>
+                        <td>{$LoanGuarantor['0']['address']|default=''}</td>
+                        <td>{$LoanGuarantor['1']['address']|default=''}</td>
+                        <td>{$LoanGuarantor['2']['address']|default=''}</td>
+                        <td>{$LoanGuarantor['3']['address']|default=''}</td>
+                        <td>{$LoanGuarantor['4']['address']|default=''}</td>
+                        <td>{$LoanGuarantor['5']['address']|default=''}</td>
+                        <td>{$LoanGuarantor['6']['address']|default=''}</td>
+                        <td>{$LoanGuarantor['7']['address']|default=''}</td>
+                    </tr>
+                    <tr>
+                        <td>工作单位</td>
+                        <td>{$base_msg['workunit']|default=''}</td>
+                        <td>{$LoanGuarantor['0']['workunit']|default=''}</td>
+                        <td>{$LoanGuarantor['1']['workunit']|default=''}</td>
+                        <td>{$LoanGuarantor['2']['workunit']|default=''}</td>
+                        <td>{$LoanGuarantor['3']['workunit']|default=''}</td>
+                        <td>{$LoanGuarantor['4']['workunit']|default=''}</td>
+                        <td>{$LoanGuarantor['5']['workunit']|default=''}</td>
+                        <td>{$LoanGuarantor['6']['workunit']|default=''}</td>
+                        <td>{$LoanGuarantor['7']['workunit']|default=''}</td>
+                    </tr>
+                    <tr>
+                        <td>经营项目</td>
+                        <td>{$base_msg.industry_category|default=''}</td>
+                        <td>{$LoanGuarantor['0']['business']|default=''}</td>
+                        <td>{$LoanGuarantor['1']['business']|default=''}</td>
+                        <td>{$LoanGuarantor['2']['business']|default=''}</td>
+                        <td>{$LoanGuarantor['3']['business']|default=''}</td>
+                        <td>{$LoanGuarantor['4']['business']|default=''}</td>
+                        <td>{$LoanGuarantor['5']['business']|default=''}</td>
+                        <td>{$LoanGuarantor['6']['business']|default=''}</td>
+                        <td>{$LoanGuarantor['7']['business']|default=''}</td>
+                    </tr>
+                    <tr>
+                        <td>联系方式</td>
+                        <td>{$base_msg.tel_number|default=''}/{$base_msg.phone_number|default=''}</td>
+                        <td>{$LoanGuarantor['0']['mobile']|default=''}</td>
+                        <td>{$LoanGuarantor['1']['mobile']|default=''}</td>
+                        <td>{$LoanGuarantor['2']['mobile']|default=''}</td>
+                        <td>{$LoanGuarantor['3']['mobile']|default=''}</td>
+                        <td>{$LoanGuarantor['4']['mobile']|default=''}</td>
+                        <td>{$LoanGuarantor['5']['mobile']|default=''}</td>
+                        <td>{$LoanGuarantor['6']['mobile']|default=''}</td>
+                        <td>{$LoanGuarantor['7']['mobile']|default=''}</td>
+                    </tr>
+                    <tr>
+                        <td>抵押物</td>
+                        <td>{$loan.mortgage|default=''}</td>
+                        <td>{$LoanGuarantor['0']['mortgage']|default=''}</td>
+                        <td>{$LoanGuarantor['1']['mortgage']|default=''}</td>
+                        <td>{$LoanGuarantor['2']['mortgage']|default=''}</td>
+                        <td>{$LoanGuarantor['3']['mortgage']|default=''}</td>
+                        <td>{$LoanGuarantor['4']['mortgage']|default=''}</td>
+                        <td>{$LoanGuarantor['5']['mortgage']|default=''}</td>
+                        <td>{$LoanGuarantor['6']['mortgage']|default=''}</td>
+                        <td>{$LoanGuarantor['7']['mortgage']|default=''}</td>
+                    </tr>
+                   <tr>
+                        <td rowspan="6">查控财产信息</td>
+                        <td>存款股金类</td>
+                        <td>{$fund.fund|default=''}<br>{if condition="isset($fund['fund_ck_date']) && $fund['fund_ck_date'] != '0'"}<span class="c-red">[查控中：{$fund['fund_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['0']['fund']|default=''}<br>{if condition="isset($LoanGuarantor['0']['fund_ck_date']) && $LoanGuarantor['0']['fund_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['0']['fund_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['1']['fund']|default=''}<br>{if condition="isset($LoanGuarantor['1']['fund_ck_date']) && $LoanGuarantor['1']['fund_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['1']['fund_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['2']['fund']|default=''}<br>{if condition="isset($LoanGuarantor['2']['fund_ck_date']) && $LoanGuarantor['2']['fund_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['2']['fund_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['3']['fund']|default=''}<br>{if condition="isset($LoanGuarantor['3']['fund_ck_date']) && $LoanGuarantor['3']['fund_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['3']['fund_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['4']['fund']|default=''}<br>{if condition="isset($LoanGuarantor['4']['fund_ck_date']) && $LoanGuarantor['4']['fund_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['4']['fund_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['5']['fund']|default=''}<br>{if condition="isset($LoanGuarantor['5']['fund_ck_date']) && $LoanGuarantor['5']['fund_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['5']['fund_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['6']['fund']|default=''}<br>{if condition="isset($LoanGuarantor['6']['fund_ck_date']) && $LoanGuarantor['6']['fund_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['6']['fund_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['7']['fund']|default=''}<br>{if condition="isset($LoanGuarantor['7']['fund_ck_date']) && $LoanGuarantor['7']['fund_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['7']['fund_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                    </tr>
+                    <tr>
+                        <td>房产土地类</td>
+                        <td>{$fund.house|default=''}<br>{if condition="isset($fund['house_ck_date']) && $fund['house_ck_date'] != '0'"}<span class="c-red">[查控中：{$fund['house_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['0']['house']|default=''}<br>{if condition="isset($LoanGuarantor['0']['house_ck_date']) && $LoanGuarantor['0']['house_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['0']['house_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['1']['house']|default=''}<br>{if condition="isset($LoanGuarantor['1']['house_ck_date']) && $LoanGuarantor['1']['house_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['1']['house_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['2']['house']|default=''}<br>{if condition="isset($LoanGuarantor['2']['house_ck_date']) && $LoanGuarantor['2']['house_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['2']['house_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['3']['house']|default=''}<br>{if condition="isset($LoanGuarantor['3']['house_ck_date']) && $LoanGuarantor['3']['house_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['3']['house_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['4']['house']|default=''}<br>{if condition="isset($LoanGuarantor['4']['house_ck_date']) && $LoanGuarantor['4']['house_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['4']['house_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['5']['house']|default=''}<br>{if condition="isset($LoanGuarantor['5']['house_ck_date']) && $LoanGuarantor['5']['house_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['5']['house_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['6']['house']|default=''}<br>{if condition="isset($LoanGuarantor['6']['house_ck_date']) && $LoanGuarantor['6']['house_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['6']['house_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['7']['house']|default=''}<br>{if condition="isset($LoanGuarantor['7']['house_ck_date']) && $LoanGuarantor['7']['house_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['7']['house_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                    </tr>
+                    <tr>
+                        <td>车辆类</td>
+                        <td>{$fund.car|default=''}<br>{if condition="isset($fund['car_ck_date']) && $fund['car_ck_date'] != '0'"}<span class="c-red">[查控中：{$fund['car_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['0']['car']|default=''}<br>{if condition="isset($LoanGuarantor['0']['car_ck_date']) && $LoanGuarantor['0']['car_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['0']['car_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['1']['car']|default=''}<br>{if condition="isset($LoanGuarantor['1']['car_ck_date']) && $LoanGuarantor['1']['car_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['1']['car_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['2']['car']|default=''}<br>{if condition="isset($LoanGuarantor['2']['car_ck_date']) && $LoanGuarantor['2']['car_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['2']['car_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['3']['car']|default=''}<br>{if condition="isset($LoanGuarantor['3']['car_ck_date']) && $LoanGuarantor['3']['car_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['3']['car_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['4']['car']|default=''}<br>{if condition="isset($LoanGuarantor['4']['car_ck_date']) && $LoanGuarantor['4']['car_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['4']['car_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['5']['car']|default=''}<br>{if condition="isset($LoanGuarantor['5']['car_ck_date']) && $LoanGuarantor['5']['car_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['5']['car_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['6']['car']|default=''}<br>{if condition="isset($LoanGuarantor['6']['car_ck_date']) && $LoanGuarantor['6']['car_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['6']['car_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['7']['car']|default=''}<br>{if condition="isset($LoanGuarantor['7']['car_ck_date']) && $LoanGuarantor['7']['car_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['7']['car_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                    </tr>
+                      <tr>
+                        <td>地产类</td>
+                        <td>{$fund.land|default=''}<br>{if condition="isset($fund['land_ck_date']) && $fund['land_ck_date'] != '0'"}<span class="c-red">[查控中：{$fund['land_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['0']['land']|default=''}<br>{if condition="isset($LoanGuarantor['0']['land_ck_date']) && $LoanGuarantor['0']['land_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['0']['land_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['1']['land']|default=''}<br>{if condition="isset($LoanGuarantor['1']['land_ck_date']) && $LoanGuarantor['1']['land_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['1']['land_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['2']['land']|default=''}<br>{if condition="isset($LoanGuarantor['2']['land_ck_date']) && $LoanGuarantor['2']['land_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['2']['land_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['3']['land']|default=''}<br>{if condition="isset($LoanGuarantor['3']['land_ck_date']) && $LoanGuarantor['3']['land_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['3']['land_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['4']['land']|default=''}<br>{if condition="isset($LoanGuarantor['4']['land_ck_date']) && $LoanGuarantor['4']['land_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['4']['land_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['5']['land']|default=''}<br>{if condition="isset($LoanGuarantor['5']['land_ck_date']) && $LoanGuarantor['5']['land_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['5']['land_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['6']['land']|default=''}<br>{if condition="isset($LoanGuarantor['6']['land_ck_date']) && $LoanGuarantor['6']['land_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['6']['land_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['7']['land']|default=''}<br>{if condition="isset($LoanGuarantor['7']['land_ck_date']) && $LoanGuarantor['7']['land_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['7']['land_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                    </tr>
+                      <tr>
+                        <td>公司类</td>
+                        <td>{$fund.company|default=''}<br>{if condition="isset($fund['company_ck_date']) && $fund['company_ck_date'] != '0'"}<span class="c-red">[查控中：{$fund['company_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['0']['company']|default=''}<br>{if condition="isset($LoanGuarantor['0']['company_ck_date']) && $LoanGuarantor['0']['company_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['0']['company_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['1']['company']|default=''}<br>{if condition="isset($LoanGuarantor['1']['company_ck_date']) && $LoanGuarantor['1']['company_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['1']['company_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['2']['company']|default=''}<br>{if condition="isset($LoanGuarantor['2']['company_ck_date']) && $LoanGuarantor['2']['company_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['2']['company_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['3']['company']|default=''}<br>{if condition="isset($LoanGuarantor['3']['company_ck_date']) && $LoanGuarantor['3']['company_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['3']['company_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['4']['company']|default=''}<br>{if condition="isset($LoanGuarantor['4']['company_ck_date']) && $LoanGuarantor['4']['company_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['4']['company_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['5']['company']|default=''}<br>{if condition="isset($LoanGuarantor['5']['company_ck_date']) && $LoanGuarantor['5']['company_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['5']['company_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['6']['company']|default=''}<br>{if condition="isset($LoanGuarantor['6']['company_ck_date']) && $LoanGuarantor['6']['company_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['6']['company_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['7']['company']|default=''}<br>{if condition="isset($LoanGuarantor['7']['company_ck_date']) && $LoanGuarantor['7']['company_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['7']['company_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                    </tr>
+                    <tr>
+                        <td>设备存货类</td>
+            			<td>{$fund.device|default=''}<br>{if condition="isset($fund['device_ck_date']) && $fund['device_ck_date'] != '0'"}<span class="c-red">[查控中：{$fund['device_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['0']['device']|default=''}<br>{if condition="isset($LoanGuarantor['0']['device_ck_date']) && $LoanGuarantor['0']['device_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['0']['device_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['1']['device']|default=''}<br>{if condition="isset($LoanGuarantor['1']['device_ck_date']) && $LoanGuarantor['1']['device_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['1']['device_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['2']['device']|default=''}<br>{if condition="isset($LoanGuarantor['2']['device_ck_date']) && $LoanGuarantor['2']['device_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['2']['device_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['3']['device']|default=''}<br>{if condition="isset($LoanGuarantor['3']['device_ck_date']) && $LoanGuarantor['3']['device_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['3']['device_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['4']['device']|default=''}<br>{if condition="isset($LoanGuarantor['4']['device_ck_date']) && $LoanGuarantor['4']['device_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['4']['device_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['5']['device']|default=''}<br>{if condition="isset($LoanGuarantor['5']['device_ck_date']) && $LoanGuarantor['5']['device_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['5']['device_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['6']['device']|default=''}<br>{if condition="isset($LoanGuarantor['6']['device_ck_date']) && $LoanGuarantor['6']['device_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['6']['device_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                        <td>{$LoanGuarantor['7']['device']|default=''}<br>{if condition="isset($LoanGuarantor['7']['device_ck_date']) && $LoanGuarantor['7']['device_ck_date'] != '0'"}<span class="c-red">[查控中：{$LoanGuarantor['7']['device_ck_date']|date="Y-m-d",###}]</span>{/if}</td>
+                    </tr>
+                    <tr>
+                        <td><a href="javascript:void('0')" title="(住房公积金、个税、投资、应收款项等)">其他</a></td>
+                        <td></td>
+                        <td>{$fund.other|default=''}</td>
+                        <td>{$LoanGuarantor['0']['other']|default=''}</td>
+                        <td>{$LoanGuarantor['1']['other']|default=''}</td>
+                        <td>{$LoanGuarantor['2']['other']|default=''}</td>
+                        <td>{$LoanGuarantor['3']['other']|default=''}</td>
+                        <td>{$LoanGuarantor['4']['other']|default=''}</td>
+                        <td>{$LoanGuarantor['5']['other']|default=''}</td>
+                        <td>{$LoanGuarantor['6']['other']|default=''}</td>
+                        <td>{$LoanGuarantor['7']['other']|default=''}</td>
+                    </tr>
+                    <tr>
+                        <td>优先赔偿权</td>
+                        <td></td>
+                        <td>{if condition="isset($fund['0']['rightfirst']) && $fund['0']['rightfirst'] == 1 "}<span class="c-red">优先</span>{/if}</td>
+                        <td>{if condition="isset($LoanGuarantor['0']['rightfirst']) && $LoanGuarantor['0']['rightfirst'] == 1 "}<span class="c-red">优先</span>{/if}</td>
+						<td>{if condition="isset($LoanGuarantor['1']['rightfirst']) && $LoanGuarantor['1']['rightfirst'] == 1 "}<span class="c-red">优先</span>{/if}</td>
+						<td>{if condition="isset($LoanGuarantor['2']['rightfirst']) && $LoanGuarantor['2']['rightfirst'] == 1 "}<span class="c-red">优先</span>{/if}</td>
+						<td>{if condition="isset($LoanGuarantor['3']['rightfirst']) && $LoanGuarantor['3']['rightfirst'] == 1 "}<span class="c-red">优先</span>{/if}</td>
+						<td>{if condition="isset($LoanGuarantor['4']['rightfirst']) && $LoanGuarantor['4']['rightfirst'] == 1 "}<span class="c-red">优先</span>{/if}</td>
+						<td>{if condition="isset($LoanGuarantor['5']['rightfirst']) && $LoanGuarantor['5']['rightfirst'] == 1 "}<span class="c-red">优先</span>{/if}</td>
+						<td>{if condition="isset($LoanGuarantor['6']['rightfirst']) && $LoanGuarantor['6']['rightfirst'] == 1 "}<span class="c-red">优先</span>{/if}</td>
+						<td>{if condition="isset($LoanGuarantor['7']['rightfirst']) && $LoanGuarantor['7']['rightfirst'] == 1 "}<span class="c-red">优先</span>{/if}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">其他关联诉讼信息</td>
+                        <td>{$fund['inlaw']|default=''}</td>
+                        <td>{$LoanGuarantor['0']['inlaw']|default=''}</td>
+                        <td>{$LoanGuarantor['1']['inlaw']|default=''}</td>
+                        <td>{$LoanGuarantor['2']['inlaw']|default=''}</td>
+                        <td>{$LoanGuarantor['3']['inlaw']|default=''}</td>
+                        <td>{$LoanGuarantor['4']['inlaw']|default=''}</td>
+                        <td>{$LoanGuarantor['5']['inlaw']|default=''}</td>
+                        <td>{$LoanGuarantor['6']['inlaw']|default=''}</td>
+                        <td>{$LoanGuarantor['7']['inlaw']|default=''}</td>
+                    </tr>
+                     <tr class="text-c">
+                        <td colspan="2">还款意愿</td>
+                        <td>{if condition="isset($fund['returnwant']) && $fund['returnwant'] == 1 "}<span class="c-red">有</span>{/if}</td>
+                        <td>{if condition="isset($LoanGuarantor['0']['returnwant']) && $LoanGuarantor['0']['returnwant'] == 1 "}<span class="c-red">有</span>{/if}</td>
+						<td>{if condition="isset($LoanGuarantor['1']['returnwant']) && $LoanGuarantor['1']['returnwant'] == 1 "}<span class="c-red">有</span>{/if}</td>
+						<td>{if condition="isset($LoanGuarantor['2']['returnwant']) && $LoanGuarantor['2']['returnwant'] == 1 "}<span class="c-red">有</span>{/if}</td>
+						<td>{if condition="isset($LoanGuarantor['3']['returnwant']) && $LoanGuarantor['3']['returnwant'] == 1 "}<span class="c-red">有</span>{/if}</td>
+						<td>{if condition="isset($LoanGuarantor['4']['returnwant']) && $LoanGuarantor['4']['returnwant'] == 1 "}<span class="c-red">有</span>{/if}</td>
+						<td>{if condition="isset($LoanGuarantor['5']['returnwant']) && $LoanGuarantor['5']['returnwant'] == 1 "}<span class="c-red">有</span>{/if}</td>
+						<td>{if condition="isset($LoanGuarantor['6']['returnwant']) && $LoanGuarantor['6']['returnwant'] == 1 "}<span class="c-red">有</span>{/if}</td>
+						<td>{if condition="isset($LoanGuarantor['7']['returnwant']) && $LoanGuarantor['7']['returnwant'] == 1 "}<span class="c-red">有</span>{/if}</td>
+                    </tr>
+                    <tr class="text-c">
+                        <td>其他说明</td>
+                        <td colspan="10">{$loan.qs_description|default=''}</td>
+                    </tr>
+                    <tr class="text-c">
+                        <td>分类结果</td>
+                        <td colspan="10">{$loan.qs_classjg|default=''}</td>
+                    </tr>
+                    <tr class="text-c">
+                        <td>拟清收处置<br/>措施建议</td>
+                        <td colspan="10">{$loan.qs_jgjy|default=''}</td>
+                    </tr>
+                    <tr class="text-c">
+                        <td>调查人签字</td>
+                        <td colspan="10"><span style="width:60%;display:inline-block;text-align:left;">调查人:{$loan.qs_sign|default=''} </span>{if condition="isset($loan.qs_sign_date) && $loan.qs_sign_date != 0"}{$loan.qs_sign_date|date='Y年m月d日',###}{/if}</td>
+                    </tr>
+                    <tr class="text-c">
+                        <td rowspan="{$Backrecordcount}">清收处置工作</td>
+                        <td><strong>时间</strong></td>
+                        <td colspan="8"><strong>清收处置进度</strong></td>
+                        <td><strong>调查人</strong></td>
+                    </tr>
+                    {if condition="isset($LoanBackrecordlist)"}
+                     {volist name="$LoanBackrecordlist" id="msg"}
+                     <tr class="text-c">
+                        <td>{$msg.back_time|date="Y-m-d",###}</td>
+                        <td colspan="8">{$msg.process}</td>
+                        <td>{$msg.back_name}</td>
+                     </tr>
+					 {/volist}
+                     {/if}
+                    </tr>
+                </table>
+		</article>
+       <br><br>
+{/block}

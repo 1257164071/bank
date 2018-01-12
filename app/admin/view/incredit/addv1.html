@@ -1,0 +1,196 @@
+{extend name="base" /}
+
+{block name="main"}
+
+<article class="cl pd-20">
+    <form action="" method="post" class="form form-horizontal" id="form-member-add">
+        {if isset($add) && $add==1}
+        <input type="hidden" name="client_id" value="{$client_id}" >
+        {else}
+        <input type="hidden" name="client_id" value="{$incredit.client_id}" >
+        <input type="hidden" name="id" value="{$incredit.id}" >
+        {/if}
+
+      
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>合同号：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.contact_number|default=''}" placeholder="合同号"  name="contact_number">
+            </div>
+        </div>
+         <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>借据号：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.ious_number |default=''}" placeholder="借据号"  name="ious_number">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">担保方式：</label>
+            <div class="formControls col-xs-8 col-sm-9"> 
+                <input name="guarantee_way" type="radio" {if condition="isset($incredit.guarantee_way) && $incredit.guarantee_way eq 1"}checked="checked"{/if} value="1">
+				<label for="sex-1">保证</label>
+				<input name="guarantee_way" type="radio" {if condition="isset($incredit.guarantee_way) && $incredit.guarantee_way eq 2"}checked="checked"{/if} value="2">
+				<label for="sex-1">抵押</label>
+				<input name="guarantee_way" type="radio" {if condition="isset($incredit.guarantee_way) && $incredit.guarantee_way eq 3"}checked="checked"{/if} value="3">
+				<label for="sex-1">质押</label>
+				<input name="guarantee_way" type="radio" {if condition="isset($incredit.guarantee_way) && $incredit.guarantee_way eq 4"}checked="checked"{/if} value="4">
+				<label for="sex-1">留置</label>
+				<input name="guarantee_way" type="radio" {if condition="isset($incredit.guarantee_way) && $incredit.guarantee_way eq 5"}checked="checked"{/if} value="5">
+				<label for="sex-1">定金</label>
+            </div>
+        </div>
+         <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">抵押物：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.mortgage|default=''}" placeholder=""  name="mortgage">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">贷款用途：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input name="loan_using" type="radio" {if condition="isset($incredit.loan_using) && $incredit.loan_using eq 1"}checked="checked"{/if} value="1">
+				<label for="sex-1">个人贷款</label>
+				<input name="loan_using" type="radio" {if condition="isset($incredit.loan_using) && $incredit.loan_using eq 2"}checked="checked"{/if} value="2">
+				<label for="sex-1">企业贷款</label>
+				<input name="loan_using" type="radio" {if condition="isset($incredit.loan_using) && $incredit.loan_using eq 3"}checked="checked"{/if} value="3">
+				<label for="sex-1">房贷</label>
+				<input name="loan_using" type="radio" {if condition="isset($incredit.loan_using) && $incredit.loan_using eq 4"}checked="checked"{/if} value="4">
+				<label for="sex-1">车贷</label>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>贷款金额(万元)：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+             {if isset($add) && $add==1}
+                <input type="text" class="input-text" value="{$incredit.loan_money|default=''}" placeholder="贷款金额"  name="loan_money">
+             {else/}
+                <input type="hidden" class="input-text" value="{$incredit.loan_money|default=''}" placeholder="贷款金额"  name="loan_money">
+                {$incredit.loan_money|default=''}
+             {/if}
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>发放金额（万元）：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+            {if isset($add) && $add==1}
+                <input type="text" class="input-text" value="{$incredit.provide_loan_money|default=''}" placeholder="发放金额"  name="provide_loan_money">
+            {else/}
+                {$incredit.provide_loan_money|default=''}
+                  <input type="hidden" class="input-text" value="{$incredit.provide_loan_money|default=''}" placeholder="发放金额"  name="provide_loan_money">
+             {/if}
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">欠息金额（万元）：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.debt_money|default=''}" placeholder="欠息金额"  name="debt_money">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>执行利率：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$incredit.use_rate|default=''}" placeholder="执行利率"  name="use_rate">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">发放日期：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" onfocus="WdatePicker()" value="<?php echo (isset($incredit['provide_time']) && ($incredit['provide_time'] !== '')?date('Y-m-d',$incredit['provide_time']):''); ?>"  name="provide_time"class="input-text Wdate" >
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">到期日期：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" onfocus="WdatePicker()" value="<?php echo (isset($incredit['arrive_time']) && ($incredit['arrive_time'] !== '')?date('Y-m-d',$incredit['arrive_time']):''); ?>"  name="arrive_time"class="input-text Wdate" >
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">结算日期：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" onfocus="WdatePicker()" value="<?php echo (isset($incredit['settlement_time']) && ($incredit['settlement_time'] !== '')?date('Y-m-d',$incredit['settlement_time']):''); ?>"  name="settlement_time"class="input-text Wdate" >
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">账户状态：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input name="loan_status" type="radio" {if condition="isset($incredit.loan_status) && $incredit.loan_status eq 1"}checked="checked"{/if} value="1">
+				<label for="sex-1">还款中</label>
+				<input name="loan_status" type="radio" {if condition="isset($incredit.loan_status) && $incredit.loan_status eq 2"}checked="checked"{/if} value="2">
+				<label for="sex-1">还清</label>
+				<input name="loan_status" type="radio" {if condition="isset($incredit.loan_status) && $incredit.loan_status eq 3"}checked="checked"{/if} value="3">
+				<label for="sex-1">逾期</label>
+				<input name="loan_status" type="radio" {if condition="isset($incredit.loan_status) && $incredit.loan_status eq 4"}checked="checked"{/if} value="4">
+				<label for="sex-1">逾期-清收完成</label>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                {if isset($add)&&$add==1}
+                <a class="btn btn-primary radius"  onclick="add()"> 提交</a>
+                {else}
+                <a class="btn btn-primary radius"  onclick="edit()"> 提交</a>
+                {/if}
+                <!--<input class="btn btn-primary radius" onclick="submit()" type="button" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">-->
+            </div>
+        </div>
+    </form>
+</article>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=33b529efc5e27ef1eb1f674704afd789"></script>
+<script type="text/javascript">
+    $(function(){
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+    });
+
+    function add(){
+        $.ajax({
+            url:'{:url("admin/incredit/add")}',
+            type:'post',
+            data:$('form').serialize(),
+            success:function (data) {
+                if(data.code==0){
+                    layer.msg(data.msg);
+                    parent.location.reload();
+                    setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))",2000);
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+    }
+    function edit(){
+        $.ajax({
+            url:'{:url("admin/incredit/edit")}',
+            type:'post',
+            data:$('form').serialize(),
+            success:function (data) {
+                if(data.code==0){
+                    layer.msg(data.msg);
+                    parent.location.reload();
+                    setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))",2000);
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+
+    }
+
+
+
+</script>
+
+{/block}

@@ -1,0 +1,113 @@
+{extend name="base" /}
+
+{block name="main"}
+
+
+<link data-jsfiddle="common" rel="stylesheet" media="screen" href="/static/grid/dist/handsontable.css">
+<link data-jsfiddle="common" rel="stylesheet" media="screen" href="/static/grid/dist/pikaday/pikaday.css">
+<script data-jsfiddle="common" src="/static/grid/dist/pikaday/pikaday.js"></script>
+<script data-jsfiddle="common" src="/static/grid/dist/moment/moment.js"></script>
+<script data-jsfiddle="common" src="/static/grid/dist/zeroclipboard/ZeroClipboard.js"></script>
+<script data-jsfiddle="common" src="/static/grid/dist/numbro/numbro.js"></script>
+<script data-jsfiddle="common" src="/static/grid/dist/numbro/languages.js"></script>
+<script data-jsfiddle="common" src="/static/grid/dist/handsontable.js"></script>
+
+<!--
+Loading demo dependencies. They are used here only to enhance the examples on this page
+-->
+
+<script src="/static/grid/js/highlight/highlight.pack.js"></script>
+<link rel="stylesheet" media="screen" href="/static/grid/js/highlight/styles/github.css">
+<link rel="stylesheet" href="/static/grid/css/font-awesome/css/font-awesome.min.css">
+
+<article class="cl pd-20">
+
+    <form action="" method="post" class="form form-horizontal" id="form-member-add">
+        <div class="row cl">
+            <label class="form-label col-sm-1"><span class="c-red">*</span>名称</label>
+            <div class="formControls  col-sm-2">
+                <input type="text" class="input-text"  placeholder="名称"  name="name" id="gridname" value="{$grid.name|default=''}">
+            </div>
+            <label class="form-label  col-sm-1"><span class="c-red"></span>备注</label>
+            <div class="formControls  col-sm-3">
+                <input type="text" class="input-text"  placeholder="备注"  name="name" id="gridremark" value="{$grid.remark|default=''}">
+            </div>
+            <div class="col-xs-12 col-sm-3">
+                <a href="javascript:" class="btn btn-primary radius" onclick="gridadd();"> 提交保存 </a>
+                <a href="{:url('admin/grid/gridlist')}" class="btn btn-secondary radius" > 返回列表 </a>
+            </div>
+        </div>
+        <div class="row cl">
+
+        </div>
+    </form>
+	<div class="sample-turtorial">
+		<div id="ss"></div>
+	</div>
+
+
+
+	<script>
+        var container = document.getElementById('ss'),
+            hot;
+
+        hot = new Handsontable(container, {
+           // data: data,
+            startRows: 50,
+            startCols: 50,
+            colHeaders: true,
+            rowHeaders: true,
+            contextMenu: true,
+            mergeCells:true
+        });
+
+
+        $(document).ready(function ()
+        {
+
+            gridata = '{$grid.data|default = 0}';
+
+            if(gridata != 0){
+                //spread.fromJSON(JSON.parse(gridata));
+                hot.loadData(JSON.parse(gridata));
+            }
+        });
+	</script>
+</article>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+
+<script type="text/javascript">
+
+
+  function gridadd(){
+      var spread1 = $('#ss').data('workbook');
+      var gridid = '{$grid.id|default = 0}';
+      var jsonString = JSON.stringify(hot.getData());
+      //alert(jsonString);return;
+      var gridname = $("#gridname").val();
+      var gridremark = $("#gridremark").val();
+      $.ajax({
+		  url:'{:url("admin/grid/gridadd")}',
+		  type:'post',
+		  data:{id :gridid,name :gridname,remark:gridremark,data:jsonString},
+		  success:function (data) {
+			  if(data.code==0){
+				  layer.msg(data.msg);
+                  window.location.href="{:url('admin/grid/gridlist')}";
+
+			  }else{
+				  layer.msg(data.msg);
+			  }
+		  }
+	  });
+  }
+
+
+
+
+</script>
+
+{/block}

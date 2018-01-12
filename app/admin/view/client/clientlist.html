@@ -1,0 +1,359 @@
+﻿{extend name="base" /}
+
+{block name="content"}
+<style type="text/css">
+.table{}
+</style>
+<section class="Hui-article-box">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> {$title1}<span class="c-gray en">&gt;</span>{$title2}<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<form  method="get" action="">
+			<div class="text-c" style="line-height: 40px;"> 
+			<span class="select-box" style="width: 200px;line-height: 21px;">
+					<select class="select" name="belong_organization"  >
+						<option value="0">所属机构</option>
+						{volist name="bank" id="bank"}
+						<option <?php if(isset($post['belong_organization'])&&$post['belong_organization']==$bank['id']){ echo  'selected="selected"'; }?>  value="{$bank.id}">{$bank.bankname}</option>
+						{/volist}
+
+					</select>
+				</span>
+				<label>客户名称:</label>
+				<input type="text" class="input-text" style="width:150px" placeholder="客户名称" value="{$post.client_name|default=''}" name="client_name">
+			<!-- 日期范围：
+				<input type="text" onfocus="WdatePicker()" id="datemin" name="start_add_time" value="{$post.start_add_time|default=''}" class="input-text Wdate" style="width:120px;">
+				-
+				<input type="text" onfocus="WdatePicker()" id="datemax" name="end_add_time" value="{$post.end_add_time|default=''}" class="input-text Wdate" style="width:120px;"> -->
+				<label>身份证:</label>
+				<input type="text" class="input-text" style="width:200px" placeholder="身份证" value="{$post.card_number|default=''}"  name="card_number">
+				
+				<span class="select-box" style="width: 200px;line-height: 21px;">
+					<select class="select" name="sex"  >
+						<option value="">性别</option>
+						<option  <?php if(isset($post['sex'])&&$post['sex']=='nan'){ echo  'selected="selected"'; }?> value="nan">男</option>
+						<option  <?php if(isset($post['sex'])&&$post['sex']=='nv'){ echo  'selected="selected"'; }?> value="nv">女</option>
+						
+						
+					</select>
+				</span>
+				<span class="select-box" style="width: 200px;line-height: 21px;">
+					<select class="select" name="age"  >
+						<option value="">年龄</option>
+						<option  <?php if(isset($post['age'])&&$post['age']==1){ echo  'selected="selected"'; }?> value="1">30岁以下[包括30岁]</option>
+						<option  <?php if(isset($post['age'])&&$post['age']=='2'){ echo  'selected="selected"'; }?> value="2">30~40岁[包括40岁]</option>
+						
+						<option  <?php if(isset($post['age'])&&$post['age']=='3'){ echo  'selected="selected"'; }?> value="3">40~50岁[包括50岁]</option>
+						<option  <?php if(isset($post['age'])&&$post['age']=='4'){ echo  'selected="selected"'; }?> value="4">50~60岁[包括60岁]</option>
+						<option  <?php if(isset($post['age'])&&$post['age']==5){ echo  'selected="selected"'; }?> value="5">60岁以上</option>
+					</select>
+				</span>
+
+				<!--<input type="text" class="input-text" style="width:150px" placeholder="客户经理" value="{$post.belong_manger|default=''}" name="belong_manger">-->
+				<!-- 2017.11.14隐藏 -->
+				<!-- <span class="select-box" style="width: 200px;line-height: 21px;" >
+                    <select class="select" name="class"  >
+                        <option value="">存款筛选</option>
+                        {volist name="class" id="list" key="key"}
+                        <option <?php if(isset($post['class'])&&$post['class']!=''&&$post['class']==$key-1){ echo  'selected="selected"'; }?> value="{$key-1}">{$list}</option>
+                        {/volist}
+                    </select>
+                </span> -->
+                <span class="select-box" style="width: 200px;line-height: 21px;" >
+                    <select class="select" name="card_class1708"  >
+                        <option value="card_class">客户等级</option>
+                        {volist name="card_class1708" id="list" key="key"}
+                        <option <?php if(isset($post['card_class1708'])&&$post['card_class1708']==$key-1){ echo  'selected="selected"'; }?> value="{$key-1}">{$list}</option>
+                        {/volist}
+                    </select>
+                </span>
+               <!--  <span class="select-box" style="width: 200px;line-height: 21px;" >
+                    <select class="select" name="class"  >
+                        <option value="vip">vip等级</option>
+                        {volist name="class" id="list" key="key"}
+                        <option <?php if(isset($post['class'])&&$post['class']!='vip'&&$post['class']==$key-1){ echo  'selected="selected"'; }?> value="{$key-1}">{$list}</option>
+                        {/volist}
+                    </select>
+                </span> -->
+                <span class="select-box" style="width: 200px;line-height: 21px;">
+					<select class="select" name="wangyin"  >
+						<option value="">网银</option>
+						<option  <?php if(isset($post['wangyin'])&&$post['wangyin']=='未'){ echo  'selected="selected"'; }?> value="未">未开通</option>
+						<option  <?php if(isset($post['wangyin'])&&$post['wangyin']==1){ echo  'selected="selected"'; }?> value="1">开通</option>
+						
+						
+					</select>
+				</span>
+				<!-- <span class="select-box" style="width: 200px;line-height: 21px;">
+					<select class="select" name="duanxinban"  >
+						<option value="">短信版</option>
+						<option  <?php if(isset($post['duanxinban'])&&$post['duanxinban']=='未'){ echo  'selected="selected"'; }?> value="未">未开通</option>
+						<option  <?php if(isset($post['duanxinban'])&&$post['duanxinban']==1){ echo  'selected="selected"'; }?> value="1">开通</option>
+						<option <?php if(isset($post['duanxinban'])&&$post['duanxinban']==2){ echo  'selected="selected"'; }?> value="2">2个</option>
+						<option <?php if(isset($post['duanxinban'])&&$post['duanxinban']==3){ echo  'selected="selected"'; }?> value="3">3个</option>
+						<option <?php if(isset($post['duanxinban'])&&$post['duanxinban']==4){ echo  'selected="selected"'; }?> value="4">4个</option>
+						
+					</select>
+				</span> -->
+				<span class="select-box"  style="width: 200px;line-height: 21px;">
+					<select class="select" name="kehuduan"  >
+						<option value="">客户端</option>
+						<option  <?php if(isset($post['kehuduan'])&&$post['kehuduan']=='未'){ echo  'selected="selected"'; }?> value="未">未开通</option>
+						<option  <?php if(isset($post['kehuduan'])&&$post['kehuduan']==1){ echo  'selected="selected"'; }?> value="1">开通</option>
+						<!-- <option <?php if(isset($post['kehuduan'])&&$post['kehuduan']==2){ echo  'selected="selected"'; }?> value="2">2个</option>
+						<option <?php if(isset($post['kehuduan'])&&$post['kehuduan']==3){ echo  'selected="selected"'; }?> value="3">3个</option>
+						<option <?php if(isset($post['kehuduan'])&&$post['kehuduan']==4){ echo  'selected="selected"'; }?> value="4">4个</option> -->
+						
+					</select>
+				</span>
+
+				<span class="select-box"  style="width: 200px;line-height: 21px;">
+					<select class="select" name="wap"  >
+						<option value="">wap</option>
+						<option  <?php if(isset($post['wap'])&&$post['wap']=='未'){ echo  'selected="selected"'; }?> value="未">未开通</option>
+						<option  <?php if(isset($post['wap'])&&$post['wap']==1){ echo  'selected="selected"'; }?> value="1">开通</option>
+						<!-- <option <?php if(isset($post['wap'])&&$post['wap']==2){ echo  'selected="selected"'; }?> value="2">2个</option>
+						<option <?php if(isset($post['wap'])&&$post['wap']==3){ echo  'selected="selected"'; }?> value="3">3个</option>
+						<option <?php if(isset($post['wap'])&&$post['wap']==4){ echo  'selected="selected"'; }?> value="4">4个</option> -->
+						
+					</select>
+				</span>
+				<span class="select-box"  style="width: 200px;line-height: 21px;">
+					<select class="select" name="duanxintong"  >
+						<option value="">短信通</option>
+						<option  <?php if(isset($post['duanxintong'])&&$post['duanxintong']=='未'){ echo  'selected="selected"'; }?> value="未">未开通</option>
+						<option  <?php if(isset($post['duanxintong'])&&$post['duanxintong']==1){ echo  'selected="selected"'; }?> value="1">开通</option>
+						<!-- <option <?php if(isset($post['duanxintong'])&&$post['duanxintong']==2){ echo  'selected="selected"'; }?> value="2">2个</option>
+						<option <?php if(isset($post['duanxintong'])&&$post['duanxintong']==3){ echo  'selected="selected"'; }?> value="3">3个</option>
+						<option <?php if(isset($post['duanxintong'])&&$post['duanxintong']==4){ echo  'selected="selected"'; }?> value="4">4个</option> -->
+						
+					</select>
+				</span>
+				<!-- <span class="select-box" style="width:10%;">
+					<select class="select" name="pos"  >
+						<option value="">pos</option>
+						<option  <?php if(isset($post['pos'])&&$post['pos']=='未'){ echo  'selected="selected"'; }?> value="未">未开通</option>
+						<option  <?php if(isset($post['pos'])&&$post['pos']==1){ echo  'selected="selected"'; }?> value="1">1个</option>
+						<option <?php if(isset($post['pos'])&&$post['pos']==2){ echo  'selected="selected"'; }?> value="2">2个</option>
+						<option <?php if(isset($post['pos'])&&$post['pos']==3){ echo  'selected="selected"'; }?> value="3">3个</option>
+						<option <?php if(isset($post['pos'])&&$post['pos']==4){ echo  'selected="selected"'; }?> value="4">4个</option>
+						
+					</select>
+				</span> -->
+				<span class="select-box" style="width: 200px;line-height: 21px;">
+					<select class="select" name="quickpay"  >
+						<option value="">快捷支付</option>
+						<option  <?php if(isset($post['quickpay'])&&$post['quickpay']=='未'){ echo  'selected="selected"'; }?> value="未">未开通</option>
+						<option  <?php if(isset($post['quickpay'])&&$post['quickpay']==1){ echo  'selected="selected"'; }?> value="1">开通</option>
+						<!-- <option <?php if(isset($post['quickpay'])&&$post['quickpay']==2){ echo  'selected="selected"'; }?> value="2">2个</option>
+						<option <?php if(isset($post['quickpay'])&&$post['quickpay']==3){ echo  'selected="selected"'; }?> value="3">3个</option>
+						<option <?php if(isset($post['quickpay'])&&$post['quickpay']==4){ echo  'selected="selected"'; }?> value="4">4个</option> -->
+						
+					</select>
+				</span>
+				<span class="select-box" style="width: 200px;line-height: 21px;">
+					<select class="select" name="sj_warning"  >
+						<option value="">升降级预警</option>
+						<option  <?php if(isset($post['sj_warning'])&&$post['sj_warning']==1){ echo  'selected="selected"'; }?> value="1">正常</option>
+						<option  <?php if(isset($post['sj_warning'])&&$post['sj_warning']==2){ echo  'selected="selected"'; }?> value="2">即将升</option>
+						<option <?php if(isset($post['sj_warning'])&&$post['sj_warning']==3){ echo  'selected="selected"'; }?> value="3">即将降</option>
+						
+						
+					</select>
+				</span>
+				<label>所属客户经理:</label>
+				<input type="text" class="input-text" style="width:150px" placeholder="所属客户经理" value="{$post.lancun_man|default=''}" name="lancun_man">
+				<label>地址:</label>
+				<input type="text" class="input-text" style="width:150px" placeholder="地址" value="{$post.gridname|default=''}" name="gridname">
+				<!-- <span class="select-box" style="width: 150px;line-height: 21px;">
+					<select class="select" name="client_grade"  >
+						<option value=" ">省联社评级</option>
+						<option  <?php if(isset($post['client_grade'])&&$post['client_grade']==1){ echo  'selected="selected"'; }?> value="1">潜在客户</option>
+						<option <?php if(isset($post['client_grade'])&&$post['client_grade']==2){ echo  'selected="selected"'; }?> value="2">普通客户</option>
+						<option <?php if(isset($post['client_grade'])&&$post['client_grade']==3){ echo  'selected="selected"'; }?> value="3">黄金客户</option>
+						<option <?php if(isset($post['client_grade'])&&$post['client_grade']==4){ echo  'selected="selected"'; }?> value="4">白金客户</option>
+						<option <?php if(isset($post['client_grade'])&&$post['client_grade']==5){ echo  'selected="selected"'; }?> value="5">红钻客户</option>
+						<option <?php if(isset($post['client_grade'])&&$post['client_grade']==6){ echo  'selected="selected"'; }?> value="6">金钻客户</option>
+					</select>
+				</span> -->
+				<a href="javascript:;" onclick="research()" class="btn btn-success radius"><i class="Hui-iconfont">&#xe665;</i>  搜索客户</a>
+				<!--<button  type="submit" class="btn btn-warning  radius" id="" name=""><i class="Hui-iconfont">&#xe644;</i> 导出</button>-->
+			</div>
+
+
+			<div class="cl pd-5 bg-1 bk-gray mt-10" style="border-radius: 20px; padding:5px 20px;">
+				<span class="l">
+					<!--<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>-->
+					<!-- <a href="javascript:;" onclick="member_add('添加客户','/admin/client/clientadd','900','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加客户</a> -->
+					<a href="javascript:;" onclick="member_add('导入数据','/admin/client/daoru','800','510')" class="btn btn-warning radius"><i class="Hui-iconfont">&#xe645;</i> 导入</a>
+					<a href="javascript:;" onclick="daochu()" class="btn btn-success radius"><i class="Hui-iconfont">&#xe645;</i> 导出</a>
+
+
+				</span>
+				<span class="r"><strong>{$count}</strong> 个客户</span>
+				</div>
+			</form>
+			<div class="mt-10" style="overflow: scroll;">
+				<table class="table table-border table-bordered table-hover table-bg table-sort" style="min-width: 1500px;">
+					<thead>
+						<tr class="text-c" >
+						<!-- <th width="25"><input type="checkbox" name="" value=""></th> -->
+							<!-- <th>ID</th> -->
+							<th>网点</th> 
+							
+							<th>客户名称</th>
+							<th>证件号码</th>
+							<th>年龄</th>
+							<th>性别</th>
+							<th>联系方式</th>
+							<th>客户编号</th>
+							<th>网银</th>
+							<th>短信版</th>
+							<th>客户端</th>
+							<th>wap</th>
+							<th>短信通</th>			
+							<th>快捷支付</th>
+							<th>有效复合卡</th>
+							<th>有效磁条卡</th>
+							<th>升降级明细</th>
+							<th>升降级预警</th>
+							<th>存款区间[万元]</th>
+							<th>揽存人员</th>
+							<th>地址</th>
+							<th>经度</th>
+							<th>纬度</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+
+					<tbody>
+					{volist name="clients" id="clients"}
+						<tr class="text-c">
+						<!-- <td><input type="checkbox" value="{$clients.id}" name="id[]"></td> -->
+							<!-- <td>{$clients.id}</td> -->
+							
+							<td>{$clients.sign_website_name|default='营业厅'}</td>
+							<td>{$clients.name}</td>
+							<td>{$clients.card_number}</td>
+							<td>{$clients.age}</td>
+
+							<td>{if $clients.sex==1}男{/if}{if $clients.sex==2}女{/if}</td>
+							<td>{$clients.tel_number|default=''}</td>
+							<td><a href="javascript:void('0')" title="{$clients.id}">{$clients.client_number}</a></td>
+							<td>{$clients.wangyin}</td>
+							<td>{$clients.duanxinban}</td>
+							<td>{$clients.kehuduan}</td>
+							<td>{$clients.wap}</td>
+							<td>{$clients.duanxintong}</td>
+							<td>{$clients.quickpay}</td>
+							<td>{$clients.fuhe_card|default=''}</td>
+							<td>{$clients.citiao_card|default=''}</td>
+							<td>{if !empty($clients.card_class1512)}{:get_name('card_class1708',$clients.card_class1512)}{else}{/if}->{if !empty($clients.card_class1612)}{:get_name('card_class1708',$clients.card_class1612)}{else}{/if}->{if !empty($clients.card_class1710)}{:get_name('card_class1708',$clients.card_class1710)}{else}{/if}</td>
+							<td>{$clients.sj_warning}</td>
+							<td>{$clients.cunkuan_section}</td>
+							<td>{$clients.lancun_man}</td>
+							<td>罗庄区 {$clients.gridname}</td>
+							<td>{$clients.lng}</td>
+							<td>{$clients.lat}</td>
+							<td class="td-manage">
+								<a style="text-decoration:none"  href="{:url('clientdetail',array('card_number'=>$clients['card_number']))}" title="查看客户详情"><i class="Hui-iconfont">&#xe725;</i>查看</a>&nbsp;&nbsp;
+								<a title="删除客户" href="{:url('del',array('client_id'=>$clients['id']))}" class="ml-5" onclick="return confirm('确认删除');" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i>删除</a>
+							</td>
+						</tr>
+						{/volist}
+					</tbody>
+
+				</table>
+			</div>
+			<div class="page">{$page}</div>
+		</article>
+	</div>
+</section>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/static/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+$(function(){
+//	$('.table-sort').dataTable({
+//		"aaSorting": [[ 1, "desc" ]],//默认第几个排序
+//		"bStateSave": true,//状态保存
+//		"aLengthMenu": [16,20,25],
+//		"aoColumnDefs": [
+//			//{ targets: [0, 1], visible: true},
+//		  //{"bVisible": false, "aTargets": [1]}, //控制列的隐藏显示
+//		  {"orderable":false,"aTargets":[0,4,6,8]}// 制定列不参与排序
+//		]
+//	});
+//	$('.table-sort tbody').on( 'click', 'tr', function () {
+//		if ( $(this).hasClass('selected') ) {
+//			$(this).removeClass('selected');
+//		}
+//		else {
+//			table.$('tr.selected').removeClass('selected');
+//			$(this).addClass('selected');
+//		}
+//	});
+});
+/*导出*/
+function daochu(){
+	var input='<input name="names" type="hidden"value="daochu"/>';
+	$('form').append(input);
+	$('form').submit();
+}
+/*用户-添加*/
+function member_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+function research(){
+	$('form input[name="names"]').remove();
+	
+	$('form').submit();
+}
+
+//		$.get(self.)
+//		$.ajax({
+//			url: '{:url("client/clientlist",array("export"=>1))}',
+//			type: 'post',
+//			data: $('form').serialize(),
+////			success: function (data) {
+////				if (data.code == 0) {
+////					layer.msg(data.msg);
+////					parent.location.reload();
+////					setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))", 2000);
+////
+////				} else {
+////					layer.msg(data.msg);
+////				}
+////			}
+//		});
+
+
+
+
+	function datadel(){
+		 var $ids=$('input:checked');
+		$.ajax({
+			url: "{:url('client/delpatch')}",
+			type: 'post',
+			data: $('input:checked'),
+			dataType: 'json',
+			success:function(data) {
+				if (data.code == 0) {
+					layer.msg(data.msg);
+					location.reload();
+
+				} else {
+					layer.msg(data.msg);
+				}
+			}
+		});
+
+
+	}
+</script>
+
+{/block}

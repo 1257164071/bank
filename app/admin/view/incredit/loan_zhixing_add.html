@@ -1,0 +1,152 @@
+{extend name="base" /}
+
+{block name="main"}
+
+<article class="cl pd-20">
+	<form action="" method="post" class="form form-horizontal" id="form-admin-add">
+		{if !empty($loan_zhixing_info)}
+			<input type="hidden" name="id" value="{$loan_zhixing_info.id}">
+		{else}
+			<input type="hidden" name="loan_id" value="{:input('loan_id')}">
+		{/if}
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">执行标的:</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$loan_zhixing_info.zzbiaodi|default=''}" placeholder="执行标的"  name="zzbiaodi">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">申请执行时间:</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" onfocus="WdatePicker()" value="<?php echo (isset($loan_zhixing_info['sszx_time']) && ($loan_zhixing_info['sszx_time'] !== '')?date('Y-m-d',$loan_zhixing_info['sszx_time']):''); ?>"  name="sszx_time" class="input-text Wdate" >
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">执行案号</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$loan_zhixing_info.zx_anhao|default=''}" placeholder="执行案号"  name="zx_anhao">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">经办人</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$loan_zhixing_info.zxjingbanren|default=''}" placeholder="经办人"  name="zxjingbanren">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">经办法官</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$loan_zhixing_info.zxjbfg|default=''}" placeholder="经办法官"  name="zxjbfg">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">执行送达时间:</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" onfocus="WdatePicker()" value="<?php echo (isset($loan_zhixing_info['zxsd_time']) && ($loan_zhixing_info['zxsd_time'] !== '')?date('Y-m-d',$loan_zhixing_info['zxsd_time']):''); ?>"  name="zxsd_time" class="input-text Wdate" >
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">是否提出执行异议:</label>
+			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+				<div class="radio-box">
+					<input name="has_zxyy" type="radio"  value="1" id="sqzhixing_1" checked>
+					<label for="sqzhixing_1">是</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="sqzhixing_2" value="0" name="has_zxyy"<?php echo (isset($loan_zhixing_info['has_zxyy']) && ($loan_zhixing_info['has_zxyy'] == '0')?'checked':''); ?> >
+					<label for="sqzhixing_2">否</label>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">执行异议内容:</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$loan_zhixing_info.zxyy_content|default=''}" placeholder="执行异议内容"  name="zxyy_content">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">回收标的:</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$loan_zhixing_info.shbiaodi|default=''}" placeholder="回收标的"  name="shbiaodi">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">未回收标的:</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$loan_zhixing_info.wshbiaodi|default=''}" placeholder="未回收标的"  name="wshbiaodi">
+			</div>
+		</div> 
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">终结本次执行时间:</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" onfocus="WdatePicker()" value="<?php echo (isset($loan_zhixing_info['zjbczx_time']) && ($loan_zhixing_info['zjbczx_time'] !== '')?date('Y-m-d',$loan_zhixing_info['zjbczx_time']):''); ?>"  name="zjbczx_time" class="input-text Wdate" >
+			</div>
+		</div>    
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">恢复执行时间:</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" onfocus="WdatePicker()" value="<?php echo (isset($loan_zhixing_info['hfzx_time']) && ($loan_zhixing_info['hfzx_time'] !== '')?date('Y-m-d',$loan_zhixing_info['hfzx_time']):''); ?>"  name="hfzx_time" class="input-text Wdate" >
+			</div>
+		</div>      
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">终结执行时间:</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" onfocus="WdatePicker()" value="<?php echo (isset($loan_zhixing_info['zjzx_time']) && ($loan_zhixing_info['zjzx_time'] !== '')?date('Y-m-d',$loan_zhixing_info['zjzx_time']):''); ?>"  name="zjzx_time" class="input-text Wdate" >
+			</div>
+		</div> 
+		
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-6 col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+
+			</div>
+		</div>
+	</form>
+</article>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+	
+	$("#form-admin-add").validate({
+
+		onkeyup:false,
+		focusCleanup:true,
+		success:"valid",
+		submitHandler:function(form){
+			var $form = $(form);
+			$.ajax({
+				url:'{$url}',
+				type:'post',
+				data:$form.serialize(),
+				success:function (data) {
+					if(data.code==0){
+						layer.msg(data.msg);
+						parent.location.reload();
+						setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))",2000);
+					}else{
+						layer.msg(data.msg);
+					}
+				}
+			});
+		}
+	});
+
+})
+
+
+      
+</script>
+
+{/block}

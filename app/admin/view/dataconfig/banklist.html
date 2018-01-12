@@ -1,0 +1,91 @@
+﻿{extend name="base" /}
+
+{block name="content"}
+
+<section class="Hui-article-box">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 组织机构管理 <span class="c-gray en">&gt;</span> 银行管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<div class="cl pd-5 bg-1 bk-gray"> <span class="l"> <a class="btn btn-primary radius" href="javascript:;" onclick="admin_role_add('添加银行','/admin/dataconfig/bankadd','600','370')"><i class="Hui-iconfont">&#xe600;</i> 添加银行</a> </span>  </div>
+			<div class="mt-10">
+			<table class="table table-border table-bordered table-hover table-bg">
+				<thead>
+					<tr>
+						<th scope="col" colspan="6">银行管理</th>
+					</tr>
+					<tr class="text-c">
+						<th width="40">ID</th>
+						<th>银行名称</th>
+						<th width="200">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+				   {volist name="msglist" id="msg"}
+					<tr class="text-c">
+						<td>{$msg.id}</td>
+						<td style="text-align:left;">
+						<strong>{$msg.bankname}</strong>
+						</td>
+						<td class="f-14">
+						<a title="编辑" href="javascript:;" onclick="msg_edit('编辑','{:url('admin/dataconfig/bankedit',array('id'=>$msg['id']))}','1','600','370')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i> 编辑</a>
+						<a title="删除客户" href="javascript:;" onclick="msg_del(this,'{$msg.id}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i>删除</a></td>
+					</tr>
+						{volist name="msg.child" id="m"}
+						<tr class="text-c">
+							<td>{$m.id}</td>
+							<td style="text-align:left;padding-left:60px;">
+							<strong>|— {$m.bankname}</strong>
+							</td>
+							<td class="f-14">
+							<a title="编辑" href="javascript:;" onclick="msg_edit('编辑','{:url('admin/dataconfig/bankedit',array('id'=>$m['id']))}','1','600','370')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i> 编辑</a>
+							<a title="删除客户" href="javascript:;" onclick="msg_del(this,'{$m.id}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i>删除</a></td>
+						</tr>
+						{/volist}
+					{/volist}
+				</tbody>
+			</table>
+			</div>
+		</article>
+	</div>
+</section>
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/static/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+/*管理员-角色-添加*/
+function admin_role_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+/*管理员-角色-编辑*/
+function msg_edit(title,url,id,w,h){
+	layer_show(title,url,w,h);
+}
+/*管理员-角色-删除*/
+function msg_del(obj,id){
+	layer.confirm('删除须谨慎，确认要删除吗？',function(index){
+		$.ajax({
+			type: 'POST',
+			url: '{:url('admin/dataconfig/bankdel')}',
+			dataType: 'json',
+			data:'id='+id,
+			success: function(data){
+				if(data.code==0){
+					$(obj).parents("tr").remove();
+					layer.msg('已删除!',{icon:1,time:1000});
+				}else{
+					layer.msg(data.msg);
+				}
+			},
+			error:function(data) {
+				console.log(data.msg);
+			},
+		});		
+	});
+}
+</script>
+
+
+{/block}

@@ -1,0 +1,121 @@
+
+<aside class="Hui-aside">
+
+    <div class="menu_dropdown bk_2">
+<!--
+        <dl id="menu-member">
+            <dt><i class="Hui-iconfont">&#xe60d;</i> 客户信息<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a href="{:url('admin/client/clientlist')}" title="客户列表">客户列表</a></li>
+                    <li><a href="{:url('admin/client/clientselect')}" title="客户筛选">客户筛选</a></li>
+                </ul>
+            </dd>
+        </dl>
+        <dl id="menu-picture">
+            <dt><i class="Hui-iconfont">&#xe6c0;</i> 网格地图<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a href="{:url('admin/grid/gridlist')}" title="网格分布">网格分布</a></li>
+                    <li><a href="{:url('admin/grid/getloc')}" title="地图统计">地图统计</a></li>
+                </ul>
+            </dd>
+        </dl>
+        <dl id="menu-article">
+            <dt><i class="Hui-iconfont">&#xe6cf;</i> 营销管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a href="{:url('admin/spread/lists')}" title="营销管理">营销管理</a></li>
+                    <li><a href="{:url('admin/spread/sms')}" title="营销互动">营销互动</a></li>
+                </ul>
+            </dd>
+        </dl>
+        <dl id="menu-tongji">
+            <dt><i class="Hui-iconfont">&#xe61e;</i> 数据分析<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a href="{:url('admin/analyse/charts_1')}" title="折线图">折线图</a></li>
+                    <li><a href="charts-2.html" title="时间轴折线图">时间轴折线图</a></li>
+                    <li><a href="charts-3.html" title="区域图">区域图</a></li>
+                    <li><a href="charts-4.html" title="柱状图">柱状图</a></li>
+                    <li><a href="charts-5.html" title="饼状图">饼状图</a></li>
+                    <li><a href="charts-6.html" title="3D柱状图">3D柱状图</a></li>
+                    <li><a href="charts-7.html" title="3D饼状图">3D饼状图</a></li>
+                </ul>
+            </dd>
+        </dl>
+        <dl id="menu-admin">
+            <dt><i class="Hui-iconfont">&#xe62d;</i> 权限管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a href="{:url('admin/admin/adminlists')}" title="管理员列表">管理员列表</a></li>
+                    <li><a href="{:url('admin/admin/rolelists')}" title="角色管理">角色管理</a></li>
+                    <li><a href="{:url('admin/admin/nodelists')}" title="节点管理">节点管理</a></li>
+                </ul>
+            </dd>
+        </dl>
+
+        <dl id="menu-system">
+            <dt><i class="Hui-iconfont">&#xe61d;</i> 系统设置<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a href="{:url('admin/dataconfig/configlist')}">配置管理</a></li>
+                    <li><a href="{:url('admin/dataconfig/database')}">数据库备份</a></li>
+                </ul>
+            </dd>
+        </dl>
+-->
+        {notempty name="nodes"}
+        {volist name="nodes" id="action"}
+        <dl id="menu-{$action.name}">
+            <dt><i class="Hui-iconfont">{$action.icon}</i> {$action.title}<i class="Hui-iconfont menu_dropdown-arrow Hui-iconfont-arrow2-bottom"></i></dt>
+            <dd>
+                <ul>
+                    {volist name="action.child" id="method"}
+
+                    {switch name="$user.role_id"}
+                        {case value="13"}
+                            {if $method.admin != 1}
+                                <li><a href="/admin/{if $method.controller == ''}{$action.name}{else}{$method.controller}{/if}/{$method.name}">{$method.title}</a></li>
+                            {/if}
+                        {/case}
+                        {case value="7"}
+                            {if $method.hangzhang != 1}
+                            <li><a href="/admin/{if $method.controller == ''}{$action.name}{else}{$method.controller}{/if}/{$method.name}">{$method.title}</a></li>
+                            {/if}
+                        {/case}
+                        {case value="9"}
+                            {if $method.zhihangzhang != 1}
+                            <li><a href="/admin/{if $method.controller == ''}{$action.name}{else}{$method.controller}{/if}/{$method.name}">{$method.title}</a></li>
+                            {/if}
+                        {/case}
+                        {default /}
+                        <li><a href="/admin/{if $method.controller == ''}{$action.name}{else}{$method.controller}{/if}/{$method.name}">{$method.title}</a></li>
+                    {/switch}
+
+                   
+                    {/volist}
+                </ul>
+            </dd>
+        </dl>
+        {/volist}
+        {/notempty}
+
+        
+    </div>
+</aside>
+<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
+
+<script type="text/javascript">
+    var urlstr = location.href;
+    var urlstatus=false;
+    $(".menu_dropdown li a").each(function () {
+        if ((urlstr).indexOf($(this).attr('href')) > -1&&$(this).attr('href')!='') {
+            $(this).parent().addClass('current');
+            $(this).parent().parent().parent().css("display","block");
+            urlstatus = true;
+        } else {
+            $(this).parent().removeClass('current');
+        }
+    });
+</script>

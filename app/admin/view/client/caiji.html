@@ -1,0 +1,80 @@
+{extend name="base" /}
+
+{block name="content"}
+<style type="text/css">
+	.dataTables_length{display: none;}
+	#DataTables_Table_0_filter{margin-bottom: 10px;}
+	#DataTables_Table_0_filter input{width: 300px;}
+	.table{width: 400px;}
+	#DataTables_Table_0_info,#DataTables_Table_0_paginate{display: none;}
+</style>
+<section class="Hui-article-box">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 网格列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<div class="Hui-article">
+		<article class="cl pd-20">
+
+			<div class="cl pd-5 bg-1 bk-gray"> 
+				<span class="l"> 
+					<a href="javascript:" onclick="layer_show('添加小区','/admin/grid/gridadds','600','370')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加小区</a>
+				</span>  
+				<span class="r">
+					<strong>{:count($gridlist)}</strong>个小区
+				</span>
+			</div>
+			<div class="mt-10" style="text-align: center;">
+				<table class="table table-border table-bordered table-hover table-bg table-sort" style="margin: 0 auto;">
+					<thead>
+						<tr class="text-c">
+							<th style="display:none;"><input type="checkbox" name="" value=""></th>
+							<th>小区</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+
+					<tbody>
+					{volist name="gridlist" id="vo"}
+						<tr class="text-c">
+							<td style="display:none;"><input type="checkbox" value="{$vo.id}" name="id[]"></td>
+							<td style="text-align: left;">{:mb_substr($vo.name,0,10)}</td>
+							<td class="td-manage">
+							    <a href="javascript:;" onclick="member_add('添加客户','{:url('admin/client/clientadd',array('grid'=>$vo['id']))}','900','510')" class="btn btn-primary radius" style="height: 25px;line-height: 25px;padding: 0 3px;">添加客户</a>
+							  
+							</td>
+						</tr>
+					{/volist}
+					</tbody>
+
+				</table>
+			</div>
+
+
+		</article>
+	</div>
+</section>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+
+<script type="text/javascript" src="/static/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="/static/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+
+$(function(){
+	$('.table-sort').dataTable({
+		
+		"aLengthMenu": [1000]
+		
+	});
+	
+});
+
+function member_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+
+
+
+</script>
+
+{/block}

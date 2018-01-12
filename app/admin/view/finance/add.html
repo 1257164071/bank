@@ -1,0 +1,346 @@
+{extend name="base" /}
+
+{block name="main"}
+
+<article class="cl pd-20">
+    <form action="" method="post" class="form form-horizontal" id="form-member-add">
+        {if !empty($client_id)&&(isset($client_id))}
+        <input type="hidden" name="client_id" value="{$client_id}" >
+        {else}
+        <input type="hidden" name="id" value="{$finance_info.id}" >
+        {/if}
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">家庭总资产：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.total_assets|default=''}" placeholder="家庭总资产"  name="total_assets">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">家庭总负债：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.total_debt|default=''}" placeholder="家庭总负债"  name="total_debt">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">个人月收入：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.month_income|default=''}" placeholder="个人月收入"  name="month_income">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">年总收入：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.year_income|default=''}" placeholder="年总收入"  name="year_income">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">年总支出：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.year_expend|default=''}" placeholder="年总支出"  name="year_expend">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">收入项目：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <span class="select-box" style="width: 150px;">
+					<select class="select" name="income_project"  >
+                        <option value="">==请选择==</option>
+                        {volist name="income_project" id="list" key="key"}
+                        <option  {if isset($finance_info)&&($finance_info['income_project']==$key-1)} selected="selected"{/if} value="{$key-1}">{$list}</option>
+                        {/volist}
+                    </select>
+				</span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">年均收入金额：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.annual_income|default=''}" placeholder="年均收入金额"  name="annual_income">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">日常支出：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.daily_spending|default=''}" placeholder="日常支出"  name="daily_spending">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">教育支出：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.education_spending|default=''}" placeholder="教育支出"  name="education_spending">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">医疗保健支出：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.yiliao_spending|default=''}" placeholder="医疗保健支出"  name="yiliao_spending">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">赡养老人支出：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.support|default=''}" placeholder="赡养老人支出"  name="support">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">其他支出：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.other_spending|default=''}" placeholder="其他支出"  name="other_spending">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">年均支出金额：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.annual_spending|default=''}" placeholder="年均支出金额"  name="annual_spending">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">行内借款：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.hangnei_jiekuan|default=''}" placeholder="行内借款"  name="hangnei_jiekuan">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">他行借款：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.tahang_jiekuan|default=''}" placeholder="他行借款"  name="tahang_jiekuan">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">民间借贷：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.minjian_jiedai|default=''}" placeholder="民间借贷"  name="minjian_jiedai">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">信用卡透支：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.creditcard_touzhi|default=''}" placeholder="信用卡透支"  name="creditcard_touzhi">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">应付账款：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.yingfu_zhangkuan|default=''}" placeholder="应付账款"  name="yingfu_zhangkuan">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">预收账款：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.yushou_zhangkuan|default=''}" placeholder="预收账款"  name="yushou_zhangkuan">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">其他负债：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.other_fuzhai|default=''}" placeholder="其他负债"  name="other_fuzhai">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">房产：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <span class="select-box" style="width: 150px;">
+					<select class="select" name="house"  >
+                        <option value="">==请选择==</option>
+                        {volist name="house" id="list" key="key"}
+                        <option  {if isset($finance_info)&&($finance_info['house']==$key-1)} selected="selected"{/if} value="{$key-1}">{$list}</option>
+                        {/volist}
+                    </select>
+				</span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">土地：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <span class="select-box" style="width: 150px;">
+					<select class="select" name="land"  >
+                        <option value="">==请选择==</option>
+                        {volist name="land" id="list" key="key"}
+                        <option  {if isset($finance_info)&&($finance_info['land']==$key-1)} selected="selected"{/if} value="{$key-1}">{$list}</option>
+                        {/volist}
+                    </select>
+				</span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">现金：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.cash|default=''}" placeholder="现金"  name="cash">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">存款：</label>
+            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                <div class="radio-box">
+                    <input type="radio" id="is_poor-2" value="1" name="deposit" checked>
+                    <label for="is_poor-2">本行存款</label>
+                </div>
+                <div class="radio-box">
+                    <input name="deposit" type="radio"  value="2" id="is_poor-1" <?php echo (isset($client['guding_work']) && ($client['guding_work'] == '2')?'checked':''); ?> >
+                    <label for="is_poor-1">他行存款</label>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">车辆：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <span class="select-box" style="width: 150px;">
+					<select class="select" name="car"  >
+                        <option value="">==请选择==</option>
+                        {volist name="car" id="list" key="key"}
+                        <option  {if isset($finance_info)&&($finance_info['car']==$key-1)} selected="selected"{/if} value="{$key-1}">{$list}</option>
+                        {/volist}
+                    </select>
+				</span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">股权：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.equity|default=''}" placeholder="股权"  name="equity">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">机械设备：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.equipment|default=''}" placeholder="机械设备"  name="equipment">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">存货：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.inventory|default=''}" placeholder="存货"  name="inventory">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">应收账款：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.accounts_receivable|default=''}" placeholder="应收账款"  name="accounts_receivable">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">预付款项：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.prepayments|default=''}" placeholder="预付款项"  name="prepayments">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">对外投资：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.foreign_investment|default=''}" placeholder="对外投资"  name="foreign_investment">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">理财：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.manage_money|default=''}" placeholder="理财"  name="manage_money">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">其他：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.other|default=''}" placeholder="其他"  name="other">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">生产经营项目：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <span class="select-box" style="width: 150px;">
+					<select class="select" name="manage_project"  >
+                        <option value="">==请选择==</option>
+                        {volist name="manage_project" id="list" key="key"}
+                        <option  {if isset($finance_info)&&($finance_info['manage_project']==$key-1)} selected="selected"{/if} value="{$key-1}">{$list}</option>
+                        {/volist}
+                    </select>
+				</span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">年经营项目收入：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.project_income|default=''}" placeholder="年经营项目收入"  name="project_income">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">年经营项目支出：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$finance_info.project_spend|default=''}" placeholder="年经营项目支出"  name="project_spend">
+            </div>
+        </div>
+
+
+
+
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                {if isset($finance_info)&&$finance_info!=''}
+                <a class="btn btn-primary radius"  onclick="edit()"> 提交</a>
+                {else}
+                <a class="btn btn-primary radius"  onclick="add()"> 提交</a>
+                {/if}
+                <input type="reset" value="重置" class="btn btn-primary radius" >
+            </div>
+        </div>
+    </form>
+</article>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=33b529efc5e27ef1eb1f674704afd789"></script>
+<script type="text/javascript">
+    $(function(){
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+
+
+    });
+
+    function add(){
+        $.ajax({
+            url:'{:url("finance/add")}',
+            type:'post',
+            data:$('form').serialize(),
+            success:function (data) {
+                if(data.code==0){
+                    layer.msg(data.msg);
+                    parent.location.reload();
+                    setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))",2000);
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+    }
+    function edit(){
+        $.ajax({
+            url:'{:url("finance/edit")}',
+            type:'post',
+            data:$('form').serialize(),
+            success:function (data) {
+                if(data.code==0){
+                    layer.msg(data.msg);
+                    parent.location.reload();
+                    setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))",2000);
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+
+    }
+
+
+
+</script>
+
+{/block}

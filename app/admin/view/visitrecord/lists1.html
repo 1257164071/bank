@@ -1,0 +1,112 @@
+{extend name="base" /}
+
+{block name="content"}
+
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
+        <span class="c-gray en">&gt;</span>
+        客户拜访
+        <span class="c-gray en">&gt;</span>
+        我的拜访记录
+        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
+    </nav>
+    <div class="Hui-article">
+        <article class="cl pd-20">
+            <form action="{:url('lists')}" method="post">
+                <div class="text-c">
+                    拜访时间：
+                    <input type="text" onfocus="WdatePicker()" id="datemin" name="start_visit_time" value="{$post.start_visit_time|default=''}" class="input-text Wdate" style="width:120px;">
+                    -
+                    <input type="text" onfocus="WdatePicker()" id="datemax" name="end_visit_time" value="{$post.end_visit_time|default=''}" class="input-text Wdate" style="width:120px;">
+                    客户名称：<input type="text" class="input-text" style="width:150px" placeholder="客户名称" value="{$post.name|default=''}" name="name">
+                    联系方式：<input type="text" class="input-text" style="width:150px" placeholder="手机号" value="{$post.tel_number|default=''}" name="tel_number">
+
+                    <button name="" id="" class="btn btn-success radius" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+                </div>
+            </form>
+
+            <div class="cl pd-5 bg-1 bk-gray mt-10">
+
+                <span class="r">共有数据：<strong>{:count($info)}</strong> 条</span>
+            </div>
+            <div class="mt-10">
+                <table class="table table-border table-bordered table-hover table-bg table-sort">
+                    <thead>
+                    <tr class="text-c">
+
+                        <th width="80">编号</th>
+                        <th width="80">客户名称</th>
+                        <th width="80">证件号码</th>
+                        <th width="80">拜访内容</th>
+
+                        <th width="120">客户现住址</th>
+                        <th width="75">联系方式</th>
+                        <th width="75">最近拜访时间</th>
+                        <th width="75">申请状态</th>
+                        <th width="120">操作</th>
+                    </tr>
+                    </thead>
+                    {volist name="$info" id="list"}
+                    <tbody>
+                        <tr class="text-c">
+                            <td>{$list.id}</td>
+                            <td>{$list.name}</td>
+                            <td>{$list.card_number}</td>
+                            <td>{$list.content}</td>
+                            <td>{$list.current_address}</td>
+                            <td>{$list.tel_number}</td>
+                            <td>{:date('Y-m-d',$list.visit_time)}</td>
+                            <td>{if !empty($list.status)}{:get_name('apply_status',$list.status)}{/if}</td>
+                            <td class="f-14 td-manage">
+                                {if empty($list.status)} <a  class="btn btn-success radius" href="javascript:;" onclick="submit('添加申请','{:url('apply',array('client_id'=>$list['client_id'],'user_id'=>$user['id'],'id'=>$list.id))}','','510')" ><i class="Hui-iconfont">&#xe692;</i>申请</a>{else}<a class="btn btn-warning radius" href="{:url('applydetail',array('record_id'=>$list.id))}" ><i class="Hui-iconfont">&#xe695;</i>审批</a>{/if}&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a style="text-decoration:none"  href="{:url('detail',array('client_id'=>$list['client_id']))}" title="查看拜访记录详情"><i class="Hui-iconfont">&#xe720;</i>查看拜访详情</a>&nbsp;&nbsp;
+                            </td>
+                        </tr>
+                    </tbody>
+                    {/volist}
+
+                </table>
+            </div>
+            <div class="page">{$page}</div>
+        </article>
+    </div>
+</section>
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/static/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+    $(function(){
+//        $('.table-sort').dataTable({
+//            "aaSorting": [[ 0, "desc" ]],//默认第几个排序
+//            "bStateSave": true,//状态保存
+//            "aoColumnDefs": [
+//                //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+//                {"orderable":false,"aTargets":[]}// 不参与排序的列
+//            ]
+//        });
+//        $('.table-sort tbody').on( 'click', 'tr', function () {
+//            if ( $(this).hasClass('selected') ) {
+//                $(this).removeClass('selected');
+//            }
+//            else {
+//                table.$('tr.selected').removeClass('selected');
+//                $(this).addClass('selected');
+//            }
+//        });
+    });
+
+    function submit(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+
+
+
+
+
+</script>
+
+{/block}
+

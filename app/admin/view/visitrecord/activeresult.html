@@ -1,0 +1,79 @@
+{extend name="base" /}
+
+{block name="content"}
+
+<div class="Hui-article-box">
+
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> {$title1}<span class="c-gray en">&gt;</span>{$title2}<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:history.go(-1);" title="返回" >返回</a></nav>
+
+
+    <h4 style=" text-align: center;">活动的效果和心得</h4>
+    <div style="width: 1000px;margin: 0 auto;">
+        <div class="panel panel-default">
+            <div class="panel-header" style="display: flex;justify-content: space-between;"><span>详情</span>
+                <a href="javascript:;" onclick="submit('添加活动的效果和心得','{:url('activeresult_add',array('activity_id'=>$activity_id))}','','510')" ><i class="Hui-iconfont">&#xe600;</i>添加</a></div>
+            <div class="panel-body">
+
+                <table class="table table-border table-bordered table-hover table-bg table-sort">
+                    <thead >
+                    <tr class="text-c">
+                        <th width="80">编号</th>
+                        <th width="100">活动名称</th>
+                        <th width="200">活动效果</th>
+                        <th width="200">活动心得</th>
+                        <th width="100">添加时间</th>
+                        <th width="150">操作</th>
+                    </tr>
+                    </thead>
+                    {volist name="info" id="list" key="key"}
+                    <tbody>
+                    <tr class="text-c">
+                        <td>{$list.id}</td>
+                        <td><a href="{:url('visit_detail',array('visit_id'=>$list['id']))}">{$list.title}</a></td>
+                        <td>{$list.activity_result}</td>
+                        <td>{$list.activity_xinde}</td>
+                        <td>{:date('Y-m-d',$list.add_time)}</td>
+                        <td class="td-manage">
+                            <a href="javascript:;" onclick="submit('修改活动的效果和心得','{:url('activeresult_edit',array('id'=>$list['id']))}','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i>编辑</a>&nbsp;&nbsp;
+                            <a style="text-decoration:none"  href="{:url('activeresult_del',array('id'=>$list['id']))}" title="删除活动的效果和心得"><i class="Hui-iconfont">&#xe6e2;</i>删除</a>&nbsp;&nbsp;
+                            <!-- <a href="{:url('visit_detail',array('visit_id'=>$list['id']))}" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe725;</i>查看</a> </td> -->
+                        </td>
+                    </tr>
+                    </tbody>
+                    {/volist}
+                </table>
+                <div class="page">{$page}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function(){
+        $('.table-sort').dataTable({
+            "aaSorting": [[ 1, "desc" ]],//默认第几个排序
+            "bStateSave": true,//状态保存
+            "aoColumnDefs": [
+                //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+                {"orderable":false,"aTargets":[0,4,6,8]}// 制定列不参与排序
+            ]
+        });
+        $('.table-sort tbody').on( 'click', 'tr', function () {
+            if ( $(this).hasClass('selected') ) {
+                $(this).removeClass('selected');
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });
+    });
+    function submit(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+</script>
+
+
+
+{/block}

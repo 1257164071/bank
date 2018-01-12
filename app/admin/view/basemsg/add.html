@@ -1,0 +1,337 @@
+{extend name="base" /}
+
+{block name="main"}
+<style type="text/css">
+.gridlist{border:1px solid #3bb4f2;border-top:0;border-bottom:0;width:228px;}
+.gridarea{height:28px;line-height:25px;border-bottom:1px solid #3bb4f2;padding-left:10px;}
+
+</style>
+<article class="cl pd-20">
+    <form action="" method="post" class="form form-horizontal" id="form-member-add">
+        <input type="hidden" name="client_id" value="{$client_id|default=''}" >
+        <input type="hidden" name="id" value="{$base.id|default=''}" >
+ 
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">婚姻状况：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <span class="select-box">
+                    <select class="select" name="marriage_status">
+                        <option value="">选择婚姻状况</option>
+                        <option {if isset($base.marriage_status)&&($base.marriage_status eq 0)}selected="selected"{/if} value="0">未婚</option>
+                        <option {if isset($base.marriage_status)&&($base.marriage_status eq 1)}selected="selected"{/if} value="1">已婚</option>
+                        <option {if isset($base.marriage_status)&&($base.marriage_status eq 2)}selected="selected"{/if} value="2">离异</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">结婚证登记日期：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" onfocus="WdatePicker()" value="<?php echo (isset($base['married_record_date']) && ($base['married_record_date'] !== '')?date('Y-m-d',$base['married_record_date']):''); ?>"  name="married_record_date"class="input-text Wdate" >
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">有无子女：</label>
+            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                <div class="radio-box">
+                    <input name="children" type="radio"  value="1" id="children-1" checked >
+                    <label for="children-1">有</label>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" id="children-2" value="0" name="children" <?php echo (isset($base['children']) && ($base['children'] == '0')?'checked':''); ?>>
+                    <label for="children-2">无</label>
+                </div>
+
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">是否涉农：</label>
+            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                <div class="radio-box">
+                    <input name="is_farmer" type="radio" value="0" id="farmer-1" checked >
+                    <label for="farmer-1">否</label>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" id="farmer-2" value="1" name="is_farmer"<?php echo (isset($base['is_farmer']) && ($base['is_farmer'] == '1')?'checked':''); ?> >
+                    <label for="farmer-2">是</label>
+                </div>
+
+            </div>
+        </div>
+        
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>行政区划（省）：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                  <select name="province" id="province" class="select" style="height:32px;">
+                     {if condition="isset($province)"}
+                     <option value="{$province.code}" selected="selected">{$province.name}</option>
+                     {/if}
+	                 {:get_province()}
+	              </select>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>行政区划（市）：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <select name="city" id="city" class="select" style="height:32px;">
+                    {if condition="isset($city)"}
+                    <option value="{$city.code}" selected="selected">{$city.name}</option>
+                    {/if}
+                    <option value="">==请选择==</option>
+                </select>
+              
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>行政区划（区）：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                  <select name="area" id="area" class="select" style="height:32px;">
+	                    {if condition="isset($area)"}
+	                    <option value="{$area.code}" selected="selected">{$area.name}</option>
+	                    {/if}
+	                  <option value="">==请选择==</option>
+	              </select>
+            </div>
+        </div>
+         <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>小区/村镇：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+             <input type="text" class="input-text" style="width:230px" placeholder="输入小区" value="" name="search" id="grid">
+             <a class="btn btn-primary radius"  onclick="grid()">搜索</a>
+             <a class="btn btn-primary radius"  onclick="gridadd()">新增</a>
+             <div id="gridlist" class="gridlist">
+              {if condition="isset($gridnow) && !empty($gridnow)"}
+                <div class="gridarea"><input name="grid" value="{$gridnow.id}" type="radio" checked="checked">{$gridnow.name}</div>
+              {/if}
+             </div>
+            </div>
+        </div>
+         <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>户号：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+	             <input type="text" class="input-text" style="width:50px" placeholder="" value="{$hs.lou|default=''}" name="lou" id="">号楼&nbsp;&nbsp;
+	             <select name="danyuan">
+	                <option value="0" {if condition="isset($hs.danyuan) && $hs.danyuan eq 0"}selected="selected"{/if}>选择</option>
+	             	<option value="1" {if condition="isset($hs.danyuan) && $hs.danyuan eq 1"}selected="selected"{/if}>1单元</option>
+	             	<option value="2" {if condition="isset($hs.danyuan) && $hs.danyuan eq 2"}selected="selected"{/if}>2单元</option>
+	             	<option value="3" {if condition="isset($hs.danyuan) && $hs.danyuan eq 3"}selected="selected"{/if}>3单元</option>
+	             	<option value="4" {if condition="isset($hs.danyuan) && $hs.danyuan eq 4"}selected="selected"{/if}>4单元</option>
+	             	<option value="5" {if condition="isset($hs.danyuan) && $hs.danyuan eq 5"}selected="selected"{/if}>5单元</option>
+	             	<option value="6" {if condition="isset($hs.danyuan) && $hs.danyuan eq 6"}selected="selected"{/if}>6单元</option>
+	             </select> 单元   &nbsp;&nbsp;
+	             <input type="text" class="input-text" style="width:50px" placeholder="" value="{$hs.hu|default=''}" name="hu" id=""> 户号(例如：301)    &nbsp;&nbsp;
+	               <select name="huxing">
+                       <option value="1" {if isset($base.huxing)&&($base.huxing eq 1)}selected="selected"{/if}>1户</option>
+	                   <option value="2" {if isset($base.huxing)&&($base.huxing eq 2)}selected="selected"{/if}>2户</option>
+	                   <option value="3" {if isset($base.huxing)&&($base.huxing eq 3)}selected="selected"{/if} {if !isset($base.huxing) || empty($base.huxing)}selected="selected"{/if}>3户</option>
+	                   <option value="4" {if isset($base.huxing)&&($base.huxing eq 4)}selected="selected"{/if}>4户</option>
+	                   <option value="5" {if isset($base.huxing)&&($base.huxing eq 5)}selected="selected"{/if}>5户</option>
+	                   <option value="6" {if isset($base.huxing)&&($base.huxing eq 6)}selected="selected"{/if}>6户</option>
+	                   <option value="7" {if isset($base.huxing)&&($base.huxing eq 7)}selected="selected"{/if}>7户</option>
+	                   <option value="8" {if isset($base.huxing)&&($base.huxing eq 8)}selected="selected"{/if}>8户</option>
+	                   <option value="9" {if isset($base.huxing)&&($base.huxing eq 9)}selected="selected"{/if}>9户</option>
+	                   <option value="10" {if isset($base.huxing)&&($base.huxing eq 10)}selected="selected"{/if}>10户</option>
+	                   <option value="15" {if isset($base.huxing)&&($base.huxing eq 15)}selected="selected"{/if}>15户</option>
+	                   <option value="20" {if isset($base.huxing)&&($base.huxing eq 20)}selected="selected"{/if}>20户</option>
+	                   <option value="25" {if isset($base.huxing)&&($base.huxing eq 25)}selected="selected"{/if}>25户</option>
+	                   <option value="30" {if isset($base.huxing)&&($base.huxing eq 30)}selected="selected"{/if}>30户</option>
+	                   <option value="50" {if isset($base.huxing)&&($base.huxing eq 50)}selected="selected"{/if}>50户</option>
+	              </select>
+	                                   户/ 每层
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">现住地址：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$base.current_address|default=''}" placeholder="现住地址"  name="current_address">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">现住址邮编：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$base.current_postcode|default=''}" placeholder="现住址邮编"  name="current_postcode">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">通讯地址：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$base.corresponding_address|default=''}" placeholder="通讯地址"  name="corresponding_address">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">通讯邮编：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$base.corresponding_postcode|default=''}" placeholder="通讯邮编"  name="corresponding_postcode">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">最高学位：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <span class="select-box">
+                    <select class="select" name="highest_degree">
+                        <option value="">选择学位</option>
+                        <option {if isset($base.highest_degree)&&($base.highest_degree eq 0)}selected="selected"{/if} value="0">无</option>
+                        <option {if isset($base.highest_degree)&&($base.highest_degree eq 1)}selected="selected"{/if} value="1">学士学位</option>
+                        <option {if isset($base.highest_degree)&&($base.highest_degree eq 2)}selected="selected"{/if} value="2">硕士学位</option>
+                        <option {if isset($base.highest_degree)&&($base.highest_degree eq 3)}selected="selected"{/if} value="3">博士学位</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">最高学历：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <span class="select-box">
+                    <select class="select" name="highest_education">
+                        <option value="">选择学历</option>
+                        <option {if isset($base.marriage_status)&&($base.marriage_status eq 0)}selected="selected"{/if} value="0">初中水平</option>
+                        <option {if isset($base.marriage_status)&&($base.marriage_status eq 1)}selected="selected"{/if} value="1">高中水平</option>
+                        <option {if isset($base.marriage_status)&&($base.marriage_status eq 2)}selected="selected"{/if} value="2">大专</option>
+                        <option {if isset($base.marriage_status)&&($base.marriage_status eq 3)}selected="selected"{/if} value="3">本科</option>
+                        <option {if isset($base.marriage_status)&&($base.marriage_status eq 4)}selected="selected"{/if} value="4">硕士</option>
+                        <option {if isset($base.marriage_status)&&($base.marriage_status eq 5)}selected="selected"{/if} value="5">博士</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">行业：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$base.industry_category|default=''}" placeholder="行业分类"  name="industry_category">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">居住状况：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$base.live_status|default=''}" placeholder="居住状况"  name="live_status">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">是否扶贫户：</label>
+            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                <div class="radio-box">
+                    <input name="is_poor" type="radio"  value="1" id="is_poor-1" checked>
+                    <label for="is_poor-1">是</label>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" id="is_poor-2" value="0" name="is_poor" <?php echo (isset($base['is_poor']) && ($base['is_poor'] == '0')?'checked':''); ?> >
+                    <label for="is_poor-2">否</label>
+                </div>
+
+            </div>
+        </div>
+         <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">工作单位：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$base.workunit|default=''}" placeholder="居住状况"  name="workunit">
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                {if isset($base)&&$base!=''}
+                <a class="btn btn-primary radius"  onclick="edit()"> 提交</a>
+                {else}
+                <a class="btn btn-primary radius"  onclick="add()"> 提交</a>
+                {/if}
+                <!--<input class="btn btn-primary radius" onclick="submit()" type="button" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">-->
+            </div>
+        </div>
+    </form>
+</article>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=33b529efc5e27ef1eb1f674704afd789"></script>
+<script type="text/javascript">
+
+$("#province").change(function () {
+    $("#area option").remove();
+    $("#area").append('<option value="">==请选择==</option>');
+    setRegion(this,"city"); });
+$("#city").change(function () {  setRegion(this,"area"); });
+
+function setRegion(parent,child){
+    $.post('/admin/index/region', {region_id:$(parent).val()},
+            function(data){
+                $("#"+child).html(data);
+            },
+            "JSON");
+}
+
+    $(function(){
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+
+
+    });
+
+    function add(){
+        $.ajax({
+            url:'{:url("basemsg/add")}',
+            type:'post',
+            data:$('form').serialize(),
+            success:function (data) {
+                if(data.code==0){
+                    layer.msg(data.msg);
+                    parent.location.reload();
+                    setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))",2000);
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+    }
+    function edit(){
+        $.ajax({
+            url:'{:url("basemsg/edit")}',
+            type:'post',
+            data:$('form').serialize(),
+            success:function (data) {
+                if(data.code==0){
+                    layer.msg(data.msg);
+                    parent.location.reload();
+                    setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))",2000);
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+    }
+
+    function grid(){
+         var grid = $('#grid').val();
+         var changUrl="{:url('admin/index/checkgrid')}";  
+         $.post(changUrl,{grid:grid},function(data){
+             $("#gridlist").html(data);
+         },"json");
+    }
+    
+
+    function gridadd(){
+         var grid = $('#grid').val();
+         var changUrl="{:url('admin/dataconfig/gridadd')}";  
+         $.ajax({
+   		  url:'{:url("admin/dataconfig/gridadd")}',
+   		  type:'post',
+   		  data:{name:grid},
+   		  success:function(data){
+   			  if(data.code==0){
+   				  layer.msg(data.msg);
+   			  }else{
+   				  layer.msg(data.msg);
+   			  }
+   		  }
+   	  });
+    }
+
+</script>
+
+{/block}

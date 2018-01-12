@@ -1,0 +1,40 @@
+{extend name="base" /}
+
+{block name="main"}
+<article class="cl pd-20">
+                 <br/>
+                 <table class="table table-border table-bordered table-hover">
+                     <tr>
+                        <td scope="col" colspan="2" style="text-align: center;font-weight: bold;">保全情况</td>
+                    </tr>
+                   
+                    <tr class="text-c">
+                        <td>保全标的</td>
+                        <td>{$loan_baoquan_info.bqbiaodi}</td>
+                    </tr><tr class="text-c">
+                        <td>查封财产类别</td>
+                        <td>{:get_name('cfcc_type',$loan_baoquan_info.cfcc_type)}</td>
+                    </tr><tr class="text-c">
+                        <td>查封起日</td>
+                        <td>{:date('Y-m-d',$loan_baoquan_info.cfqr_time)}</td>
+                    </tr><tr class="text-c">
+                        <td>查封止日</td>
+                        <td>{:date('Y-m-d',$loan_baoquan_info.cfzr_time)}</td>
+                    </tr><tr class="text-c">
+                        <td>续封止日</td>
+                        <td>{:date('Y-m-d',$loan_baoquan_info.xfzr_time)}</td>
+                    </tr><tr class="text-c">
+                        <td>查封财产详情</td>
+                        <td>{$loan_baoquan_info.cf_detail}</td>
+                    </tr><tr class="text-c">
+                        <td>是否提出财产保全异议</td>
+                        <td>{if !empty($loan_baoquan_info.is_bqyy)&&$loan_baoquan_info.is_bqyy==1}是{else}否{/if}</td>
+                    </tr><tr class="text-c">
+                        <td>财产保全异议内容</td>
+                        <td>{$loan_baoquan_info.bqyy_content}</td>
+                    </tr>
+                     </table>
+
+
+ </article>
+ {/block}

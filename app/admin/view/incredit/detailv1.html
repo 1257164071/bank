@@ -1,0 +1,85 @@
+{extend name="base" /}
+
+{block name="main"}
+<article class="cl pd-20">
+          <h4 class="text-c">贷款信息</h4><br/>
+                 <table class="table table-border table-bordered table-hover">
+                    <tr class="text-c">
+                    	<td>合同号:</td>
+                    	<td>{$loan.contact_number}</td>
+                    </tr>
+                    <tr class="text-c">
+                    	<td>借据号:</td>
+                    	<td>{$loan.ious_number}</td>
+                    </tr>
+                    <tr class="text-c">
+                    	<td>主担保方式:</td>
+                    	<td>
+                                {if condition="$loan.guarantee_way eq 1"}保证 
+                                {elseif condition="$loan.guarantee_way eq 2"}抵押 
+                                {elseif condition="$loan.guarantee_way eq 3"}质押
+                                {elseif condition="$loan.guarantee_way eq 4"}留置
+                                {elseif condition="$loan.guarantee_way eq 5"}定金
+                                {/if}
+                             </td>
+                    </tr>
+                    <tr class="text-c">
+                    	<td>贷款用途:</td>
+                    	<td>
+                    	        {if condition="$loan.loan_using eq 1"}个人贷款
+                                {elseif condition="$loan.loan_using eq 2"}企业贷款
+                                {elseif condition="$loan.loan_using eq 3"}房贷
+                                {elseif condition="$loan.loan_using eq 4"}车贷
+                                {/if}
+                    	</td>
+                    </tr>
+                    <tr class="text-c">
+                    	<td>贷款金额:</td>
+                    	<td>{$loan.loan_money}</td>
+                    </tr>
+                    <tr class="text-c">
+                    	<td>发放金额:</td>
+                    	<td>{$loan.provide_loan_money}</td>
+                    </tr>
+                    <tr class="text-c">
+                    	<td>欠息金额:</td>
+                    	<td>{$loan.debt_money}</td>
+                    </tr>
+                    <tr class="text-c">
+                    	<td>执行利率:</td>
+                    	<td>{$loan.use_rate}</td>
+                    </tr>
+                    <tr class="text-c">
+                    	<td>发放日期:</td>
+                    	<td>{$loan.provide_time|date="Y-m-d",###}</td>
+                    </tr>
+                    <tr class="text-c">
+                    	<td>到期日期:</td>
+                    	<td>{$loan.arrive_time|date="Y-m-d",###}</td>
+                    </tr>
+                    <tr class="text-c">
+                    	<td>结算日期:</td>
+                    	<td>{$loan.settlement_time|date="Y-m-d",###}</td>
+                    </tr>
+                    <tr class="text-c">
+                    	<td>贷款状态:</td>
+                    	<td>
+                                {if condition="$loan.loan_status eq 1"}还款中
+                                {elseif condition="$loan.loan_status eq 2"}还清
+                                {elseif condition="$loan.loan_status eq 3"}<span class="c-red">逾期</span>
+                                {elseif condition="$loan.loan_status eq 4"}逾期-清收完成
+                                {/if}
+                        </td>
+                    </tr>
+                    <tr class="text-c">
+                    	<td>办理人:</td>
+                    	<td>{$loan.settlement_time|date="Y-m-d",###}</td>
+                    </tr>
+                    <tr class="text-c">
+                    	<td>录入时间:</td>
+                    	<td>{$loan.settlement_time|date="Y-m-d",###}</td>
+                    </tr>
+                </table>
+		</article>
+       <br><br>
+{/block}

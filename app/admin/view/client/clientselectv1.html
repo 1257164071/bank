@@ -1,0 +1,520 @@
+{extend name="base" /}
+
+{block name="content"}
+
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> {$title1}<span class="c-gray en">&gt;</span>{$title2}<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="Hui-article">
+        <form action="{:url('client/clientresult')}" method="get">
+            <div class="panel panel-secondary mt-21">
+                <div class="panel-header">选择筛选条件</div>
+                <div class="panel-body">
+                    <table class="table table-border table-bordered table-hover">
+                        <div id="cleint">
+                        <tr>
+                            <td style="width: 70px;">客户名称</td>
+                            <td style="width: 200px;"><input type="text" class="input-text" name="name"/></td>
+                            <td style="width: 70px;">证件号码</td>
+                            <td style="width: 200px;">
+                                <input type="text" class="input-text" name="card_number"/>
+                            </td>
+                            <td style="width: 70px;">婚姻状况</td>
+                            <td style="width: 200px;">
+                                <span class="select-box" >
+                                    <select class="select" name="marriage_status"  >
+                                        <option value="">==请选择==</option>
+                                        <option value="0">未婚</option>
+                                        <option value="1">已婚</option>
+                                        <option value="2">离异</option>
+                                    </select>
+				                </span>
+                            </td>
+                            <td style="width: 70px;">客户经理</td>
+                            <td style="width: 200px;">
+                                <span class="select-box" >
+                                    <select class="select" name="belong_user_id"  >
+                                        <option value="">==请选择==</option>
+                                        {foreach name="manger" item="user"}
+                                         <option    value="{$user.id}">{$user.real_name}</option>
+                                        {/foreach}
+                                    </select>
+				                </span>
+                            </td>
+
+
+                        </tr>
+                        <tr>
+                            <td style="width: 70px;">配偶姓名</td><td style="width: 200px;"><input type="text" class="input-text" name="spouse_name"/></td>
+                            <td style="width: 70px;">配偶证件号码</td><td style="width: 200px;"><input type="text" class="input-text" name="spouse_card_number"/></td>
+                            <td style="width: 70px;">有无不良记录</td>
+                            <td style="width: 200px;">
+                                <div class="radio-box">
+                                    <input name="bad_record" type="radio"  value="0" id="bad_record0" >
+                                    <label for="bad_record0">无</label>
+                                </div>
+                                <div class="radio-box">
+                                    <input type="radio" id="bad_record1" value="1" name="bad_record" >
+                                    <label for="bad_record1">有</label>
+                                </div>
+                            </td>
+
+                            <td style="width: 70px;">所属机构</td>
+                            <td style="width: 200px;">
+                                <span class="select-box" >
+                                        <select class="select" name="belong_organization"  >
+                                            <option value="">==请选择==</option>
+                                            {volist name="banklist" id="bank"}
+                                                <option value="{$bank.id}" >{$bank.bankname}</option>
+                                                {volist name="bank.child" id="b"}
+                                                <option value="{$b.id}"  style="padding-left:30px;">|—{$b.bankname}</option>
+                                                {/volist}
+                                            {/volist}
+                                        </select>
+                                </span>
+                            </td>
+                        </tr>
+                    </div>
+
+                        <tr>
+                            <td >是否扶贫</td>
+                            <td >
+                                <div class="radio-box">
+                                    <input name="is_poor" type="radio"  value="0" id="is_poor0"  >
+                                    <label for="is_poor0">否</label>
+                                </div>
+                                <div class="radio-box">
+                                    <input type="radio" id="is_poor1" value="1" name="is_poor" >
+                                    <label for="is_poor1">是</label>
+                                </div>
+                            </td>
+
+                            <td style="width: 70px;">是否涉农</td>
+                            <td style="width: 200px;">
+                                <div class="radio-box">
+                                    <input name="is_farmer" type="radio"  value="0" id="farmer0"  >
+                                    <label for="farmer0">否</label>
+                                </div>
+                                <div class="radio-box">
+                                    <input type="radio" id="farmer1" value="1" name="is_farmer" >
+                                    <label for="farmer1">是</label>
+                                </div>
+                            </td>
+                            <td>手机号</td>
+                            <td>
+                                <input type="text" class="input-text" name="tel_number"/>
+                            </td>
+                            <td >有无子女</td>
+                            <td>
+                                <div class="radio-box">
+                                    <input name="children" type="radio"  value="0" id="children0"  >
+                                    <label for="children0">无</label>
+                                </div>
+                                <div class="radio-box">
+                                    <input type="radio" id="children1" value="1" name="children" >
+                                    <label for="children1">有</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>签约类型</td>
+                            <td>
+                                 <span class="select-box" >
+                                    <select class="select" name="sign_type"  >
+                                        <option value="">==请选择==</option>
+                                        {volist name="sign_type" id="list" key="key"}
+                                        <option value="{$key-1}">{$list}</option>
+                                        {/volist}
+                                    </select>
+                                </span>
+                            </td>
+                            <td>签约网点号</td>
+                            <td>
+                                 <span class="select-box" >
+                                    <select class="select" name="sign_website_number"  >
+                                        <option value="">==请选择==</option>
+                                        {volist name="banklist" id="bank"}
+                                            <option value="{$bank.id}" >{$bank.bankname}</option>
+                                            {volist name="bank.child" id="b"}
+                                            <option value="{$b.id}"  style="padding-left:30px;">|—{$b.bankname}</option>
+                                            {/volist}
+                                        {/volist}
+                                    </select>
+                                </span>
+                            </td>
+
+                            <td>签约时间</td>
+                            <td>
+                                <input style="width: 130px;"type="text" onfocus="WdatePicker()"value=""  name="start_sign_time"class="input-text Wdate" >-<input type="text" style="width: 130px;" onfocus="WdatePicker()"value=""  name="end_sign_time"class="input-text Wdate" >
+                            </td>
+                            <td>客户评级</td>
+                            <td>
+                                <span class="select-box" >
+                                    <select class="select" name="client_grade"  >
+                                        <option value="">==请选择==</option>
+                                        {volist name="client_grade" id="list" key="key"}
+                                        <option value="{$key-1}">{$list}</option>
+                                        {/volist}
+                                    </select>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>家庭总资产</td>
+                            <td><input type="text" style="width: 100px;" class="input-text" name="start_family_money"/>万元-<input type="text" style="width: 100px;" class="input-text" name="end_family_money"/>万元</td>
+                            <td>家庭总负债</td>
+                            <td><input type="text" style="width: 100px;" class="input-text" name="start_family_debt"/>万元-<input type="text" style="width: 100px;" class="input-text" name="end_family_debt"/>万元</td>
+                            <td>家庭年收入</td>
+                            <td><input type="text" style="width: 100px;" class="input-text" name="start_family_year_income"/>万元-<input type="text" style="width: 100px;" class="input-text" name="end_family_year_income"/>万元</td>
+                            <td>家庭年支出</td>
+                            <td><input type="text" style="width: 100px;" class="input-text" name="start_family_year_spending"/>万元-<input type="text" style="width: 100px;" class="input-text" name="end_family_year_spending"/>万元</td>
+                        </tr>
+                        <tr>
+                            <td>工作单位</td>
+                            <td>
+                                <input type="text" class="input-text" name="workunit"/>
+                            </td>
+                            <td >现住址</td>
+                            <td >
+                                <input type="text" class="input-text" name="current_address"/>
+                            </td>
+                            <td colspan="4"></td>
+                        </tr>
+                        <!--存款-->
+                        <tr>
+                            <td>存款开户行</td>
+                            <td>
+                                <span class="select-box" >
+                                    <select class="select" name="cun_bank_id"  >
+                                        <option value="">==请选择==</option>
+                                        {volist name="banklist" id="bank"}
+                                        <option value="{$bank.id}" >{$bank.bankname}</option>
+                                        {volist name="bank.child" id="b"}
+                                        <option value="{$b.id}"  style="padding-left:30px;">|—{$b.bankname}</option>
+                                        {/volist}
+                                        {/volist}
+                                    </select>
+                                </span>
+                            </td>
+                            <td>存款类型</td>
+                            <td>
+                                 <span class="select-box" >
+                                    <select class="select" name="deposit_type"  >
+                                        <option value="">==请选择==</option>
+                                        {volist name="deposit_type" id="list" key="key"}
+                                        <option value="{$key-1}">{$list}</option>
+                                        {/volist}
+                                    </select>
+                                </span>
+                            </td>
+                            <td colspan="4"></td>
+                        </tr>
+                        <!--新增贷款的查询-->
+                        <tr>
+                            <td >业务种类</td>
+                            <td >
+                                <span class="select-box" >
+                                    <select class="select" name="besiness_type"  >
+                                        <option value="">==请选择==</option>
+                                        {volist name="besiness_type" id="list" key="key"}
+                                        <option value="{$key-1}">{$list}</option>
+                                        {/volist}
+                                    </select>
+                                </span>
+                            </td>
+                            <td >信用等级</td>
+                            <td>
+                                <span class="select-box" >
+                                    <select class="select" name="credit_class"  >
+                                        <option value="">==请选择==</option>
+                                        {volist name="credit_class" id="list" key="key"}
+                                        <option value="{$key-1}">{$list}</option>
+                                        {/volist}
+                                    </select>
+                                </span>
+                            </td>
+                            <td>贷款账号</td>
+                            <td>
+                                <input type="text" class="input-text" name="loan_account"/>
+                            </td>
+                            <td >扣款账号</td>
+                            <td >
+                                <input type="text" class="input-text" name="koukuan_account"/>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td >科目号/名称</td>
+                            <td >
+                                <span class="select-box" >
+                                    <select class="select" name="subject_number"  >
+                                        <option value="">==请选择==</option>
+                                        {volist name="subject_number" id="list" key="key"}
+                                        <option value="{$key-1}">{$key-1}/{$list}</option>
+                                        {/volist}
+                                    </select>
+                                </span>
+                            </td>
+                            <td>客户号</td>
+                            <td>
+                                <input type="text" class="input-text" name="client_number"/>
+                            </td>
+                            <td >借据号</td>
+                            <td>
+                                <input type="text" class="input-text" name="ious_number"/>
+                            </td>
+
+                            <td >贷款形态（五级）</td>
+                            <td >
+                                <input type="text" class="input-text" name="five_loan_form"/>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td >贷款形态（十级）</td>
+                            <td >
+                                <input type="text" class="input-text" name="ten_loan_form"/>
+                            </td>
+                            <td>利率执行方式</td>
+                            <td>
+                                <span class="select-box" >
+                                    <select class="select" name="rate_runmode"  >
+                                        <option value="">==请选择==</option>
+                                        {volist name="rate_runmode" id="list" key="key"}
+                                        <option value="{$key-1}">{$list}</option>
+                                        {/volist}
+                                    </select>
+                                </span>
+                            </td>
+                            <td >首贷日</td>
+                            <td>
+                                <input style="width: 130px;"type="text" onfocus="WdatePicker()"value=""  name="start_firstloan_time"class="input-text Wdate" >-<input type="text" style="width: 130px;" onfocus="WdatePicker()"value=""  name="end_firstloan_time"class="input-text Wdate" >
+                            </td>
+
+                            <td >主办客户经理</td>
+                            <td >
+                                <input type="text" class="input-text" name="main_manager"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>贷款账户状态</td>
+                            <td>
+                                <span class="select-box" >
+                                        <select class="select" name="account_status"  >
+                                            <option value="">==请选择==</option>
+                                            {volist name="account_status" id="list" key="key"}
+                                            <option value="{$key-1}">{$list}</option>
+                                            {/volist}
+                                        </select>
+                                </span>
+                            </td>
+                            <td>贷款余额</td>
+                            <td><input type="text" style="width: 100px;" class="input-text" name="start_remian_money"/>万元-<input type="text" style="width: 100px;" class="input-text" name="end_remian_money"/>万元</td>
+                            <td>贷款用途</td>
+                            <td>
+                                 <span class="select-box" >
+                                        <select class="select" name="loan_using"  >
+                                            <option value="">==请选择==</option>
+                                            {volist name="loan_using" id="list" key="key"}
+                                            <option value="{$key-1}">{$list}</option>
+                                            {/volist}
+                                        </select>
+                                </span>
+
+                            </td>
+                            <td>担保方式</td>
+                            <td>
+                                <span class="select-box" >
+                                        <select class="select" name="guarantee_way"  >
+                                            <option value="">==请选择==</option>
+                                            {volist name="guarantee_way" id="list" key="key"}
+                                            <option value="{$key-1}">{$list}</option>
+                                            {/volist}
+                                        </select>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>贷款发放日期</td>
+                            <td>
+                                <input style="width: 130px;"type="text" onfocus="WdatePicker()"value=""  name="start_provide_time"class="input-text Wdate" >-<input type="text" style="width: 130px;" onfocus="WdatePicker()"value=""  name="end_provide_time"class="input-text Wdate" >
+                            </td>
+                            <td>贷款到期日期</td>
+                            <td>
+                                <input style="width: 130px;"type="text" onfocus="WdatePicker()"value=""  name="start_arrive_time"class="input-text Wdate" >-<input type="text" style="width: 130px;" onfocus="WdatePicker()"value=""  name="end_arrive_time"class="input-text Wdate" >
+                            </td>
+                            <td>欠息金额</td>
+                            <td><input type="text" style="width: 100px;" class="input-text" name="start_debt_money"/>万元-<input type="text" style="width: 100px;" class="input-text" name="end_debt_money"/>万元</td>
+                            <td>发放类型</td>
+                            <td>
+                                <span class="select-box" >
+                                    <select class="select" name="provide_type"  >
+                                        <option value="">==请选择==</option>
+                                        {volist name="provide_type" id="list" key="key"}
+                                        <option value="{$key-1}">{$list}</option>
+                                        {/volist}
+                                    </select>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>合同金额</td>
+                            <td><input type="text" style="width: 100px;" class="input-text" name="start_contract_money"/>万元-<input type="text" style="width: 100px;" class="input-text" name="end_contract_money"/>万元</td>
+                            <td>发放金额</td>
+                            <td><input type="text" style="width: 100px;" class="input-text" name="start_provide_money"/>万元-<input type="text" style="width: 100px;" class="input-text" name="end_provide_money"/>万元</td>
+                            <td>业务编号</td>
+                            <td><input type="text"  class="input-text" name="besiness_number"/></td>
+                            <td colspan="2"></td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+            <div class="panel panel-success  mt-21">
+                <div class="panel-header">选择查看的字段</div>
+                <div class="panel-body">
+                    <table class="table table-border table-bordered table-hover table-bg " >
+                        <thead>
+                        <tr >
+                            <th style="width: 25%;text-align: center;"><strong>结果字段</strong> <span class="r"><a href="javascript:;"  class="btn radius btn-warning" onclick="add_all();">添加全部<i class="Hui-iconfont">&#xe67a;</i></a></span></th>
+                            <th style="width:  25%;text-align: center;"><span class="l"><a href="javascript:;"  class="btn radius btn-warning" onclick="remove_all();"><i class="Hui-iconfont">&#xe678;</i>移除全部</a></span><strong>展示字段</strong></th>
+                            <th style=" width: 50%;">
+
+                            </th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr >
+                            <td  style="text-align: center;" >
+                                <div style="overflow-y: scroll;height: 180px;"id="select">
+                                    <a href="#" id="c-name" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="客户名称">客户名称</a><br>
+                                    <a href="#" id="c-type" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="客户类型">客户类型</a><br>
+                                    <a href="#" id="c-sex" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="性别">性别</a><br>
+                                    <a href="#" id="c-card_number" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="证件号码">证件号码</a><br>
+                                    <a href="#" id="c-born_date" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="出生日期">出生日期</a><br>
+                                    <a href="#" id="base-current_address" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="现住址">现住址</a><br>
+                                    <a href="#" id="base-tel_number" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="联系方式">联系方式</a><br>
+                                    <a href="#" id="base-marriage_status" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="婚姻状况">婚姻状况</a><br>
+                                    <a href="#" id="base-children" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="有无子女">有无子女</a><br>
+                                    <a href="#" id="base-is_farmer" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="是否涉农">是否涉农</a><br>
+                                    <a href="#" id="spouse-spouse_name" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="配偶名称">配偶名称</a><br>
+                                    <a href="#" id="base-workunit" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="工作单位">工作单位</a><br>
+                                    <a href="#" id="c-client_grade" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="客户评级">客户评级</a><br>
+                                    <a href="#" id="base-bad_record" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="有无不良记录">有无不良记录</a><br>
+                                    <a href="#" id="base-current_postcode" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="现住址邮编">现住址邮编</a><br>
+                                    <a href="#" id="base-save_money" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="存款总额">存款总额</a><br>
+                                    <a href="#" id="base-loan_money" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="贷款总额">贷款总额</a><br>
+                                    <a href="#" id="base-is_poor" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="是否是扶贫户">是否是扶贫户</a><br>
+                                    <a href="#" id="lm-client_number" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="客户号">客户号</a><br>
+                                    <a href="#" id="lm-loan_account" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="贷款账号">贷款账号</a><br>
+                                    <a href="#" id="lm-koukuan_account" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="扣款账号">扣款账号</a><br>
+                                    <a href="#" id="lm-remian_money" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="贷款余额">贷款余额</a><br>
+                                    <a href="#" id="lm-contract_money" class="btn btn-primary-outline radius hui-animation " style="width: 200px;margin-top: 5px;" data-tra="合同金额">合同金额</a><br>
+
+                                </div>
+                            </td>
+                            <td rowspan="5" style="text-align: center;" >
+                                <div style="overflow-y: scroll;height: 180px;" id="list"></div>
+                            </td>
+                            <td >
+                                <a class="btn btn-success size-L radius"onclick="submit()" style="position: relative ;left:3%;top: 70%" href="javascript:;">确认</a>
+                                <!--<input class="btn btn-success size-L radius" type="submit" value="提交"style="position: relative ;left:3%;top: 70%;margin-left: 3%"/>-->
+
+                                <!--<a class="btn btn-success size-L radius"onclick="submit()" style="position: relative ;left:3%;top: 70%" href="javascript:;">提交</a>-->
+                            </td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+
+</section>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/static/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+    $('#select').on('click','a',function(){
+        var tra=$(this).attr('data-tra');
+        var id=$(this).attr('id');
+
+        $(this).next('br').remove();
+        $(this).remove();
+
+        var input='<a id="'+id+'" style="width: 200px;margin-top: 5px;" hre="#" class="btn btn-primary-outline radius hui-rotateinLT" data-tra="'+tra+'">'+tra+'</a><br/>';
+        $('#list').append(input);
+    });
+
+
+    $('#list').on('click','a',function() {
+        var tra = $(this).attr('data-tra');
+        var id = $(this).attr('id');
+        $(this).removeClass();
+        $(this).addClass('btn btn-primary-outline radius hui-rotateoutLT');
+        var find=$('#select').children('#'+id).attr('id');
+        if(find==undefined){
+            var input = '<a id="' + id + '" style="width: 200px;margin-top: 5px;" hre="#" class="btn btn-primary-outline radius hui-animation"data-tra="'+tra+'">' + tra + '</a><br/>';
+            $('#select').append(input);
+        }
+        setTimeout(function(){
+            $('#list').children('#'+id).next('br').remove();
+            $('#list').children('#'+id).remove();
+        },1000);
+    });
+
+    function submit(){
+
+
+        var len=$('#list > a').length;
+        if(len>=1){
+            var list=$('#list').children('a').attr('id');
+            var names=list+',';
+            for(var i=1;i<len;i++){
+                var id=$('#'+list).next('br').next('a').attr('id');
+                names+=id+',';
+                list=id;
+            }
+        }
+        var input='<input name=names type="hidden"value="'+names+'"/>';
+        $('form').append(input);
+        $('form').submit();
+
+    }
+    function add_all(){
+        var html = $('#select').html();
+        $('#select').children().remove();
+        $('#list').append(html);
+    }
+    function remove_all()
+    {
+        var html = $('#list').html();
+        $('#list').children().remove();
+        $('#select').append(html);
+    }
+
+
+
+    /*用户-添加*/
+    function member_add(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+
+
+
+
+
+
+</script>
+
+{/block}

@@ -1,0 +1,493 @@
+{extend name="base" /}
+
+{block name="content"}
+<link href="/static/lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
+<div class="Hui-article-box">
+
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> {$title1}<span class="c-gray en">&gt;</span>{$title2}<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:history.go(-1);" title="返回" >返回</a></nav>
+    <div class="Hui-article">
+    <div class="panel panel-default" >
+        <div class="panel-header">
+            <span>客户编号&nbsp;[{$client['client_number']}]</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>客户名称&nbsp;[{$client['name']}]</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>所属机构&nbsp;[{$client['bankname']|default='罗庄农村商业银行'}]</span>
+        </div>
+    </div>
+     <div class="btn-group" style="text-align: center;">
+        {include file="clientmenu"}
+     </div>
+
+    <h4 style=" text-align: center;">客户资料表</h4>
+    <div>
+        <div class="panel panel-default">
+            <div class="panel-header" style="display: flex;justify-content: space-between;"><span>基本信息</span><a href="javascript:;" onclick="submit('修改身份信息','{:url('client/edit',array('client_id'=>$client['id']))}','800','510')" ><i class="Hui-iconfont">&#xe6df;</i>编辑</a></div>
+            <div class="panel-body">
+                <table class="table table-border table-bordered table-hover">
+                    <tr>
+                        <td style="width: 55px;">客户编号</td><td style="width: 200px;">{$client.client_number|default=''}</td>
+                        <td style="width: 55px;">客户类型</td><td style="width: 200px;">{:get_name('type',$client['type'])}</td>
+                        <td rowspan="6" style="text-align: center;">{if empty($client.pic_url)}<a  class='btn btn-secondary radius' href="javascript:;" onclick="submit('上传头像','{:url('client/uploadpost',array('client_id'=>$client['id']))}','800','510')" ><i class="Hui-iconfont">&#xe60a;</i>上传头像</a>{else}<img onclick="submit('修改头像','{:url('client/uploadpost',array('client_id'=>$client['id']))}','800','510')" style='width:230px;height: 230px; 'src="{$client.pic_url}"/>{/if}</td>
+                    </tr>
+                    <tr>
+                        <td>客户名称</td><td>{$client.name}</td>
+                        <td>性别</td><td>{if $client.sex==1}男{/if}{if $client.sex==2}女{/if}</td>
+                    </tr>
+                    <tr>
+                        <td>证件类型</td><td>{if $client.card_type==0}身份证{else}其他{/if}</td>
+                        <td>证件号码</td><td>{$client.card_number}</td>
+                    </tr>
+                    <tr>
+                        <td>民族</td><td>{if $client.nation_id==1 or $client.nation_id==0}汉{/if}{if $client.nation_id==2}少数民族{/if}</td>
+                        <td>出生日期</td><td>{if $client.valid_time!=''}{:date('Y-m-d',$client.born_date);}{else} -{/if}</td>
+                    </tr>
+                    <tr>
+                        <td>手机</td><td>{$client.tel_number|default=''}</td> 
+                        <td>住址</td ><td>{$client.address|default=''}</td>
+                    </tr>
+                    <tr>
+                        <td>有效期限</td><td>{if $client.valid_time!=''}{$client.valid_time|date="Y-m-d",###}{else} -{/if}</td>
+                        <td>签发机关</td><td>{$client.issue_office|default=''}</td>
+                    </tr>
+                </table>
+                <div id="mapContainer" style="height: 400px;margin: 10px 0 0;"></div>
+            </div>
+        </div>
+
+
+        <div class="panel panel-default">
+            <div class="panel-header" style="display: flex;justify-content: space-between;"><span>详细信息</span></span></div>
+            <div class="panel-body">
+    
+                <table class="table table-border table-bordered table-hover">
+                    <tr>
+                        <td style="width: 70px;">婚姻状况</td><td style="width: 200px;">{if $client.marriage_status==1}未婚{elseif $client.marriage_status == 2}已婚{elseif $client.marriage_status == 3}丧偶{elseif $client.marriage_status==4}离婚{/if}</td>
+                        <td style="width: 70px;">结婚证登记日期</td><td style="width: 200px;">{if $client.married_record_date != 0 && $client.married_record_date > 0}{:date('Y-m-d',$client.married_record_date);}{/if}</td>
+                    </tr>
+                    <tr>
+                        <td>有无子女</td><td>{if $client.children==0 && $client.children != ''}无{elseif  $client.children==1}有{/if}</td>
+                        <td>是否涉农</td><td>{if $client.is_farmer==0 && $client.is_farmer != ''}否{elseif $client.is_farmer==1}是{/if}</td>
+                    </tr>
+                    <tr>
+                        <td>行政区划（省）</td><td>山东省</td>
+                        <td>行政区划（市）</td><td>临沂市</td>
+                    </tr>
+                    <tr>
+                        <td>行政区划（县/区）</td><td>罗庄区</td>
+						<td>行政区划（小区）</td><td>{$client.gridname|default=''} - {$client.lou|default=''}号楼  {if condition="$client.danyuan neq 0"} - {$client.danyuan|default=''}单元{/if}  - {$client.hu|default=''}室</td>
+                    </tr>
+                    <tr>
+                        <td>现住址</td><td>{$client.current_address|default=''}</td>
+                        <td>现住址邮编</td><td>{$client.current_postcode|default=''}</td>
+                    </tr>
+                    <tr>
+                        <td>通讯地址</td><td>{$client.corresponding_address|default=''}</td>
+                        <td>通讯地址邮编</td><td>{$client.corresponding_postcode|default=''}</td>
+                    </tr>
+                    <tr>
+                        <td>最高学位</td><td>
+                        {if isset($client.highest_degree)&&!is_array(get_name('highest_degree',$client['highest_degree']))}
+                         {:get_name('highest_degree',$client['highest_degree'])}
+                        {/if}
+                      <!--  {if isset($client.highest_degree)&&($client.highest_degree eq 0)}{/if} 
+                       {if isset($client.highest_degree)&&($client.highest_degree eq 1)}学士学位{/if} 
+                       {if isset($client.highest_degree)&&($client.highest_degree eq 2)}硕士学位{/if} 
+                       {if isset($client.highest_degree)&&($client.highest_degree eq 3)}博士学位{/if}  -->
+                        </td>
+                        <td>最高学历</td><td>
+                        {if isset($client.highest_education)&&!is_array(get_name('highest_education',$client['highest_education']))}
+                            {:get_name('highest_education',$client['highest_education'])}
+                        {/if}
+                          <!--  {if isset($client.highest_education)&&($client.highest_education eq 1)}初中水平{/if} 
+	                       {if isset($client.highest_education)&&($client.highest_education eq 2)}高中水平{/if}
+	                       {if isset($client.highest_education)&&($client.highest_education eq 3)}大专{/if} 
+	                       {if isset($client.highest_education)&&($client.highest_education eq 4)}本科{/if} 
+	                       {if isset($client.highest_education)&&($client.highest_education eq 5)}硕士{/if} 
+	                       {if isset($client.highest_education)&&($client.highest_education eq 6)}博士{/if}  -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>行业分类</td><td>{$client.industry_category|default=''}</td>
+                        <td>居住状况</td><td>{if isset($client.live_status)&&!is_array(get_name('live_status',$client['live_status']))}{:get_name('live_status',$client['live_status'])}{/if}</td>
+                    </tr>
+                     <tr>
+                        <td>是否扶贫户</td ><td>{if $client.is_poor==0 && $client.is_poor!=''}否{elseif $client.is_poor == 1}是{/if}</td>
+                        <td>健康状况</td><td>{if isset($client.physical_condition)&&!is_array(get_name('physical_condition',$client['physical_condition']))}{:get_name('physical_condition',$client['physical_condition'])}{/if}</td>
+                    </tr>
+                    <tr>
+                       
+                        <td>工作单位</td><td colspan="3">{$client.workunit|default=''}</td>
+                    </tr>
+                  <!--   <tr>
+                        <td>存款</td><td>{$client.save_money|default='0'}</td>
+                        <td>贷款</td><td>{$client.loan_money|default='0'}</td>
+                    </tr>
+                     <tr>
+                        <td>担保贷款</td><td>{$client.guarantor|default='0'}份</td>
+                        <td>不良记录</td><td>{$client.bad_record|default='0'}次</td>
+                    </tr>
+                    <tr>
+                        <td>电子银行</td><td colspan="3">{if !empty($client.e_bank)}{:get_name('e_bank',$client.e_bank)}{/if}</td>
+
+                    </tr> -->
+                </table>
+                <br/>
+            </div>
+        </div>
+
+            <div class="panel panel-default">
+                <div class="panel-header" style="display: flex;justify-content: space-between;"><span>资产信息</span></span></div>
+                <div class="panel-body">
+                    <table class="table table-border table-bordered table-hover">
+                        <tr>
+                            <td style="width: 55px;">评级结果</td><td style="width: 200px;">
+                            {if condition="$client.class_result eq 1"}逾期客户{/if}
+                            {if condition="$client.class_result eq 2"}有记录客户{/if}
+                            {if condition="$client.class_result eq 3"}普通客户{/if}
+                            {if condition="$client.class_result eq 4"}潜在客户{/if}
+                            {if condition="$client.class_result eq 5"}优质客户{/if}
+                            {if condition="$client.class_result eq 6"}金钻客户{/if}
+                            </td>
+                            <td style="width: 55px;">家庭总人数</td><td style="width: 200px;"> {$client.family_people|default=''}</td>
+
+                        </tr>
+                        <tr>
+                            <td>家庭总资产</td><td>{$client.family_money|default=''}</td>
+                            <td>家庭总负债</td><td>{$client.family_debt|default=''}</td>
+                        </tr>
+                        <tr>
+                            <td>家庭年收入</td><td>{$client.family_year_income|default=''}</td>
+                            <td>家庭年支出</td><td>{$client.family_year_spending|default=''}</td>
+                        </tr>
+                        <tr>
+                            <td>工资账号</td><td>{$client.wage_number|default=''}</td>
+                            <td>工资账号所属银行</td><td>{$client.wage_belong_bank|default=''}</td>
+                        </tr>
+
+                    </table>
+                   
+                </div>
+            </div>
+            
+             <div class="panel panel-default">
+                <div class="panel-header" style="display: flex;justify-content: space-between;"><span>品行信息</span><span>{if !empty($tese)}<a href="javascript:;" onclick="submit('修改特色信息','{:url('admin/client/tese_edit',array('card_number'=>$client['card_number']))}','800','510')" ><i class="Hui-iconfont">&#xe6df;</i>编辑</a>{else}<a href="javascript:;" onclick="submit('添加特色信息','{:url('admin/client/tese_add',array('card_number'=>$client['card_number']))}','800','510')" ><i class="Hui-iconfont">&#xe604;</i>添加</a>{/if}</span></div>
+
+                <div class="panel-body">
+                    <table class="table table-border table-bordered table-hover">
+                        <tr>
+                            <td style="width: 55px;">家庭关系</td>
+                            <td style="width: 200px;">
+                                {$tese.pinxing_familyrelation_name|default=''}
+                            </td>
+                            <td style="width: 55px;">社会声誉</td>
+                            <td style="width: 200px;"> {$tese.pinxing_shengyu_name|default=''}</td>
+                        </tr>
+                        <tr>
+                            <td>不良行为</td><td>{$tese.pinxing_buliang_name|default=''}</td>
+                            <td>诚信状况</td><td>{$tese.pinxing_chengxin_name|default=''}</td>
+                        </tr>
+                        <tr>
+                            <td>创新能力</td>
+                            <td>{$tese.pinxing_chuangxin_name|default=''}</td>
+                            <td></td><td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-header" style="display: flex;justify-content: space-between;"><span>种植信息</span></div>
+                <div class="panel-body">
+                    <table class="table table-border table-bordered table-hover">
+                        <tr>
+                            <td style="width: 55px;">种植种类</td>
+                            <td style="width: 200px;">
+                                {$tese.zhongzhi_class_name|default=''}
+
+                            </td>
+                            <td style="width: 55px;">种植亩数</td>
+                            <td style="width: 200px;"> {if $tese.zhongzhi_num != 0}{$tese.zhongzhi_num|default=''}{/if}&nbsp;亩</td>
+
+                        </tr>
+                        <tr>
+                            <td>种植模式</td><td>{$tese.zhongzhi_mode_name|default=''}</td>
+                            <td>亩产</td><td>{if $tese.zhongzhi_muchan != 0}{$tese.zhongzhi_muchan|default=''}{/if}&nbsp;斤</td>
+                        </tr>
+                        <tr>
+                            <td>种植年限</td>
+                            <td>{if !empty($tese.zhongzhi_years)}{$tese.zhongzhi_years|default=''}{/if}&nbsp;年起</td>
+                            <td></td><td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-header" style="display: flex;justify-content: space-between;"><span>养殖信息</span></div>
+                <div class="panel-body">
+                    <table class="table table-border table-bordered table-hover">
+                        <tr>
+                            <td style="width: 55px;">养殖种类</td>
+                            <td style="width: 200px;">
+                                {$tese.yangzhi_class_name|default=''}
+                            </td>
+                            </td>
+                            <td style="width: 55px;">养殖数量</td>
+                            <td style="width: 200px;"> {if $tese.yangzhi_num != 0}{$tese.yangzhi_num|default=''}{/if}</td>
+
+                        </tr>
+                        <tr>
+                            <td>养殖年限</td><td>{if !empty($tese.yangzhi_years)}{$tese.yangzhi_years|default=''}{/if}&nbsp;年起</td>
+                            <td>固定资产</td><td>{$tese.yangzhi_zichan|default=''}</td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+            
+            <div class="panel panel-default">
+                <div class="panel-header" style="display: flex;justify-content: space-between;">
+                    <span>工作信息</span>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-border table-bordered table-hover">
+                        <tr>
+                            <td style="width: 55px;">有无固定工作</td><td style="width: 200px;">
+                            {$tese.guding_work_name|default=''}
+                        </td>
+                            <td style="width: 55px;">工作单位</td><td style="width: 200px;"> {$tese.work_place|default=''}</td>
+                        </tr>
+                        <tr>
+                            <td>工作单位地址</td><td>{$tese.work_address|default=''}</td>
+                            <td>单位地址邮编</td><td>{if isset($tese.work_postcode) && $tese.work_postcode!= 0}{$tese.work_postcode|default=''}{/if}</td>
+                        </tr>
+                        <tr>
+                            <td>单位工作起始年份</td><td>{if(!empty($tese['start_work']))}{:date('Y-m-d',$tese.start_work)}{/if}</td>
+                            <td>职称</td><td>{if(!empty($tese['job_title']))}{:get_name('job_title',$tese.job_title)}{/if}</td>
+                        </tr>
+                        <tr>
+                            <td>职务</td><td>{if(!empty($tese['duty']))}{:get_name('duty',$tese.duty)}{/if}</td>
+                            <td>职务细分</td><td>{if(!empty($tese['duty_xifen']))}{:get_name('duty_xifen',$tese.duty_xifen)}{/if}</td>
+                        </tr>
+                        <tr>
+                            <td>职业</td><td>{$tese.occupation|default=''}</td>
+                            <td>单位联系方式</td><td>{$tese.unit_phone|default=''}</td>
+                        </tr>
+                        <tr>
+                            <td>医疗保险上年度合计缴纳金额</td><td colspan="3">{$tese.pay_amount|default='0'}元</td>
+                        </tr>
+                    </table>
+                </div>
+        </div>
+        <div class="panel panel-default">
+                <div class="panel-header" style="display: flex;justify-content: space-between;">
+                    <span>经营信息</span>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-border table-bordered table-hover">
+                        <tr>
+                            <td style="width: 55px;">字号名称</td><td style="width: 200px;">
+                            {$tese.jingying_zihao|default=''}
+                        </td>
+                            <td style="width: 55px;">经营者姓名</td><td style="width: 200px;"> {$tese.jingying_name|default=''}</td>
+                        </tr>
+                        <tr>
+                            <td>营业执照号码</td><td>{$tese.jingying_number|default=''}</td>
+                            <td>经营场所</td><td>{$tese.jingying_address|default=''}</td>
+                        </tr>
+                        <tr>
+                            <td>经营范围</td><td>{$tese.jingying_range|default=''}</td>
+                            <td>客户类型</td><td>{$tese.jingying_guest_type_name|default=''}</td>
+                        </tr>
+                        <tr>
+                            <td>经营年限</td><td>{if(!empty($tese['jingying_years']))}{$tese.jingying_years}{/if}</td>
+                            <td>运营车辆数量</td><td>{$tese.jingying_cars|default=''}</td>
+                        </tr>
+                        <tr>
+                            <td>员工人数</td><td>{$tese.jingying_workers|default=''}</td>
+                            <td>有人身和工伤保险员工数量</td><td>{$tese.jingying_baoxian|default=''}</td>
+                        </tr>
+                        <tr>
+                            <td>经营场地属性</td><td>{$tese.jingying_cdsx_name|default=''}</td>
+                            <td>自有经营场地建筑面积</td><td>{$tese.jingying_zyjymj|default=''}</td>
+                        </tr>
+                        <tr>
+                            <td>租赁经营场地建筑面积</td><td>{$tese.jingying_zljymj|default=''}</td>
+                            <td>pos商户</td><td>{$tese.jingying_pos_name|default=''}</td>
+                        </tr>
+                         <tr>
+                            <td>机具安装日期</td><td>{$tese.jingying_azdate|default=''}</td>
+                            <td></td><td></td>
+                        </tr>
+                    </table>
+                </div> 
+            </div>
+
+        <div class="panel panel-default">
+            <div class="panel-header" style="display: flex;justify-content: space-between;"><span>财务信息</span><span>{if !empty($finance_info)}<a href="javascript:;" onclick="submit('修改财务信息','{:url('finance/edit',array('client_id'=>$client['id']))}','800','510')" ><i class="Hui-iconfont">&#xe6df;</i>编辑</a>{else}<a href="javascript:;" onclick="submit('添加财务信息','{:url('finance/add',array('client_id'=>$client['id']))}','800','510')" ><i class="Hui-iconfont">&#xe600;</i>添加</a>{/if}</span></div>
+
+            <div class="panel-body">
+               
+                <table class="table table-border table-bordered table-hover">
+                   <tr class="text-c">
+                       <td rowspan="3" style="width: 100px">基本财务信息</td>
+                       <td>家庭总资产</td> <td>{$finance_info.total_assets}</td>
+                       <td>家庭总负债</td> <td>{$finance_info.total_debt}</td>
+                   </tr>
+                    <tr class="text-c">
+
+                        <td>个人月收入</td> <td>{$finance_info.month_income}</td>
+                        <td>年总收入</td> <td>{$finance_info.year_income}</td>
+                    </tr>
+                    <tr class="text-c">
+
+                        <td>年总支出</td> <td>{$finance_info.year_expend}</td>
+                        <td></td> <td></td>
+                    </tr>
+                    <tr class="text-c">
+                        <td>家庭年收入</td>
+                        <td>收入项目</td> <td>{if !empty($finance_info['income_project'])}{:get_name('income_project',$finance_info.income_project)}{/if}</td>
+                        <td>年均收入金额</td> <td>{$finance_info.annual_income}</td>
+                    </tr>
+
+                    <tr class="text-c">
+                        <td rowspan="3">家庭年支出</td>
+                        <td>日常支出</td> <td>{$finance_info.daily_spending}</td>
+                        <td>教育支出</td> <td>{$finance_info.education_spending}</td>
+                    </tr>
+                    <tr class="text-c">
+
+                        <td>医疗保健支出</td> <td>{$finance_info.yiliao_spending}</td>
+                        <td>赡养老人支出</td> <td>{$finance_info.support}</td>
+                    </tr>
+                    <tr class="text-c">
+
+                        <td>其他支出</td> <td>{$finance_info.other_spending}</td>
+                        <td>年均支出金额</td> <td>{$finance_info.annual_spending}</td>
+                    </tr>
+                    <tr class="text-c">
+                        <td rowspan="4">负债信息</td>
+                        <td>行内借款</td> <td>{$finance_info.hangnei_jiekuan}</td>
+                        <td>他行借款</td> <td>{$finance_info.tahang_jiekuan}</td>
+                    </tr>
+                    <tr class="text-c">
+
+                        <td>民间借贷</td> <td>{$finance_info.minjian_jiedai}</td>
+                        <td>信用卡透支</td> <td>{$finance_info.creditcard_touzhi}</td>
+                    </tr>
+                    <tr class="text-c">
+
+                        <td>应付账款</td> <td>{$finance_info.yingfu_zhangkuan}</td>
+                        <td>预收账款</td> <td>{$finance_info.yushou_zhangkuan}</td>
+                    </tr>
+                    <tr class="text-c">
+
+                        <td>其他负债</td> <td>{$finance_info.other_fuzhai}</td>
+                        <td></td> <td></td>
+                    </tr>
+                    <tr class="text-c">
+                        <td rowspan="8">资产信息</td>
+                        <td>房产</td> <td  colspan="3">{if !empty($finance_info['house'])}{:get_name('house',$finance_info.house)}{/if}</td>
+
+                    </tr>
+                    <tr class="text-c">
+
+                        <td>土地</td> <td  colspan="3">{if !empty($finance_info['land'])}{:get_name('land',$finance_info.land)}{/if}</td>
+
+                    </tr>
+                    <tr class="text-c">
+
+                        <td>现金</td> <td>{$finance_info.cash}</td>
+                        <td>存款</td> <td>{if $finance_info.deposit==1}本行存款{elseif  $finance_info.deposit==2}他行存款{/if}</td>
+                    </tr>
+                    <tr class="text-c">
+
+                        <td>车辆</td> <td>{if !empty($finance_info['car'])}{:get_name('car',$finance_info.car)}{/if}</td>
+                        <td>股权</td> <td>{$finance_info.equity}</td>
+                    </tr>
+                    <tr class="text-c">
+
+                        <td>机械设备</td> <td>{$finance_info.equipment}</td>
+                        <td>存货</td> <td>{$finance_info.inventory}</td>
+                    </tr>
+                    <tr class="text-c">
+
+                        <td>应收账款</td> <td>{$finance_info.accounts_receivable}</td>
+                        <td>预付款项</td> <td>{$finance_info.prepayments}</td>
+                    </tr>
+                    <tr class="text-c">
+
+                        <td>对外投资</td> <td>{$finance_info.foreign_investment}</td>
+                        <td>理财</td> <td>{$finance_info.manage_money}</td>
+                    </tr>
+                    <tr class="text-c">
+
+                        <td>其他</td> <td colspan="3">{$finance_info.other}</td>
+
+                    </tr>
+                    <tr class="text-c">
+                        <td rowspan="2">经营项目</td>
+                        <td>生产经营项目</td> <td colspan="3">{if !empty($finance_info['manage_project'])}{:get_name('manage_project',$finance_info.manage_project)}{/if}</td>
+
+                    </tr>
+                    <tr class="text-c">
+
+                        <td>年经营项目收入</td> <td>{$finance_info.project_income}</td>
+                        <td>年经营项目支出</td> <td>{$finance_info.project_spend}</td>
+                    </tr>
+                </table>
+                <br/><br/><br/><br/><br/><br/><br/>
+                
+            </div>
+
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function submit(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+</script>
+<script type="text/javascript" src="/static/mapv2/baidumap_offline_v2_load.js"></script>
+<script type="text/javascript" src="/static/mapv2/tools/AreaRestriction_min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/static/mapv2/css/baidu_map_v2.css"/>
+<script type="text/javascript">
+    // 百度地图API功能
+    var map = new BMap.Map("mapContainer", {minZoom:6,maxZoom:15});
+    var point = new BMap.Point(118.356685,35.09566);
+    var b = new BMap.Bounds(new BMap.Point(59.188676,5.0598),new BMap.Point(161.919181,57.893376));
+    try {
+        BMapLib.AreaRestriction.setBounds(map, b);
+    } catch (e) {
+        alert(e);
+    }
+    map.centerAndZoom(point, 13);
+    //map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+    map.addControl(new BMap.NavigationControl());   //缩放按钮
+
+    // 编写自定义函数,创建标注
+    function addMarker(point){
+        map.clearOverlays();
+        var marker = new BMap.Marker(point);
+        map.addOverlay(marker);
+    }
+
+    var reslng = "{$client['lng']}";
+    var reslat = "{$client['lat']}";
+    if( reslng!= ''&& reslat != ''){
+        var pt = new BMap.Point(reslng, reslat);
+        addMarker(pt);
+        map.panTo(pt);//移到中心
+
+    }
+
+
+</script>
+<style>
+    .BMap_cpyCtrl{display: none;}
+</style>
+
+{/block}

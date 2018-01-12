@@ -1,0 +1,3 @@
+SELECT FROM_UNIXTIME(provide_time_int,'%Y%m') AS months,COUNT(id) AS count,SUM(loan_money) AS sum FROM () GROUP BY months
+
+select FROM_UNIXTIME(provide_time_int,'%Y%m'),SUM(loan_money) AS sum from ym_intable_credit GROUP BY besiness_number

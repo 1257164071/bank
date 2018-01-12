@@ -1,0 +1,78 @@
+{extend name="base" /}
+
+{block name="content"}
+
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont"></i> <a href="/" class="maincolor">首页</a>
+        <span class="c-999 en">&gt;</span>
+        <span class="c-666">欢迎</span>
+        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont"></i></a></nav>
+    <div class="Hui-article">
+
+        <article class="cl pd-20">
+
+            <!-- 表单 -->
+            <form id="form" method="post" class="form form-horizontal">
+                <!-- 基础 -->
+                <div id="tab1" class="tab-pane in tab1">
+                    <div class="row cl">
+                        <label class="form-label col-xs-2 col-sm-2">行为名称</label>
+                        <div  class="formControls col-xs-10 col-sm-10">
+                            <span>{:get_action($info['action_id'], "title")}</span>
+                        </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-xs-2 col-sm-2">执行者</label>
+                        <div  class="formControls col-xs-10 col-sm-10">
+                            <span>{$info['real_name']}</span>
+                        </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-xs-2 col-sm-2">执行IP</label>
+                        <div  class="formControls col-xs-10 col-sm-10">
+                            <span>{:long2ip($info['action_ip'])}</span>
+                        </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-xs-2 col-sm-2">时间</label>
+                        <div  class="formControls col-xs-10 col-sm-10">
+                            <span>{:date('Y-m-d H:i:s',$info['create_time'])}</span>
+                        </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-xs-2 col-sm-2">备注</label>
+                        <div  class="formControls col-xs-10 col-sm-10">
+                                <textarea class="textarea" readonly="readonly">{$info.remark}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 按钮 -->
+                <div class="row cl">
+                    <label class="form-label col-xs-2 col-sm-2"></label>
+                    <div class="controls edit_sort_btn">
+                        <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+                    </div>
+                </div>
+            </form>
+        </article>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{/block}

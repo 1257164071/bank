@@ -1,0 +1,210 @@
+{extend name="base" /}
+
+{block name="main"}
+
+<article class="cl pd-20">
+	<form action="" method="post" class="form form-horizontal" id="form-admin-add">
+	    {if condition="isset($msg.password) && $msg.password neq ''"}
+	    <input type="hidden" name="id" value="{$msg.id}" >
+		<input type="hidden" name="ypassword" value="{$msg.password}" >
+		{/if}
+       <div id="tishi"></div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2"><span class="c-red">*</span>用户名：</label>
+			<div class="formControls col-xs-9 col-sm-10" id="uname">
+			    {if condition="isset($msg.username)"}
+			    {$msg.username}<input type="hidden" name="username" value="{$msg.username}" >
+			    {else/}
+				<input type="text" class="input-text" value="{$msg.username?$msg.username:''}" placeholder="" id="username" name="username" >
+				{/if}
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">{$msg.password?'重置':'<span class="c-red">*</span>'}密码：</label>
+			<div class="formControls col-xs-9 col-sm-10">
+				<input type="password" class="input-text" autocomplete="off" value="" placeholder="密码" id="password" name="password">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">{$msg.password?'':'<span class="c-red">*</span>'}确认：</label>
+			<div class="formControls col-xs-9 col-sm-10">
+				 <input type="password" class="input-text" autocomplete="off"  placeholder="确认新密码" id="password2" name="password2">  
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2"><span class="c-red">*</span>姓名：</label>
+			<div class="formControls col-xs-9 col-sm-10 ">
+				<input type="text" class="input-text" value="{$msg.real_name?$msg.real_name:''}" placeholder="" id="realname" name="real_name">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2"><span class="c-red">*</span>性别：</label>
+			<div class="formControls col-xs-9 col-sm-10 skin-minimal">
+				<div class="radio-box">
+					<input name="sex" type="radio" id="sex-1" checked value="1">
+					<label for="sex-1">男</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="sex-2" name="sex" value="0">
+					<label for="sex-2">女</label>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">手机：</label>
+			<div class="formControls col-xs-9 col-sm-10">
+				<input type="text" class="input-text" value="{$msg.mobile?$msg.mobile:''}" placeholder="" id="mobile" name="mobile">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">邮箱：</label>
+			<div class="formControls col-xs-9 col-sm-10">
+				<input type="text" class="input-text" placeholder="@" name="email" id="email" value="{$msg.email?$msg.email:''}">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2"><span class="c-red">*</span>银行：</label>
+			<div class="formControls col-xs-9 col-sm-10"> <span class="select-box" style="width:350px;">
+				<select class="select" name="bank_id" size="1">
+					<option value="0">==请选择==</option>
+					{volist name="banklist" id="bank"}
+						<option value="{$bank.id}" {if condition="isset($msg.bank_id) && ($bank.id eq $msg.bank_id)"}selected="selected"{/if}>{$bank.bankname}</option>
+						{volist name="bank.child" id="b"}
+						    <option value="{$b.id}" {if condition="isset($msg.bank_id) && ($b.id eq $msg.bank_id)"}selected="selected"{/if} style="padding-left:30px;padding-left:30px;">&nbsp;&nbsp;&nbsp;&nbsp;|—{$b.bankname}</option>
+						{/volist}
+					{/volist}
+				</select>
+				</span> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2"><span class="c-red">*</span>角色：</label>
+			<div class="formControls col-xs-9 col-sm-10"> <span class="select-box" style="width:150px;">
+				<select class="select" name="role_id" size="1" id="role_id">
+				    <option value="">==请选择==</option>
+					{volist name="RbacRolelist" id="role"}
+					<option value="{$role.id}" {if condition="isset($msg.role_id) && ($role.id eq $msg.role_id)"}selected="selected"{/if}>{$role.name}</option>
+				    {/volist}
+				</select>
+				</span> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">备注：</label>
+			<div class="formControls col-xs-9 col-sm-10">
+				<textarea name="remark" cols="" rows="" class="textarea"  placeholder="说点什么...100个字符以内" dragonfly="true" onKeyUp="textarealength(this,100)">{$msg.remark?$msg.remark:''}</textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+			<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			<a href="javascript:" class="btn btn-default radius"  onclick="layer_close()"> 取消</a>
+			</div>
+		</div>
+	</form>
+</article>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+	
+	$("#form-admin-add").validate({
+		rules:{
+			username:{
+				required:true,
+				minlength:4,
+				maxlength:16
+			},
+		   {if condition="!isset($msg.username)"}
+			password:{
+				required:true,
+			},
+			{/if}
+			password2:{
+				{if condition="!isset($msg.username)"}
+				required:true,
+				{/if}
+				equalTo: "#password"
+			},
+			real_name:{
+				required:true,
+			},
+			sex:{
+				required:true,
+			},
+			role_id:{
+				required:true,
+			}
+		},
+		messages:{
+			username:{
+				required:'用户名必填'
+			},
+			password:{
+				required:'密码必填'
+			},
+			password2:{
+				required:'密码必须一致'
+			},
+			password2:{
+				required:'姓名必填'
+			},
+			sex:{
+				required:'性别必选'
+			},
+			role_id:{
+				required:'角色必选'
+			}
+		},
+		onkeyup:false,
+		focusCleanup:true,
+		success:"valid",
+		submitHandler:function(form){
+			var $form = $(form);
+			$.ajax({
+				url:'{$url}',
+				type:'post',
+				data:$form.serialize(),
+				success:function (data) {
+					if(data.code==0){
+						layer.msg(data.msg);
+						parent.location.reload();
+						setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))",2000);
+					}else{
+						layer.msg(data.msg);
+					}
+				}
+			});
+		}
+	});
+
+})
+
+
+       $(document).ready(function(){
+           check();
+       });
+       function check(){
+           $('#username').blur(function(){
+               var a=$(this).val();
+               var changUrl="{:url('admin/admin/namecheck')}";
+               $.post(changUrl,{username:a},function(str){
+                   if(str=='1'){
+                       $('#uname').append("<label id=\"username-error\" class=\"error\" for=\"username\">您输入的用户名已存在，请重新输入</label>");
+                   }
+               });
+           });
+       }
+
+</script>
+
+{/block}

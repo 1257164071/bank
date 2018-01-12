@@ -1,0 +1,162 @@
+{extend name="base" /}
+
+{block name="content"}
+
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>营销管理<span class="c-gray en">&gt;</span>申请记录<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="Hui-article">
+        <article class="cl pd-20">
+            <form  method="post" action="{:url('applying')}">
+                <div class="text-c">
+                    <!--拜访时间：-->
+                    <!--<input type="text" onfocus="WdatePicker()" id="datemin" name="start_visit_time" value="{$post.start_visit_time|default=''}" class="input-text Wdate" style="width:120px;">-->
+                    <!-- - -->
+                    <!--<input type="text" onfocus="WdatePicker()" id="datemax" name="end_visit_time" value="{$post.end_visit_time|default=''}" class="input-text Wdate" style="width:120px;">-->
+                    客户经理：<input type="text" class="input-text" style="width:150px" placeholder="客户经理" value="{$post.real_name|default=''}" name="real_name">
+                    客户名称：<input type="text" class="input-text" style="width:150px" placeholder="客户名称" value="{$post.name|default=''}" name="name">
+
+                        <span class="select-box" style="width: 150px;line-height: 21px;">
+                            <select class="select" name="client_grade"  >
+                                <option value=" ">客户评级</option>
+                                <option  <?php if(!empty($post['client_grade'])&&$post['client_grade']==1){ echo  'selected="selected"'; }?> value="1">潜在客户</option>
+                                <option <?php if(!empty($post['client_grade'])&&$post['client_grade']==2){ echo  'selected="selected"'; }?> value="2">普通客户</option>
+                                <option <?php if(!empty($post['client_grade'])&&$post['client_grade']==3){ echo  'selected="selected"'; }?> value="3">黄金客户</option>
+                                <option <?php if(!empty($post['client_grade'])&&$post['client_grade']==4){ echo  'selected="selected"'; }?> value="4">白金客户</option>
+                                <option <?php if(!empty($post['client_grade'])&&$post['client_grade']==5){ echo  'selected="selected"'; }?> value="5">红钻客户</option>
+                                <option <?php if(!empty($post['client_grade'])&&$post['client_grade']==6){ echo  'selected="selected"'; }?> value="6">金钻客户</option>
+                            </select>
+                        </span>
+                    <button name="" id="" class="btn btn-success radius" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+                </div>
+            </form>
+
+            <div class="cl pd-5 bg-1 bk-gray mt-20">
+				<span class="l">
+					<!--<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>-->
+                    <!--<a href="javascript:;" onclick="member_add('添加客户','/admin/client/clientadd','1200','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加客户</a>-->
+                    <!--<a href="javascript:;" onclick="daochu()" class="btn btn-warning radius"><i class="Hui-iconfont">&#xe600;</i> 导出</a>-->
+
+				</span>
+                <span class="r">共有数据：<strong><?php echo count($data);?></strong> 条</span>
+            </div>
+
+            <div class="mt-20">
+                <table class="table table-border table-bordered table-hover table-bg table-sort">
+                    <thead>
+                    <tr class="text-c">
+                        <!-- <th width="25"><input type="checkbox" name="" value=""></th> -->
+                        <th width="80">ID</th>
+                        <th width="80">客户经理</th>
+                        <th width="100">拜访客户</th>
+                        <th width="80">申请类型</th>
+                        <th width="200">申请描述</th>
+                        <th width="80">状态</th>
+                        <th width="120">操作</th>
+
+                    </tr>
+                    </thead>
+                    {volist name="$data" id='list'}
+                    <tbody>
+                    <tr class="text-c">
+                       <!--  <td><input type="checkbox" value="{$list.id}" name="id[]"></td> -->
+                        <td>{$list.id}</td>
+                        <td>{$list.real_name}</td>
+                        <td><a class="tags3"   href="{:url('client/clientdetail',array('client_id'=>$list['client_id']))}" title="查看客户详情">{$list.name}</a></td>
+                        <td>{if $list.type ==1}申请继续拜访{else}申请停止拜访{/if}</td>
+                        <td>{$list.apply_content}</td>
+                        <td>{if !empty($list.status)}{:get_name('apply_status',$list.status)}{/if}</td>
+                        <td>
+                            {if $list.status ==1}
+                            <a class="btn btn-secondary radius" href="javascript:;" onclick="submit('审批','{:url('shenpi',array('client_id'=>$list['client_id'],'user_id'=>$list['user_id']))}','','510')" ><i class="Hui-iconfont">&#xe692;</i>审批</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                            {else}
+                            <a class="btn btn-warning radius" href="{:url('Visitrecord/applydetail',array('record_id'=>$list.record_id))}" ><i class="Hui-iconfont">&#xe695;</i>详情</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                            {/if}
+                        </td>
+
+                    </tr>
+                    </tbody>
+                    {/volist}
+                </table>
+            </div>
+            <div class="page"> {$page}</div>
+        </article>
+    </div>
+</section>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/static/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+    $(function(){
+//        $('.table-sort').dataTable({
+//            "aaSorting": [[ 1, "desc" ]],//默认第几个排序
+//            "bStateSave": true,//状态保存
+//            "aLengthMenu": [16,20,25],
+//            "aoColumnDefs": [
+//                //{ targets: [0, 1], visible: true},
+//                //{"bVisible": false, "aTargets": [1]}, //控制列的隐藏显示
+//                {"orderable":false,"aTargets":[0,4,6,8]}// 制定列不参与排序
+//            ]
+//        });
+//        $('.table-sort tbody').on( 'click', 'tr', function () {
+//            if ( $(this).hasClass('selected') ) {
+//                $(this).removeClass('selected');
+//            }
+//            else {
+//                table.$('tr.selected').removeClass('selected');
+//                $(this).addClass('selected');
+//            }
+//        });
+    });
+    /*用户-添加*/
+    function submit(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+
+
+    //		$.get(self.)
+    //		$.ajax({
+    //			url: '{:url("client/clientlist",array("export"=>1))}',
+    //			type: 'post',
+    //			data: $('form').serialize(),
+    ////			success: function (data) {
+    ////				if (data.code == 0) {
+    ////					layer.msg(data.msg);
+    ////					parent.location.reload();
+    ////					setTimeout("parent.layer.close(parent.layer.getFrameIndex(window.name))", 2000);
+    ////
+    ////				} else {
+    ////					layer.msg(data.msg);
+    ////				}
+    ////			}
+    //		});
+
+
+
+
+    function datadel(){
+        var $ids=$('input:checked');
+        $.ajax({
+            url: "{:url('client/delpatch')}",
+            type: 'post',
+            data: $('input:checked'),
+            dataType: 'json',
+            success:function(data) {
+                if (data.code == 0) {
+                    layer.msg(data.msg);
+                    location.reload();
+
+                } else {
+                    layer.msg(data.msg);
+                }
+            }
+        });
+
+
+    }
+</script>
+
+{/block}

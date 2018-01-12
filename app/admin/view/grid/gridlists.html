@@ -1,0 +1,107 @@
+﻿{extend name="base" /}
+
+{block name="content"}
+
+<section class="Hui-article-box">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 网格列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<div class="Hui-article">
+		<article class="cl pd-20">
+
+			<div class="cl pd-5 bg-1 bk-gray"> 
+				<span class="l"> 
+					<a href="javascript:" onclick="layer_show('添加小区','/admin/grid/gridadds','600','370')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加小区</a>
+				</span>  
+				<span class="r">
+					<strong>{:count($gridlist)}</strong>个小区
+				</span>
+			</div>
+			<div class="mt-10">
+				<table class="table table-border table-bordered table-hover table-bg table-sort">
+					<thead>
+						<tr class="text-c">
+							<th style="display:none;"><input type="checkbox" name="" value=""></th>
+							<th>ID</th>
+							<th>小区</th>
+							<th>类型</th>
+							<th>客户数</th>
+							<th>小区经理</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+
+					<tbody>
+					{volist name="gridlist" id="vo" offset="1"}
+						<tr class="text-c">
+							<td style="display:none;"><input type="checkbox" value="{$vo.id}" name="id[]"></td>
+							<td>{$vo.id}</td>
+							<td style="text-align: left;">
+							<a href="{:url('admin/grid/wangge',['id'=>$vo.id])}">{$vo.name}</a>
+							<!-- {$vo.name} -->
+							</td>
+							<td>{if $vo.gridtype == 1}村镇{else}小区{/if}</td>
+							<td>{$vo.count}</td>
+							<td>{$vo.manger_name}</td>
+							<td class="td-manage"> <!-- <a  href="javascript:" class="ml-5" style="text-decoration:none;"><i class="Hui-iconfont">&#xe6e2;</i>删除</a> -->
+								<a href="javascript:" onclick="layer_show('修改小区','/admin/grid/gridadds/id/{$vo.id}','600','370')"><i class="Hui-iconfont"></i>编辑</a>
+							</td>
+						</tr>
+					{/volist}
+					</tbody>
+
+				</table>
+			</div>
+
+
+		</article>
+	</div>
+</section>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+
+<script type="text/javascript" src="/static/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="/static/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+
+$(function(){
+	$('.table-sort').dataTable({
+		
+		"aLengthMenu": [800]
+		
+	});
+	$('.table-sort tbody').on( 'click', 'tr', function () {
+		if ( $(this).hasClass('selected') ) {
+			$(this).removeClass('selected');
+		}
+		else {
+			table.$('tr.selected').removeClass('selected');
+			$(this).addClass('selected');
+		}
+	});
+});
+
+
+
+function datadel(){
+	 var $ids=$('input:checked');
+	$.ajax({
+		url: "",
+		type: 'post',
+		data: $('input:checked'),
+		dataType: 'json',
+		success:function(data) {
+			if (data.code == 0) {
+				layer.msg(data.msg);
+				location.reload();
+
+			} else {
+				layer.msg(data.msg);
+			}
+		}
+	});
+}
+
+</script>
+
+{/block}

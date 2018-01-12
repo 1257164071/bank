@@ -1,0 +1,399 @@
+{extend name="base" /}
+
+{block name="content"}
+
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> {$title1}<span class="c-gray en">&gt;</span>{$title2}<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="Hui-article">
+        <form action="{:url('client/clientresult')}" method="post">
+            <div class="panel panel-secondary mt-21">
+                <div class="panel-header">选择筛选条件</div>
+                <div class="panel-body">
+                    <table class="table table-border table-bordered table-hover">
+                        <div id="cleint">
+                        <tr>
+                            <td style="width: 70px;">客户名称</td>
+                            <td style="width: 200px;"><input type="text" class="input-text" name="name"/></td>
+                            <td style="width: 70px;">证件号码</td>
+                            <td style="width: 200px;">
+                                <input type="text" class="input-text" name="card_number"/>
+                            </td>
+                            <td style="width: 70px;">婚姻状况</td>
+                            <td style="width: 200px;">
+                                <span class="select-box" >
+                                    <select class="select" name="marriage_status"  >
+                                        <option value="">==请选择==</option>
+                                        <option value="0">未婚</option>
+                                        <option value="1">已婚</option>
+                                        <option value="2">离异</option>
+                                    </select>
+				                </span>
+                            </td>
+                            <td style="width: 70px;">客户经理</td>
+                            <td style="width: 200px;">
+                                <span class="select-box" >
+                                    <select class="select" name="belong_user_id"  >
+                                        <option value="">==请选择==</option>
+                                        {foreach name="manger" item="user"}
+                                         <option    value="{$user.id}">{$user.real_name}</option>
+                                        {/foreach}
+                                    </select>
+				                </span>
+                            </td>
+                        </tr>
+                    </div>
+                        <tr>
+                            <td >是否扶贫</td>
+                            <td >
+                                <div class="radio-box">
+                                    <input name="is_poor" type="radio"  value="0" id="is_poor0"  >
+                                    <label for="is_poor0">否</label>
+                                </div>
+                                <div class="radio-box">
+                                    <input type="radio" id="is_poor1" value="1" name="is_poor" >
+                                    <label for="is_poor1">是</label>
+                                </div>
+                            </td>
+
+                            <td style="width: 70px;">是否涉农</td>
+                            <td style="width: 200px;">
+                                <div class="radio-box">
+                                    <input name="is_farmer" type="radio"  value="0" id="farmer0"  >
+                                    <label for="farmer0">否</label>
+                                </div>
+                                <div class="radio-box">
+                                    <input type="radio" id="farmer1" value="1" name="is_farmer" >
+                                    <label for="farmer1">是</label>
+                                </div>
+                            </td>
+                            <td>手机号</td>
+                            <td>
+                                <input type="text" class="input-text" name="tel_number"/>
+                            </td>
+                            <td >有无子女</td>
+                            <td>
+                                <div class="radio-box">
+                                    <input name="children" type="radio"  value="0" id="children0"  >
+                                    <label for="children0">无</label>
+                                </div>
+                                <div class="radio-box">
+                                    <input type="radio" id="children1" value="1" name="children" >
+                                    <label for="children1">有</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>家庭总资产</td>
+                            <td><input type="text" style="width: 35%;" class="input-text" name="start_family_money"/>万元-<input type="text" style="width:35%;" class="input-text" name="end_family_money"/>万元</td>
+                            <td>家庭总负债</td>
+                            <td><input type="text" style="width: 35%;" class="input-text" name="start_family_debt"/>万元-<input type="text" style="width: 35%;;" class="input-text" name="end_family_debt"/>万元</td>
+                            <td>家庭年收入</td>
+                            <td><input type="text" style="width: 35%;;" class="input-text" name="start_family_year_income"/>万元-<input type="text" style="width: 35%;;" class="input-text" name="end_family_year_income"/>万元</td>
+                            <td>家庭年支出</td>
+                            <td><input type="text" style="width: 35%;;" class="input-text" name="start_family_year_spending"/>万元-<input type="text" style="width: 35%;;" class="input-text" name="end_family_year_spending"/>万元</td>
+                        </tr>
+                        <tr>
+                            <td>工作单位</td>
+                            <td>
+                                <input type="text" class="input-text" name="workunit"/>
+                            </td>
+                            <td >现住址</td>
+                            <td >
+                                <input type="text" class="input-text" name="current_address"/>
+                            </td>
+                            <td>客户评级</td>
+                            <td>
+                                <span class="select-box" >
+                                    <select class="select" name="client_grade"  >
+                                        <option value="">==请选择==</option>
+                                        {volist name="client_grade" id="list" key="key"}
+                                        <option value="{$key-1}">{$list}</option>
+                                        {/volist}
+                                    </select>
+                                </span>
+                            </td>
+                            
+                            <td>客户等级</td>
+                            <td>
+                               <span class="select-box"  >
+                                <select class="select" name="card_class1708"  >
+                                   <option value="">==请选择==</option>
+                                    {volist name="card_class1708" id="list" key="key"}
+                                    <option value="{$key-1}">{$list}</option>
+                                    {/volist}
+                                </select>
+                                </span>
+                               
+                            </td>
+                           
+                        </tr>
+                        <tr>
+                        <td>网银</td>
+                            <td>
+                           <span class="select-box" >
+                                <select class="select" name="wangyin"  >
+                                   <option value="">==请选择==</option>
+                                    <option   value="未">未开通</option>
+                                    <option  value="1">开通</option>
+                                    
+                                    
+                                </select>
+                            </span>
+                               
+                            </td>
+                            <td>短信版</td>
+                            <td>
+                               <span class="select-box" >
+                                    <select class="select" name="duanxinban"  >
+                                       <option value="">==请选择==</option>
+                                        <option   value="未">未开通</option>
+                                        <option  value="1">开通</option>  
+                                    </select>
+                                </span> 
+                            </td>
+                            <td>客户端</td>
+                            <td>
+                               <span class="select-box" >
+                                    <select class="select" name="kehuduan"  >
+                                       <option value="">==请选择==</option>
+                                        <option   value="未">未开通</option>
+                                        <option  value="1">开通</option>  
+                                    </select>
+                                </span> 
+                            </td>
+                            <td>wap</td>
+                            <td>
+                               <span class="select-box" >
+                                    <select class="select" name="wap"  >
+                                       <option value="">==请选择==</option>
+                                        <option   value="未">未开通</option>
+                                        <option  value="1">开通</option>  
+                                    </select>
+                                </span> 
+                            </td>
+                            </tr>
+                            <tr>
+                            <td>短信通</td>
+                            <td>
+                               <span class="select-box" >
+                                    <select class="select" name="duanxintong"  >
+                                       <option value="">==请选择==</option>
+                                        <option   value="未">未开通</option>
+                                        <option  value="1">开通</option>  
+                                    </select>
+                                </span> 
+                            </td>
+                            <td>快捷支付</td>
+                            <td>
+                               <span class="select-box" >
+                                    <select class="select" name="quickpay"  >
+                                       <option value="">==请选择==</option>
+                                        <option   value="未">未开通</option>
+                                        <option  value="1">开通</option>  
+                                    </select>
+                                </span> 
+                            </td>
+                            <td>有效复合卡</td>
+                            <td>
+                               <span class="select-box" >
+                                    <select class="select" name="fuhe_card"  >
+                                       <option value="">==请选择==</option>
+                                        <option   value="无">无</option>
+                                        <option  value="有">有</option>  
+                                    </select>
+                                </span> 
+                            </td>
+                            <td>有效磁条卡</td>
+                            <td>
+                               <span class="select-box" >
+                                    <select class="select" name="citiao_card"  >
+                                       <option value="">==请选择==</option>
+                                        <option   value="无">无</option>
+                                        <option  value="有">有</option>  
+                                    </select>
+                                </span> 
+                            </td>
+                            </tr>
+                            <tr>
+                             <td>揽存人员</td>
+                            <td>
+                               <input type="text" class="input-text" name="lancun_man"/>
+                            </td>
+                             <td colspan="6">
+                                <a class="btn btn-success radius" onclick="submit()" href="javascript:;">筛选</a>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                </div>
+            </div>
+            <div class="panel mt-21">
+                <article class="cl pd-20">
+            <div class="mt-20">
+               <table class="table table-border table-bordered table-hover table-bg table-sort">
+                    <thead>
+                        <tr class="text-c">
+                        <!-- <th width="25"><input type="checkbox" name="" value=""></th> -->
+                            <th>ID</th>
+                            <th>客户编号</th>
+                            <th>客户名称</th>
+                            <th>证件号码</th>
+                            <th>性别</th>
+                            <th>所属区域</th>
+                            <th>签约网点</th> 
+                            <th>网银</th>
+                            <th>短信版</th>
+                            <th>客户端</th>
+                            <th>wap</th>
+                            <th>短信通</th>            
+                            <th>快捷支付</th>
+                            <th>有效复合卡</th>
+                            <th>有效磁条卡</th>
+                            <th>揽存人员</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                    {volist name="clients" id="clients"}
+                        <tr class="text-c">
+                        <!-- <td><input type="checkbox" value="{$clients.id}" name="id[]"></td> -->
+                            <td>{$clients.id}</td>
+                            <td>{$clients.client_number}</td>
+                            <td>{$clients.name}</td>
+                            <td>{$clients.card_number}</td>
+                            <td>{if $clients.sex==1}男{/if}{if $clients.sex==2}女{/if}</td>
+                            <td>{$clients.gridname}</td>
+                            <td>{$clients.sign_website_name}</td>
+                            {if empty($clients.wangyin)}
+                                <td></td>
+                            {else}
+                                <td style="color: red;">已开通</td>
+                            {/if}
+                            {if empty($clients.duanxinban)}
+                                <td></td>
+                            {else}
+                                <td style="color: red;">已开通</td>
+                            {/if}
+                            {if empty($clients.kehuduan)}
+                                <td></td>
+                            {else}
+                                <td style="color: red;">已开通</td>
+                            {/if}
+                            {if empty($clients.wap)}
+                                <td></td>
+                            {else}
+                                <td style="color: red;">已开通</td>
+                            {/if}
+                            {if empty($clients.duanxintong)}
+                                <td></td>
+                            {else}
+                                <td style="color: red;">已开通</td>
+                            {/if}
+                            
+                            {if empty($clients.quickpay)}
+                                <td></td>
+                            {else}
+                                <td style="color: red;">已开通</td>
+                            {/if}
+                            
+                                <td>{$clients.fuhe_card}</td>
+                        
+                                <td>{$clients.citiao_card}</td>
+                                <td>{$clients.lancun_man}</td>
+                            <td class="td-manage">
+                                <a style="text-decoration:none"  href="{:url('clientdetail',array('client_id'=>$clients['id']))}" title="查看客户详情"><i class="Hui-iconfont">&#xe725;</i>查看</a>&nbsp;&nbsp;
+                                <a title="删除客户" href="{:url('del',array('client_id'=>$clients['id']))}" class="ml-5" onclick="return confirm('确认删除');" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i>删除</a></td>
+                        </tr>
+                        {/volist}
+                    </tbody>
+                </table>
+            </div>
+            <div class="page">{$page}</div>
+        </article>
+            </div>
+    </div>
+
+
+</section>
+
+
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/static/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+    $('#select').on('click','a',function(){
+        var tra=$(this).attr('data-tra');
+        var id=$(this).attr('id');
+
+        $(this).next('br').remove();
+        $(this).remove();
+
+        var input='<a id="'+id+'" style="width: 200px;margin-top: 5px;" hre="#" class="btn btn-primary-outline radius hui-rotateinLT" data-tra="'+tra+'">'+tra+'</a><br/>';
+        $('#list').append(input);
+    });
+
+
+    $('#list').on('click','a',function() {
+        var tra = $(this).attr('data-tra');
+        var id = $(this).attr('id');
+        $(this).removeClass();
+        $(this).addClass('btn btn-primary-outline radius hui-rotateoutLT');
+        var find=$('#select').children('#'+id).attr('id');
+        if(find==undefined){
+            var input = '<a id="' + id + '" style="width: 200px;margin-top: 5px;" hre="#" class="btn btn-primary-outline radius hui-animation"data-tra="'+tra+'">' + tra + '</a><br/>';
+            $('#select').append(input);
+        }
+        setTimeout(function(){
+            $('#list').children('#'+id).next('br').remove();
+            $('#list').children('#'+id).remove();
+        },1000);
+    });
+
+    function submit(){
+
+
+        var len=$('#list > a').length;
+        if(len>=1){
+            var list=$('#list').children('a').attr('id');
+            var names=list+',';
+            for(var i=1;i<len;i++){
+                var id=$('#'+list).next('br').next('a').attr('id');
+                names+=id+',';
+                list=id;
+            }
+        }
+        var input='<input name=names type="hidden"value="'+names+'"/>';
+        $('form').append(input);
+        $('form').submit();
+
+    }
+    function add_all(){
+        var html = $('#select').html();
+        $('#select').children().remove();
+        $('#list').append(html);
+    }
+    function remove_all()
+    {
+        var html = $('#list').html();
+        $('#list').children().remove();
+        $('#select').append(html);
+    }
+
+
+
+    /*用户-添加*/
+    function member_add(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+
+
+
+
+
+
+</script>
+
+{/block}
